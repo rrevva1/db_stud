@@ -1,0 +1,100 @@
+{
+  "lessonId": "p9-l08-tsql-advanced",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Для чего в T-SQL обычно используют MERGE?",
+      "options": [
+        "Только для DROP TABLE, если строка не найдена",
+        "Замену GRANT на уровне столбца",
+        "Upsert: UPDATE при совпадении ключа, INSERT если строки нет",
+        "Обязательный roll-up OLAP-куба"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "MERGE сопоставляет источник и цель: WHEN MATCHED / WHEN NOT MATCHED. В примере — оценка студента. В PostgreSQL тот же смысл чаще пишут INSERT … ON CONFLICT. Это не DDL прав и не куб."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Какой эквивалент MERGE-upsert типичен для PostgreSQL?",
+      "options": [
+        "INSERT … ON CONFLICT … DO UPDATE",
+        "SELECT TOP 10 без ключа",
+        "CREATE PUBLICATION без таблиц",
+        "VACUUM FULL вместо записи"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "ON CONFLICT (student_id) DO UPDATE SET grade = EXCLUDED.grade — штатный upsert PG. TOP — ограничение выборки. Публикация и vacuum задачу «вставить или обновить оценку» не решают. MERGE в PostgreSQL появился позже и с оговорками; курс сопоставляет ON CONFLICT."
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "question": "Как сопоставить обработку ошибок? (все верные)",
+      "options": [
+        "TRY/CATCH в T-SQL отменяет необходимость прав на таблицу",
+        "T-SQL: BEGIN TRY … BEGIN CATCH … THROW",
+        "PostgreSQL: блок EXCEPTION WHEN … THEN RAISE",
+        "Оба подхода ловят сбой процедуры и позволяют явно пробросить ошибку"
+      ],
+      "correct": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "Семантика похожа: перехват и повторный сигнал. Авторизация GRANT от этого не исчезает. В примере UpsertGrade ошибка не должна тихо проглатываться без CATCH/EXCEPTION."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Чем OUTPUT в T-SQL ближе всего в PostgreSQL?",
+      "options": [
+        "Предложением RETURNING у INSERT/UPDATE/DELETE",
+        "Типом hostssl в pg_hba.conf",
+        "Стадией $unwind aggregation pipeline",
+        "Командой GO в SSMS"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "OUTPUT inserted/deleted возвращает затронутые строки — как RETURNING. GO — разделитель пакетов, hostssl — аутентификация, $unwind — Mongo. При переносе процедур смотрят именно эту пару."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Как в T-SQL объявляют хранимую процедуру по сравнению с PostgreSQL?",
+      "options": [
+        "Процедуры есть исключительно в MongoDB shell",
+        "В обоих только анонимный Cypher без параметров",
+        "В PostgreSQL процедуры пишут только как CREATE PROC dbo.",
+        "CREATE PROC dbo.Name @p INT AS … vs CREATE PROCEDURE … LANGUAGE plpgsql"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Схема dbo и @параметры — стиль SQL Server. В PostgreSQL с 11/14 процедуры/функции на plpgsql, вызов CALL. Имена и префиксы при портировании ломаются первыми."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие пары «T-SQL — PostgreSQL» верны? (все верные)",
+      "options": [
+        "Табличная переменная @t TABLE ↔ TEMP TABLE / CTE",
+        "TRY/CATCH ↔ обязательный $lookup",
+        "MERGE ↔ INSERT ON CONFLICT (в логике upsert урока)",
+        "OUTPUT ↔ RETURNING"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "$lookup — стадия Mongo, не обработчик ошибок PG. Набор урока: процедуры, upsert, ошибки, вывод изменённых строк. Цель — читать чужой диалект, основная практика курса остаётся PostgreSQL."
+    }
+  ]
+}

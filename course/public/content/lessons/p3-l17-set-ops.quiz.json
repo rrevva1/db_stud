@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l17-set-ops",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "SELECT last_name FROM student UNION SELECT last_name FROM student_archive; в отличие от UNION ALL:",
+      "options": [
+        "Добавляет столбец source_table",
+        "Требует одинаковые алиасы таблиц",
+        "Удаляет дубликаты фамилий между двумя запросами",
+        "Разрешён, только если оба SELECT без FROM"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "UNION — объединение множеств с DISTINCT. UNION ALL сохраняет все строки и обычно быстрее. Имена столбцов берутся из первого SELECT, а не из алиасов FROM."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Когда уместен UNION ALL, а не UNION?",
+      "options": [
+        "Когда дубликаты нужны или заведомо невозможны — не тратить работу на DISTINCT",
+        "Когда столбцов разное число",
+        "Когда нужно пересечение, а не объединение",
+        "UNION ALL в PostgreSQL нет, это синтаксис SQLite"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Если множества не пересекаются (почты студентов и преподавателей с разными доменами) или дубли важны, ALL дешевле. Разное число столбцов запрещено обоим. Пересечение — INTERSECT. PostgreSQL UNION ALL поддерживает."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "SELECT student_id FROM student_in_group WHERE group_id = 1 INTERSECT SELECT student_id FROM performance WHERE grade = 5; находит:",
+      "options": [
+        "Всех студентов группы 1 плюс всех отличников (как UNION)",
+        "Студентов группы 1, которых нет среди отличников (как EXCEPT)",
+        "Декартово произведение двух SELECT",
+        "Идентификаторы, которые есть и в группе 1, и среди оценок 5"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "INTERSECT — пересечение множеств id. UNION сложил бы оба списка, EXCEPT вычел бы. Это не JOIN в смысле умножения строк: совместимые SELECT склеиваются по значениям."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "SELECT student_id FROM student EXCEPT SELECT student_id FROM performance; это:",
+      "options": [
+        "Студенты, у которых есть хотя бы одна оценка",
+        "Студенты без ни одной строки в performance",
+        "Ошибка: EXCEPT есть только в MySQL",
+        "Синоним INNER JOIN student и performance"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "EXCEPT — разность: id из первого запроса, которых нет во втором. Аналог «студенты без оценок». PostgreSQL EXCEPT поддерживает (в некоторых СУБД пишут MINUS). INNER JOIN дал бы как раз сдававших."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие требования к UNION/INTERSECT/EXCEPT верны? Выберите все верные.",
+      "options": [
+        "Имена столбцов результата всегда берутся из второго SELECT",
+        "Одинаковое число столбцов и совместимые типы",
+        "ORDER BY относят к объединённому результату (часто в конце или ORDER BY 1)",
+        "Типы PostgreSQL может привести к общему (например, к NUMERIC)"
+      ],
+      "correct": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "Заголовки — из первого запроса. Число столбцов должно совпасть. Сортировка после всей операции, не внутри каждого SELECT без скобок. Приведение типов — поведение PostgreSQL."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "В реляционной алгебре UNION, INTERSECT и EXCEPT соответствуют:",
+      "options": [
+        "Проекции π, выборке σ и декарту ×",
+        "Только соединению ⋈",
+        "Объединению ∪, пересечению ∩ и разности −",
+        "Агрегации γ"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Это множественные операции над совместимыми отношениями. JOIN — отдельная операция соединения. GROUP BY ближе к агрегации, не к UNION."
+    }
+  ]
+}

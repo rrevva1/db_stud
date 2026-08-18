@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l15-having",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Дан мини-набор:\ns_group: (1,'ИВТ-21'), (2,'ПИ-22')\nstudent_in_group: (1,1), (2,1)\n\nSELECT g.name, COUNT(sig.student_id) AS cnt\nFROM s_group g\nLEFT JOIN student_in_group sig ON sig.group_id = g.group_id\nGROUP BY g.name\nHAVING COUNT(sig.student_id) >= 1\nORDER BY g.name;\n\nЧто вернёт запрос?",
+      "options": [
+        "ИВТ-21: 2 и ПИ-22: 0 (HAVING не фильтрует группы)",
+        "Только ИВТ-21: 2 (ПИ-22 с нулём отброшена HAVING)",
+        "Пустой набор, потому что LEFT JOIN запрещён с HAVING",
+        "Только ПИ-22: 0"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Сначала GROUP BY считает ИВТ-21 → 2 и ПИ-22 → 0. HAVING COUNT(...) >= 1 оставляет только группы с хотя бы одним студентом. WHERE здесь не подошёл бы: агрегата ещё нет. LEFT JOIN с HAVING совместим."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "WHERE g.course_num = 3 от HAVING AVG(p.grade) >= 4.0 отличается тем, что:",
+      "options": [
+        "WHERE фильтрует строки до группировки; HAVING — уже посчитанные группы",
+        "HAVING выполняется до WHERE",
+        "WHERE умеет агрегаты, HAVING — нет",
+        "Разницы нет: это синонимы в PostgreSQL"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Двухступенчатый фильтр: WHERE отбрасывает отдельные оценки/группы курса, затем GROUP BY, затем HAVING по среднему. Агрегат в WHERE — ошибка. Это не синонимы и не обратный порядок."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Запрос WHERE AVG(grade) > 4 синтаксически:",
+      "options": [
+        "Верен и фильтрует студентов с средним выше 4",
+        "Верен, если добавить LIMIT",
+        "Неверен: агрегат в WHERE нельзя, нужен HAVING AVG(grade) > 4",
+        "Верен только в REPEATABLE READ"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "WHERE работает с исходными строками, среднего ещё нет. Фильтр по агрегату — HAVING (после GROUP BY) либо подзапрос. Уровень изоляции на синтаксис не влияет."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Логический порядок шагов запроса с группировкой:",
+      "options": [
+        "SELECT → WHERE → GROUP BY → HAVING → FROM",
+        "HAVING → FROM → WHERE → GROUP BY → SELECT",
+        "FROM → GROUP BY → WHERE → HAVING → SELECT",
+        "FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Сначала источник и JOIN, потом фильтр строк, группировка, фильтр групп, затем список SELECT и сортировка. Поэтому алиас из SELECT в WHERE/HAVING того же уровня часто недоступен — выражение повторяют."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие задачи решают HAVING? Выберите все верные.",
+      "options": [
+        "Группы, в которых больше 5 студентов: HAVING COUNT(...) > 5",
+        "Дисциплины с разбросом оценок: HAVING MAX(grade) - MIN(grade) > 2",
+        "Отбор строк с course_num = 3 до агрегации — это тоже HAVING, не WHERE",
+        "Оставить группы со средним баллом не ниже 4.0"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "HAVING — предикат на группу. Условие на атрибут строки (курс группы) ставят в WHERE, чтобы не тащить лишние строки в агрегат. Среднее, COUNT, размах — типичный HAVING."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "HAVING без GROUP BY в PostgreSQL:",
+      "options": [
+        "Всегда синтаксическая ошибка во всех СУБД и в PostgreSQL",
+        "Допустим: вся таблица — одна группа; это не повод писать так вместо WHERE",
+        "Превращает запрос в DELETE",
+        "Автоматически добавляет GROUP BY 1"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Курс явно предупреждает: HAVING без GROUP BY в PostgreSQL возможен (одна группа на всё отношение). Правило «HAVING запрещён без GROUP BY» неверно. Для фильтра строк всё равно нужен WHERE."
+    }
+  ]
+}

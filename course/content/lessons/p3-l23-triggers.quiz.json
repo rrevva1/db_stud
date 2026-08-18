@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l23-triggers",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Триггер на student — это:",
+      "options": [
+        "Ручной SELECT, который преподаватель запускает раз в семестр",
+        "Индекс по last_name",
+        "Функция, которую PostgreSQL вызывает сам при INSERT/UPDATE/DELETE (или TRUNCATE)",
+        "Синоним FOREIGN KEY ON DELETE CASCADE"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Триггер привязывает процедуру к событию таблицы. CASCADE — декларативная ссылочная целостность, не произвольный код. Индекс ускоряет поиск, но ничего не «вызывается» как PL/pgSQL. Аудит как раз типичный AFTER-триггер."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "BEFORE INSERT OR UPDATE ... FOR EACH ROW может:",
+      "options": [
+        "Изменить NEW (подставить значения) или отменить операцию, вернув NULL",
+        "Видеть строку только после записи на диск, как AFTER",
+        "Работать исключительно как INSTEAD OF на таблицах, не на VIEW",
+        "Запретить использование NEW и OLD"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "BEFORE видит строку до фиксации в таблице: можно поправить NEW.email. RETURN NULL в ROW-триггере отменяет действие для этой строки. AFTER удобен для журнала, когда строка уже проверена ограничениями. INSTEAD OF — в основном для VIEW."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "AFTER INSERT OR UPDATE OR DELETE ON student для журнала student_audit выбирают, потому что:",
+      "options": [
+        "AFTER не имеет доступа к NEW и OLD",
+        "AFTER срабатывает до проверки FOREIGN KEY и может обойти CHECK",
+        "FOR EACH STATEMENT нельзя использовать после INSERT",
+        "Строка уже прошла ограничения; удобно логировать фактическое изменение"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "После успешной проверки FK/CHECK AFTER пишет факт в audit. NEW/OLD доступны в ROW-триггере. STATEMENT-триггеры тоже существуют, но для построчного журнала нужен FOR EACH ROW."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "В функции триггера при DELETE доступна запись:",
+      "options": [
+        "Только NEW.student_id",
+        "OLD (удаляемая строка); NEW для DELETE нет",
+        "Только TG_OP = 'SELECT'",
+        "Только EXCLUDED, как в ON CONFLICT"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "INSERT даёт NEW, DELETE — OLD, UPDATE — оба. COALESCE(NEW.student_id, OLD.student_id) в аудите как раз закрывает все три события. EXCLUDED относится к UPSERT, не к триггеру. TG_OP хранит 'INSERT'/'UPDATE'/'DELETE'."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие параметры триггера указаны верно? Выберите все верные.",
+      "options": [
+        "Момент: BEFORE, AFTER, INSTEAD OF",
+        "Гранулярность: FOR EACH ROW или FOR EACH STATEMENT",
+        "Событие: только CREATE TABLE, не DML",
+        "Язык тела часто plpgsql, функция RETURNS TRIGGER"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "События DML — INSERT, UPDATE, DELETE (и TRUNCATE для statement-триггеров). CREATE TABLE — DDL, не штатный триггерный событие этой главы. Функция должна возвращать TRIGGER и обычно NEW/OLD."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "Минус триггеров аудита, о котором предупреждает курс:",
+      "options": [
+        "Они не могут писать в другую таблицу",
+        "AFTER запрещён на student",
+        "Скрытая логика усложняет отладку и тесты; сложное лучше держать в приложении",
+        "Триггеры отключают транзакции"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Невидимый побочный INSERT в audit легко забыть при разборе бага. Для простого журнала триггер уместен, для бизнес-процессов — осторожность. Они работают внутри той же транзакции: откат DML откатит и запись аудита."
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "lessonId": "p6-l04-tablespaces",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Что такое tablespace в PostgreSQL?",
+      "options": [
+        "Имя, связанное с каталогом на файловой системе, где лежат файлы отношений",
+        "Синоним схемы public",
+        "Тип индекса",
+        "Уровень изоляции транзакции"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Tablespace — логическая метка пути. Объекты можно создавать или двигать в другой каталог (другой диск). Схема — пространство имён SQL, не диск."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Какие tablespace есть в кластере по умолчанию?",
+      "options": [
+        "только user_data",
+        "pg_default и pg_global",
+        "pg_toast и pg_wal как tablespace пользователя",
+        "fast_ssd создаётся автоматически на любом сервере"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "pg_default — основное размещение баз, pg_global — общие объекты кластера. Пользовательские пространства создают CREATE TABLESPACE. pg_wal — каталог журнала, не пользовательский tablespace."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Как положить индекс оценок на SSD?",
+      "options": [
+        "ALTER INDEX ... SET wal_level = replica",
+        "CREATE EXTENSION tablespace",
+        "CREATE INDEX idx ON performance (student_id) TABLESPACE fast_ssd",
+        "SET shared_buffers TO 'fast_ssd'"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "TABLESPACE в CREATE INDEX (или ALTER INDEX/TABLE SET TABLESPACE) переносит файлы. Расширение для этого не нужно. shared_buffers — объём RAM, не имя диска."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Зачем выносить архив старых оценок на медленный диск, а student/performance — на быстрый?",
+      "options": [
+        "Чтобы разделить I/O: горячие OLTP-объекты не дерут очередь с холодным архивом",
+        "Потому что PostgreSQL запрещает две таблицы на одном диске",
+        "Чтобы отключить WAL для архива автоматически",
+        "Чтобы заменить секционирование"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Планирование I/O — главная причина tablespace: SSD под индексы и факты, HDD/объектное хранилище под архив. WAL при этом всё равно пишется. Секции решают другую задачу — pruning и DROP периода."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Где смотреть список tablespace?",
+      "options": [
+        "pg_stat_statements",
+        "pg_ts_config",
+        "information_schema.views",
+        "pg_tablespace (и \\db в psql)"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Системный каталог pg_tablespace хранит имя и OID; psql показывает пути. Статистика SQL и словари FTS к размещению файлов не относятся."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие операции связаны с tablespace? (все верные)",
+      "options": [
+        "CREATE TABLESPACE ... LOCATION '/mnt/ssd/pgdata'",
+        "SET timezone TO tablespace",
+        "ALTER TABLE archive_log SET TABLESPACE slow_hdd",
+        "CREATE INDEX ... TABLESPACE fast_ssd"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Создание пути, перенос таблицы и индекса — штатный DDL. Часовой пояс к диску не привязан. Права на каталог ОС должны быть у пользователя postgres."
+    }
+  ]
+}

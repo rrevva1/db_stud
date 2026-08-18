@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l11-inner-join",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Дан мини-набор:\nstudent: (1,'Иванов'), (2,'Петрова'), (3,'Сидоров')\ns_group: (1,'ИВТ-21'), (2,'ПИ-22')\nstudent_in_group: (1,1), (2,1)\n— Сидоров без группы, ПИ-22 пустая.\n\nSELECT s.last_name, g.name\nFROM student s\nINNER JOIN student_in_group sig ON sig.student_id = s.student_id\nINNER JOIN s_group g ON g.group_id = sig.group_id\nORDER BY s.last_name;\n\nЧто вернёт запрос?",
+      "options": [
+        "Иванов—ИВТ-21, Петрова—ИВТ-21, Сидоров—NULL (INNER сохраняет сирот)",
+        "Иванов—ИВТ-21, Петрова—ИВТ-21 (Сидоров и ПИ-22 отброшены)",
+        "Шесть строк: каждый студент × каждая группа (как CROSS JOIN)",
+        "Только ПИ-22—NULL, потому что группа пустая"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "INNER JOIN оставляет только совпавшие ключи. Иванов и Петрова связаны с ИВТ-21. У Сидорова нет строки в student_in_group, у ПИ-22 нет студентов — их пар нет. CROSS дал бы 3×2 строк; NULL у сирот даёт LEFT JOIN."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Почему явный JOIN ... ON предпочтительнее старого FROM student s, student_in_group sig WHERE sig.student_id = s.student_id?",
+      "options": [
+        "Условие связи отделено от фильтрации WHERE, меньше риск случайного декартова произведения",
+        "Запятая в FROM в PostgreSQL запрещена синтаксически",
+        "ON нельзя использовать для составных ключей, только WHERE",
+        "Старый стиль всегда быстрее за счёт отсутствия ON"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "В списке FROM a, b без WHERE получается CROSS JOIN, а явный JOIN заставляет записать ON. Фильтры вроде grade >= 4 остаются в WHERE, составной ключ пишут в ON через AND. Планировщик может переставлять соединения независимо от стиля записи."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Список «фамилия, дисциплина, оценка» из нормализованной схемы требует соединения:",
+      "options": [
+        "Только student и s_group",
+        "Только performance, без справочников",
+        "Только subject и s_group",
+        "performance с student и subject по внешним ключам"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Оценка лежит в performance, фамилия — в student, название предмета — в subject. Без JOIN видны сырые id. Группа здесь не обязательна, если в запросе нет имени группы."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Связь по двум столбцам записывают так:",
+      "options": [
+        "JOIN enrollment e USING (student_id) — второго столбца year не нужно",
+        "JOIN enrollment e ON e.student_id — без сравнения",
+        "JOIN enrollment e ON e.student_id = s.student_id AND e.year = s.entry_year",
+        "JOIN enrollment e ON TRUE — составной ключ подразумевается сам"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Составной ключ — конъюнкция равенств в ON. USING сработает, только если имена всех частей ключа совпадают в обеих таблицах и вы их перечислите. ON TRUE — это CROSS JOIN."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие практики INNER JOIN верны? Выберите все верные.",
+      "options": [
+        "FROM — «ведущая» таблица факта, далее JOIN справочников",
+        "INNER JOIN включает пустую ПИ-22 так же, как LEFT JOIN от s_group",
+        "WHERE отфильтровывает уже соединённые строки (например grade >= 4)",
+        "Квалифицируйте столбцы: s.last_name, subj.name, p.grade"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Читаемый порядок: факт → справочники → WHERE. Пустая группа в INNER не появится. Одноимённые name/id без префикса дадут ошибку неоднозначности."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "Студент Сидоров есть в student, но нет в student_in_group. INNER JOIN к группам его:",
+      "options": [
+        "Вернёт с name группы NULL",
+        "Не вернёт: нет истинного ON, строка отбрасывается",
+        "Присвоит ему первую группу ИВТ-21 автоматически",
+        "Создаст строку в student_in_group"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "INNER требует совпадения. Нет записи связи — нет строки результата. NULL «сироты» даёт LEFT JOIN. JOIN не вставляет в student_in_group и не подбирает группу по умолчанию."
+    }
+  ]
+}

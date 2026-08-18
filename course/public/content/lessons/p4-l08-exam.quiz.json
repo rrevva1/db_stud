@@ -1,0 +1,190 @@
+{
+  "lessonId": "p4-l08-exam",
+  "passingScore": 75,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Какая конструкция лучше подходит для обхода иерархии s_group (parent_id)?",
+      "options": [
+        "Один INNER JOIN s_group на себя по parent_id — этого хватит для всего поддерева любой глубины",
+        "WITH RECURSIVE с якорем корней и шагом по parent_id",
+        "Повторять SELECT вручную на каждый уровень, потому что SQL не умеет обходить деревья",
+        "CREATE INDEX на parent_id — индекс сам вернёт иерархию без запроса"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Рекурсивный CTE набирает произвольную глубину: якорь — корни, шаг — дети по parent_id. Один self-join даёт только соседний уровень. Индекс ускоряет поиск родителя, но иерархию не вычисляет."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Дана таблица performance:\n\nstudent_id | grade\n-----------+------\n1          | 5\n1          | 5\n1          | 4\n\nSELECT grade, DENSE_RANK() OVER (ORDER BY grade DESC) AS dr\nFROM performance WHERE student_id = 1\nORDER BY grade DESC, dr;\n\nКакой набор пар (grade, dr) получится?",
+      "options": [
+        "(5,1), (5,1), (4,3) — это RANK, а не DENSE_RANK",
+        "(5,1), (5,2), (4,3) — это ROW_NUMBER",
+        "(5,1), (5,1), (4,2) — ничья без пропуска следующего ранга",
+        "(5,1), (5,1), (4,1) — окно без PARTITION BY обнуляет различия"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "DENSE_RANK при двух пятёрках ставит 1 и 1, следующая оценка 4 получает 2 без пропуска. RANK дал бы 3, ROW_NUMBER — разные номера даже при равенстве. PARTITION BY здесь не нужен: все строки одного студента."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Как взять по одной лучшей оценке каждого студента, сохранив остальные столбцы строки?",
+      "options": [
+        "ROW_NUMBER() OVER (PARTITION BY student_id ORDER BY grade DESC) и фильтр rn = 1, либо LATERAL LIMIT 1",
+        "Только MAX(grade) без окна: остальные столбцы однозначно восстанавливаются",
+        "DELETE FROM performance — затем INSERT MAX",
+        "EXCEPT SELECT grade FROM performance"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Нужна «целая строка победителя», а не только максимум. Окно с PARTITION BY или LATERAL ... ORDER BY ... LIMIT 1 решают TOP-1 на группу. Голый MAX не говорит, какую из нескольких пятёрок оставить."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Дана таблица student:\n\nid | group_id\n---+---------\n1  | 10\n2  | NULL\n\nSELECT COUNT(*) FROM student WHERE group_id = 10 OR group_id <> 10;\n\nСколько строк посчитает запрос?",
+      "options": [
+        "2 — дизъюнкция покрывает и NULL",
+        "0 — сравнение с NULL всегда ошибка",
+        "1 — строка с group_id NULL даёт UNKNOWN в обоих сравнениях и отсекается",
+        "3 — COUNT(*) добавляет ещё одну служебную строку"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Для id=1 условие TRUE. Для id=2 оба предиката UNKNOWN, OR тоже UNKNOWN, WHERE строку отбрасывает. Значит COUNT(*) = 1. Это типичная ловушка трёхзначной логики, а не синтаксическая ошибка."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Для сводной таблицы оценок по семестрам в PostgreSQL предпочтительно:",
+      "options": [
+        "Оператор PIVOT ядра, как в T-SQL",
+        "FILTER/CASE с GROUP BY или crosstab из tablefunc",
+        "ROW_NUMBER() без агрегации и без GROUP BY",
+        "CREATE UNIQUE INDEX на каждый семестр как замена сводной таблицы"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Ядро PostgreSQL не содержит PIVOT. Условная агрегация и tablefunc.crosstab — рабочие пути. Нумерация строк и уникальный индекс сводную таблицу не строят."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "Представление JOIN(student, s_group) нужно обновлять по имени студента. Что сделать?",
+      "options": [
+        "Обычный UPDATE к VIEW: планировщик всегда развернёт JOIN",
+        "WITH CHECK OPTION без триггера — его достаточно для JOIN",
+        "INSTEAD OF UPDATE триггер, явно меняющий student",
+        "REFRESH MATERIALIZED VIEW, даже если это обычный VIEW"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "JOIN-представление не автообновляемо. INSTEAD OF задаёт однозначное изменение базовой таблицы. CHECK OPTION проверяет предикат простого VIEW, но не заменяет триггер на соединении."
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "question": "Зачем LATERAL при TOP-3 оценках каждого студента?",
+      "options": [
+        "Чтобы подзапрос в FROM мог ссылаться на student.id и сделать ORDER BY grade DESC LIMIT 3",
+        "Чтобы запретить LIMIT внутри подзапроса",
+        "Чтобы заменить трёхзначную логику на двузначную",
+        "Чтобы автоматически создать индекс по grade"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "LATERAL коррелирует подзапрос с внешней строкой и позволяет LIMIT на группу. Без него такая ссылка в FROM незаконна. На логику NULL и на создание индекса LATERAL не влияет."
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "question": "Таблица SQL без ключа ближе к:",
+      "options": [
+        "Множеству (set) отношений Кодда",
+        "Мешку (bag): одинаковые строки могут встречаться несколько раз",
+        "Графу без дубликатов рёбер",
+        "Обязательно отсортированному списку кортежей алгебры Кодда"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Пока нет PRIMARY KEY/UNIQUE, SQL хранит мультимножество. Теория требует множеств; DISTINCT или ключ приближают таблицу к отношению. Это не документная модель."
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "question": "WITH CHECK OPTION у VIEW «студенты группы 10» отклонит:",
+      "options": [
+        "SELECT по этому представлению",
+        "INSERT строки с group_id = 20, которая не будет видна в VIEW",
+        "ANALYZE по базовой таблице student",
+        "CREATE INDEX на student(group_id)"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "CHECK OPTION запрещает DML, после которого строка исчезла бы из представления. Чтение, статистика и индексы этим ограничением не управляются."
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "question": "NOT IN (SELECT group_id FROM s_group) опасен, если в подзапросе есть NULL, потому что:",
+      "options": [
+        "Результат внешнего запроса может стать пустым из‑за UNKNOWN",
+        "PostgreSQL всегда выбрасывает исключение division by zero",
+        "NOT IN автоматически заменяется на INNER JOIN",
+        "NULL в подзапросе превращается в 0"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Сравнение значения с NULL внутри NOT IN даёт UNKNOWN, и WHERE отбрасывает строку. Часто безопаснее NOT EXISTS. Исключения при этом нет."
+    },
+    {
+      "id": "q11",
+      "type": "multi",
+      "question": "Какие утверждения об оконных функциях верны? (все верные)",
+      "options": [
+        "PARTITION BY делит строки на независимые окна (например, по student_id)",
+        "GROUP BY обязателен, иначе OVER запрещён",
+        "LAG/LEAD берут значение соседней строки по ORDER BY окна",
+        "Рамка ROWS BETWEEN n PRECEDING AND CURRENT ROW задаёт скользящее окно"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Окно считается внутри раздела PARTITION BY; смещения и frame задают соседство строк. GROUP BY для OVER не требуется и как раз схлопнул бы детализацию, которую окно сохраняет."
+    },
+    {
+      "id": "q12",
+      "type": "multi",
+      "question": "Какие свойства CTE в PostgreSQL верны? (все верные)",
+      "options": [
+        "Несколько CTE в одном WITH могут ссылаться друг на друга слева направо",
+        "MATERIALIZED заставляет вычислить CTE один раз в рамках оператора",
+        "CTE всегда быстрее вложенного подзапроса",
+        "WITH RECURSIVE применяют к иерархиям групп и графам"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Цепочка CTE, материализация и рекурсия — штатные возможности. Гарантии ускорения нет: иногда NOT MATERIALIZED или обычный подзапрос дают лучший план."
+    }
+  ]
+}

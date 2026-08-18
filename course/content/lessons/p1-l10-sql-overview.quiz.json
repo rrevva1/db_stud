@@ -1,0 +1,98 @@
+{
+  "lessonId": "p1-l10-sql-overview",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Нужно создать таблицу student и позже добавить столбец birth_date. К какой категории SQL относятся CREATE TABLE и ALTER TABLE?",
+      "options": [
+        "DML — они манипулируют строками, не структурой",
+        "DCL — они выдают привилегии на чтение каталога",
+        "TCL — они фиксируют транзакцию определения схемы",
+        "DDL — они определяют и изменяют объекты схемы"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "CREATE/ALTER/DROP — DDL. INSERT/UPDATE/DELETE/SELECT в курсе относят к DML. GRANT — DCL. COMMIT/ROLLBACK — TCL. Путаница категорий — частая ошибка."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Оператор GRANT SELECT ON performance TO methodist. К какой категории он относится и зачем?",
+      "options": [
+        "DML: он выбирает строки оценок и возвращает их методисту",
+        "DDL: он создаёт новую таблицу прав рядом с performance",
+        "DCL: он управляет привилегиями доступа к уже существующему объекту",
+        "TCL: он завершает транзакцию и делает выборку видимой всем ролям"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "DCL — GRANT/REVOKE. Сам GRANT строки не читает и таблицу не создаёт. Видимость данных внутри транзакции — не его задача; это TCL и правила изоляции."
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "question": "Какие операторы в классификации курса относятся к DML для таблицы performance?",
+      "options": [
+        "SELECT score FROM performance WHERE student_id = 101",
+        "INSERT INTO performance (...) VALUES (...)",
+        "CREATE INDEX ON performance (subject_id)",
+        "UPDATE performance SET score = 90 WHERE student_id = 101 AND subject_id = 'DB101'"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "В курсе SELECT вместе с INSERT/UPDATE/DELETE — DML (манипуляция данными). CREATE INDEX меняет схему/физструктуру и относится к DDL, не к выборке строк."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Массовая загрузка оценок: BEGIN; несколько INSERT; ошибка в середине; ROLLBACK. Что гарантирует TCL?",
+      "options": [
+        "Часть INSERT останется, потому что каждый INSERT — отдельная схема DDL",
+        "ROLLBACK отменит незафиксированные изменения, таблица вернётся к состоянию на BEGIN",
+        "ROLLBACK удалит саму таблицу performance как DROP TABLE",
+        "COMMIT произойдёт автоматически на каждой ошибке, чтобы не терять строки"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Транзакция атомарна: ROLLBACK снимает все ещё не зафиксированные изменения. DDL-таблицу это не дропает. Ошибка не означает автофиксацию; обычно транзакция прерывается до явного ROLLBACK/COMMIT."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Команда psql \\dt показывает список таблиц. Почему её нельзя ставить в один ряд с CREATE TABLE как стандартный SQL?",
+      "options": [
+        "Потому что \\dt — клиентская команда psql, а не оператор языка SQL",
+        "Потому что \\dt относится к TCL и требует открытой транзакции",
+        "Потому что \\dt — стандартный DDL ISO SQL, а CREATE TABLE — расширение PostgreSQL",
+        "Потому что \\dt меняет строки student и поэтому является DML"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Метакоманды psql работают в клиенте. Переносимый SQL — CREATE/SELECT/… Стандарт как раз про DDL/DML, а не про \\dt. На данные student \\dt не влияет."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "Жизненный цикл данных в SQL для новой дисциплины. Какой порядок категорий корректен?",
+      "options": [
+        "Сначала DML INSERT, затем DDL CREATE TABLE, затем DCL GRANT — структура после данных",
+        "Сначала TCL COMMIT пустой базы, затем данные появятся без CREATE",
+        "DDL создаёт subject, DML наполняет и читает, DCL раздаёт права, TCL фиксирует сеансы изменений",
+        "DCL DROP TABLE, затем DML CREATE USER — категории в курсе так и определены"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Сначала определяют объекты, потом манипулируют строками, права и транзакции сопровождают работу. INSERT без таблицы невозможен. DROP — DDL, не DCL; CREATE USER — не DML."
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "lessonId": "p5-l07-vacuum",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Почему UPDATE в PostgreSQL порождает dead tuple?",
+      "options": [
+        "MVCC не перезаписывает строку на месте: новая версия пишется отдельно, старая нужна старым снимкам",
+        "UPDATE всегда копирует всю таблицу в TOAST",
+        "Планировщик запрещает in-place изменение даже без конкурентов",
+        "Dead tuple появляется только после VACUUM FULL"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Из‑за MVCC читатели видят снимок на момент своей транзакции. Старая версия живёт, пока снимок может понадобиться, затем становится мёртвой. VACUUM помечает место повторно используемым."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Чем обычный VACUUM отличается от VACUUM FULL?",
+      "options": [
+        "VACUUM возвращает все байты ОС и берёт ACCESS EXCLUSIVE; FULL только помечает dead tuples",
+        "VACUUM очищает dead tuples и обновляет visibility map, обычно без эксклюзивной блокировки; FULL переписывает таблицу и блокирует её целиком",
+        "Разницы нет, это синонимы",
+        "VACUUM FULL не требует блокировок и быстрее обычного VACUUM"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Обычный VACUUM совместим с работой и редко отдаёт место файловой системе. FULL компактизирует файл, но держит эксклюзивную блокировку. В проде чаще pg_repack, чем регулярный FULL."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Где смотреть n_dead_tup и last_autovacuum для performance?",
+      "options": [
+        "pg_ts_dict",
+        "pg_replication_slots только",
+        "pg_stat_user_tables",
+        "information_schema.views"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "pg_stat_user_tables даёт живые/мёртвые кортежи и время автоочистки. По ним судят, отстаёт ли autovacuum на часто обновляемой таблице оценок."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Зачем VACUUM freeze (заморозка xmin)?",
+      "options": [
+        "Чтобы ускорить Seq Scan кэшированием Java",
+        "Чтобы предотвратить зацикливание 32-битного счётчика транзакций (wraparound)",
+        "Чтобы превратить heap в BRIN",
+        "Чтобы отключить WAL"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Идентификаторы транзакций конечны. Freeze помечает старые xmin как вечно видимые. Без этого кластер остановится для защиты от wraparound. Следят за age(relfrozenxid)."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Порог autovacuum примерно считается как:",
+      "options": [
+        "ровно 1 dead tuple независимо от размера таблицы",
+        "только max_wal_size",
+        "число индексов GIN на таблице",
+        "autovacuum_vacuum_threshold + autovacuum_vacuum_scale_factor * n_live"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Чем больше таблица, тем выше абсолютный порог из‑за scale_factor. На больших горячих таблицах scale_factor уменьшают в ALTER TABLE ... SET. WAL и GIN порог не задают."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Что делает VACUUM (без FULL)? (все верные)",
+      "options": [
+        "Помечает dead tuples как переиспользуемые",
+        "Обновляет visibility map, помогая Index-Only Scan",
+        "Может выполнять freeze старых транзакций",
+        "Всегда возвращает гигабайты файловой системе, как VACUUM FULL"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Обычный VACUUM обслуживает MVCC, карту видимости и freeze. Место ОС он почти не отдаёт — для этого FULL или переписывание таблицы. VACUUM ANALYZE дополнительно обновляет статистику."
+    }
+  ]
+}

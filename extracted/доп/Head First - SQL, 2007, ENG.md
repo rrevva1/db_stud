@@ -1,0 +1,1 @@
+> pdf-inspector: файл классифицирован как **scanned** (586 страниц, confidence 0.95). Native-текстового слоя нет, Markdown пустой. Русское издание извлёклось: `extracted/доп/Head First - Изучаем SQL, 2012, RUS.md`.

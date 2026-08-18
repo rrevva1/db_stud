@@ -1,0 +1,84 @@
+{
+  "lessonId": "p0-l02-postgres-setup",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Какая команда SQL создаёт базу данных учебной практики?",
+      "options": [
+        "CREATE SCHEMA dbstud;",
+        "CREATE DATABASE dbstud;",
+        "CREATE TABLE dbstud ();",
+        "INSERT INTO databases VALUES ('dbstud');"
+      ],
+      "correct": [1],
+      "explanation": "CREATE DATABASE создаёт базу. CREATE SCHEMA — пространство имён внутри уже существующей базы. CREATE TABLE создаёт отношение. INSERT не создаёт БД."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Чем клиент psql отличается от сервера PostgreSQL?",
+      "options": [
+        "Это одно и то же: psql и есть СУБД",
+        "psql — интерактивный клиент, сервер хранит данные и выполняет SQL",
+        "psql хранит таблицы, сервер только рисует окна",
+        "Сервер нужен только для Windows, на macOS достаточно psql"
+      ],
+      "correct": [1],
+      "explanation": "Сервер принимает соединения и выполняет запросы. psql — консольный клиент. Без запущенного сервера клиент некуда подключаться."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Вы подключились не к той базе и видите чужие таблицы. Что проверить в первую очередь?",
+      "options": [
+        "Версию Python на машине",
+        "Текущую базу: SELECT current_database();",
+        "Наличие расширения postgis",
+        "Кодировку PDF учебника"
+      ],
+      "correct": [1],
+      "explanation": "current_database() показывает, к какой БД открыто соединение. Python, PostGIS и PDF на выбор базы не влияют."
+    },
+    {
+      "id": "q4",
+      "type": "multi",
+      "question": "Что нужно, чтобы выполнить первый SELECT из курса?",
+      "options": [
+        "Установленный и запущенный PostgreSQL",
+        "Учётная запись с правом подключения к учебной базе",
+        "Обязательно кластер Kubernetes",
+        "Обязательно SQL Server Management Studio"
+      ],
+      "correct": [0, 1],
+      "explanation": "Нужны сервер и право CONNECT. Kubernetes и SSMS не входят в минимальную среду курса (psql / pgAdmin)."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "CREATE DATABASE выполняется, когда вы уже подключены к dbstud. Что произойдёт?",
+      "options": [
+        "Команда всегда молча создаст вторую копию dbstud",
+        "Команда выполнится, но лучше создавать БД из служебной базы (postgres), а не «изнутри себя» как привычку",
+        "PostgreSQL удалит текущую базу",
+        "Создастся таблица с именем базы"
+      ],
+      "correct": [1],
+      "explanation": "Новую БД принято создавать, подключившись к служебной postgres. CREATE DATABASE не превращается в CREATE TABLE и не дропает текущую базу."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "Запрос SELECT 1; в psql вернул 1. Это означает:",
+      "options": [
+        "Что в таблице student есть ровно одна строка",
+        "Что соединение с сервером работает и SQL выполняется",
+        "Что установлен только SQLite",
+        "Что CREATE DATABASE уже нельзя вызывать"
+      ],
+      "correct": [1],
+      "explanation": "SELECT 1 — санитарная проверка сессии. Он не читает student, не фиксирует диалект SQLite и не запрещает DDL."
+    }
+  ]
+}

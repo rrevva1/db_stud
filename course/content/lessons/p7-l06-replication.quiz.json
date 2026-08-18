@@ -1,0 +1,100 @@
+{
+  "lessonId": "p7-l06-replication",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Как устроена streaming (physical) replication в PostgreSQL?",
+      "options": [
+        "Standby получает поток WAL и держит побайтовую копию кластера",
+        "Копируются только выбранные таблицы через CREATE PUBLICATION",
+        "Данные переносятся исключительно логическим pg_dump по cron",
+        "Реплика хранит другой major version без общего WAL"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Физическая репликация шлёт WAL: standby — почти точная копия файлов primary. Публикации/подписки — logical replication. Dump по cron — backup, не непрерывная реплика. Physical обычно требует ту же major-версию."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Для чего предназначена logical replication (PUBLICATION/SUBSCRIPTION)?",
+      "options": [
+        "Только для замены PITR и отмены WAL-архива",
+        "Для побайтового клонирования всего data directory",
+        "Для выборочной репликации таблиц, в том числе между версиями",
+        "Для включения RLS на подписчике без политик"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Логическая репликация работает на уровне изменений строк выбранных таблиц: удобна для upgrade и частичного копирования. Это не физический клон и не замена backup/PITR. RLS на подписчике настраивается отдельно."
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "question": "Что обычно настраивают для streaming-реплики? (все верные)",
+      "options": [
+        "wal_level=replica и max_wal_senders на primary",
+        "Роль с правом репликации и слот/коннект standby",
+        "primary_conninfo и hot_standby на реплике",
+        "CREATE PUBLICATION на каждую системную таблицу pg_catalog"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Primary отдаёт WAL, standby подключается replication-ролью. hot_standby позволяет читать реплику. Публикации — механизм logical replication, не обязательный шаг physical streaming."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Зачем выносят тяжёлые отчёты на hot standby?",
+      "options": [
+        "Чтобы OLAP-сканы не конкурировали с OLTP на primary",
+        "Чтобы standby стал единственным местом записи INSERT",
+        "Чтобы отменить необходимость GRANT SELECT на факты",
+        "Чтобы реплика автоматически стала primary без promote"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Read replica снимает аналитическую нагрузку с мастера. Запись по-прежнему на primary; failover — отдельная процедура promote (Patroni, repmgr или вручную). Права GRANT на отчётных таблицах всё равно нужны."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Как synchronous replication соотносится с CAP при разделении сети?",
+      "options": [
+        "Синхронная реплика всегда выбирает AP: пишет при любом split",
+        "Async-репликация гарантирует нулевой лаг и строгую C",
+        "CAP к репликации PostgreSQL неприменим в принципе",
+        "PostgreSQL в sync-режиме ближе к CP: не подтвердит COMMIT без реплики"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Синхронный COMMIT ждёт реплику — при partition доступность записи падает, согласованность сохраняется (CP-bias). Асинхронная реплика доступнее, но с лагом (AP-bias). CAP как раз про этот компромисс."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Что верно про failover? (все верные)",
+      "options": [
+        "Promote делает бывший standby новым primary",
+        "Инструменты вроде Patroni/repmgr автоматизируют переключение",
+        "Реплика полностью заменяет протестированный backup",
+        "После split-brain нужно явно разобрать, кто теперь источник истины"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Failover — смена primary, часто оркестрируется. Реплика не страхует от логических ошибок и DROP. Split-brain опасен двойной записью: нужна чёткая процедура, кто мастер."
+    }
+  ]
+}

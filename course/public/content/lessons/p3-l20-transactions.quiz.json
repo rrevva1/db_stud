@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l20-transactions",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Свойство атомарности (A в ACID) для перевода студента между группами означает:",
+      "options": [
+        "Каждый UPDATE виден другим сессиям сразу, даже до COMMIT",
+        "После сбоя диска COMMIT всё равно можно не записывать",
+        "Либо выполнятся все шаги транзакции, либо ни один (всё или ничего)",
+        "Транзакции всегда выполняются строго по одной, параллелизма нет"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Атомарность — неделимый блок: UPDATE связи и запись в audit либо вместе, либо откат. Видимость до COMMIT — вопрос изоляции. Сохранность после сбоя — Durability. Параллелизм как раз есть, его ограничивает Isolation."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "В psql без явного BEGIN каждая команда:",
+      "options": [
+        "Выполняется в режиме autocommit: успех фиксируется сразу, ошибка откатывает только её",
+        "Копит изменения, пока не напишете COMMIT вручную",
+        "Игнорируется, пока не открыта транзакция SERIALIZABLE",
+        "Пишет только в TEMP-таблицы"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "По умолчанию клиент autocommit. Явные BEGIN … COMMIT собирают несколько DML в одну атомарную единицу — как раз для «сначала SELECT, потом UPDATE». Без BEGIN каждый INSERT уже на диске (с точки зрения транзакции)."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "После BEGIN; UPDATE ...; обнаружили неверный WHERE. Как отменить изменения?",
+      "options": [
+        "COMMIT — он «откатывает по умолчанию»",
+        "TRUNCATE TABLE pg_rollback",
+        "Закрыть psql без команды — PostgreSQL всегда сохранит UPDATE",
+        "ROLLBACK — вернуть состояние на момент BEGIN"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "ROLLBACK отменяет все изменения текущей транзакции. COMMIT их фиксирует — это противоположность. Не закрывайте сессию «наугад»: поведение клиента разное, правильный жест — явный ROLLBACK."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "SAVEPOINT sp1 после INSERT, затем DELETE, затем ROLLBACK TO sp1. Что останется?",
+      "options": [
+        "И INSERT, и DELETE применятся",
+        "INSERT сохранится в транзакции, DELETE отменится; дальше нужен COMMIT или полный ROLLBACK",
+        "Отменится вся транзакция, включая INSERT",
+        "SAVEPOINT в PostgreSQL нет"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Точка сохранения откатывает только хвост после неё. INSERT до sp1 жив. Полный ROLLBACK снял бы и его. PostgreSQL SAVEPOINT поддерживает — удобно в длинном скрипте."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие утверждения о транзакциях PostgreSQL верны? Выберите все верные.",
+      "options": [
+        "BEGIN и START TRANSACTION открывают блок",
+        "После ошибки транзакция в состоянии aborted — нужен ROLLBACK перед новыми командами",
+        "COMMIT фиксирует изменения, они переживают сбой (Durability, при штатном fsync)",
+        "ROLLBACK TO sp1 автоматически делает COMMIT всей транзакции"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Ошибка внутри блока не даёт продолжать DML, пока не ROLLBACK (или ROLLBACK TO savepoint). COMMIT — фиксация, не откат. ROLLBACK TO savepoint транзакцию не закрывает: нужен финальный COMMIT или ROLLBACK."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "Consistency в ACID для INSERT в performance с CHECK (grade BETWEEN 2 AND 5) означает:",
+      "options": [
+        "Оценка 6 всё равно запишется, CHECK только логируется",
+        "Транзакция может оставить таблицу без первичного ключа",
+        "Фиксация возможна, только если ограничения целостности соблюдены",
+        "Consistency — синоним Isolation Level"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Согласованность: после COMMIT база удовлетворяет объявленным constraints. Нарушение CHECK/FK откатывает операцию. Isolation — про параллельные сессии, не про сам CHECK."
+    }
+  ]
+}

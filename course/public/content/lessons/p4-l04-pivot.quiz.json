@@ -1,0 +1,98 @@
+{
+  "lessonId": "p4-l04-pivot",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Есть ли в PostgreSQL оператор PIVOT как в T-SQL?",
+      "options": [
+        "Да, PIVOT входит в ядро PostgreSQL с версии 10",
+        "Нет; сводную таблицу строят через FILTER/CASE или crosstab из tablefunc",
+        "Да, но только внутри MATERIALIZED VIEW",
+        "Нет, pivot возможен исключительно во внешнем BI-инструменте"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "В ядре PostgreSQL нет оператора PIVOT. На практике используют условную агрегацию (FILTER или CASE) либо функцию crosstab расширения tablefunc. BI тоже умеет pivot, но это не единственный путь."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Как получить столбцы «осень» и «весна» по оценкам из performance?",
+      "options": [
+        "SUM(grade) FILTER (WHERE semester = 'осень') и аналогично для весны, плюс GROUP BY",
+        "SELECT * FROM performance PIVOT (SUM(grade) FOR semester)",
+        "ROW_NUMBER() OVER (PARTITION BY semester) без агрегации",
+        "CREATE INDEX ON performance (semester) — этого достаточно для сводной таблицы"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "FILTER ограничивает агрегат строками нужного семестра, а GROUP BY задаёт строки отчёта (студент или группа). PIVOT-синтаксиса T-SQL в PostgreSQL нет. Окно и индекс сводную таблицу не строят."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Какой формат входных данных ждёт crosstab из tablefunc?",
+      "options": [
+        "Широкая таблица, где категории уже являются столбцами",
+        "Только jsonb-документ без SQL-запроса",
+        "Длинный формат: row_name, category, value (плюс список категорий во втором аргументе)",
+        "Две таблицы, соединённые FULL OUTER JOIN по времени"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Первый аргумент crosstab — SQL, возвращающий (строка, категория, значение). Второй задаёт порядок и набор выходных столбцов. Результат нужно описать в AS ct(...), иначе типы не совпадут."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Чем UNPIVOT отличается от pivot?",
+      "options": [
+        "UNPIVOT превращает широкие столбцы обратно в длинные пары «атрибут, значение»",
+        "UNPIVOT удаляет дубликаты категорий",
+        "UNPIVOT — синоним FILTER (WHERE ...)",
+        "UNPIVOT в PostgreSQL всегда требует расширения tablefunc"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Pivot делает wide-таблицу из long; unpivot — обратное. В PostgreSQL unpivot часто пишут через UNION ALL, LATERAL VALUES или jsonb_each. tablefunc для этого не обязателен."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Эквивалент SUM(amount) FILTER (WHERE quarter = 'Q1') через CASE:",
+      "options": [
+        "SUM(quarter) WHERE amount = 'Q1'",
+        "COUNT(*) FILTER (WHERE quarter <> 'Q1')",
+        "AVG(amount) OVER (PARTITION BY quarter)",
+        "SUM(CASE WHEN quarter = 'Q1' THEN amount ELSE 0 END)"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "FILTER и CASE задают одну и ту же условную агрегацию. ELSE 0 (или NULL) определяет, как учитывать «чужие» кварталы. Оконный AVG и COUNT с обратным условием — другие запросы."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие способы построить сводный отчёт по семестрам в PostgreSQL корректны? (все верные)",
+      "options": [
+        "Условная агрегация с FILTER (WHERE ...)",
+        "Обязательный оператор PIVOT ядра PostgreSQL",
+        "SUM(CASE WHEN semester = ... THEN grade END) и GROUP BY",
+        "crosstab из расширения tablefunc при фиксированных категориях"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "FILTER, CASE и crosstab — рабочие приёмы. Оператора PIVOT в ядре нет, поэтому рассчитывать на синтаксис T-SQL нельзя. Набор столбцов crosstab нужно заранее описать в алиасе."
+    }
+  ]
+}

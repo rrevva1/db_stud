@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l14-group-by",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Дан мини-набор:\ns_group: (1,'ИВТ-21'), (2,'ПИ-22')\nstudent_in_group: (1,1), (2,1)\n— ПИ-22 пустая.\n\nSELECT g.name, COUNT(sig.student_id) AS cnt\nFROM s_group g\nLEFT JOIN student_in_group sig ON sig.group_id = g.group_id\nGROUP BY g.name\nORDER BY g.name;\n\nЧто вернёт запрос?",
+      "options": [
+        "ИВТ-21: 2, ПИ-22: 1 (как COUNT(*), который считает NULL-строку LEFT JOIN)",
+        "ИВТ-21: 2, ПИ-22: 0 (COUNT(столбец) не считает NULL)",
+        "Только ИВТ-21: 2 (пустая группа всегда пропадает из GROUP BY)",
+        "ИВТ-21: 2, ПИ-22: 2 (COUNT копирует число студентов соседней группы)"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "LEFT JOIN даёт для ПИ-22 одну строку с sig.student_id NULL. COUNT(sig.student_id) NULL пропускает → 0. COUNT(*) посчитал бы эту строку как 1. GROUP BY имя группы пустую группу не удаляет — она есть в результате с нулём."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Чем COUNT(*) отличается от COUNT(email) по таблице student?",
+      "options": [
+        "Разницы нет: оба считают только не-NULL email",
+        "COUNT(*) запрещён вместе с GROUP BY",
+        "COUNT(email) считает все строки, COUNT(*) — только с почтой",
+        "COUNT(*) — все строки; COUNT(email) — только строки, где email не NULL"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "COUNT(*) считает кортежи. COUNT(столбец) игнорирует NULL в этом столбце. Если у части студентов нет почты, числа разойдутся. Это не запрет GROUP BY."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "SELECT last_name, AVG(grade) FROM performance p JOIN student s ON ... GROUP BY subject_id; в стандартном SQL:",
+      "options": [
+        "Ошибка: last_name не в GROUP BY и не агрегат",
+        "Верно всегда: PostgreSQL подставит любую фамилию группы",
+        "HAVING last_name IS NOT NULL исправит запрос",
+        "DISTINCT last_name заменяет GROUP BY"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "В SELECT после группировки — ключи GROUP BY, агрегаты и выражения от них. Фамилия при группировке по предмету неоднозначна. Исключение PostgreSQL — функциональная зависимость от PK, здесь её нет. HAVING и DISTINCT правило не отменяют."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "AVG(p.grade)::numeric(4,2) в SELECT с GROUP BY subj.name нужен, чтобы:",
+      "options": [
+        "Заменить GROUP BY на округление",
+        "Превратить среднее в дату",
+        "Получить точное десятичное среднее с двумя знаками, а не «сырой» float",
+        "Запретить NULL в grade"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "AVG по целым может дать тип с плавающей точкой. Приведение к NUMERIC(4,2) даёт стабильную шкалу для отчёта. Это не GROUP BY и не CHECK на NULL. NULL в grade AVG пропускает."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Что допустимо в SELECT при GROUP BY g.name, subj.name? Выберите все верные.",
+      "options": [
+        "Столбец student_id, не входящий в GROUP BY и не агрегат (в стандартном SQL)",
+        "g.name и subj.name — ключи группировки",
+        "AVG(p.grade), COUNT(*), MIN(p.grade)",
+        "Выражение MAX(p.grade) - MIN(p.grade) как разброс"
+      ],
+      "correct": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "Ключи группировки и агрегаты законны. Произвольный student_id в стандартном SQL нельзя: в группе много студентов. Разброс — агрегатное выражение от MIN/MAX, его группировать отдельно не нужно."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "GROUP BY g.name, subj.name строит группы:",
+      "options": [
+        "Только по группе, предмет игнорируется",
+        "По каждой комбинации «группа + дисциплина»",
+        "По каждому студенту отдельно",
+        "Одну группу на всю таблицу, как без GROUP BY"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Несколько столбцов в GROUP BY — кортеж-ключ. ИВТ-21/Матан и ИВТ-21/БД — разные группы агрегации. Без GROUP BY агрегат схлопывает все строки в одну."
+    }
+  ]
+}

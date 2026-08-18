@@ -1,0 +1,98 @@
+{
+  "lessonId": "p6-l01-storage-arch",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Какую модель процессов использует PostgreSQL?",
+      "options": [
+        "Один многопоточный процесс на все сессии, как типичный SQL Server по умолчанию",
+        "Многопроцессную: postmaster принимает соединения и порождает backend на сессию",
+        "Только фоновые процессы без клиентских backend",
+        "По процессу на каждую строку таблицы student"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Кластер стартует postmaster (часто процесс postgres). Каждое подключение получает отдельный backend. Рядом работают checkpointer, walwriter, autovacuum, bgwriter. Это не поток-на-строку."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Что такое shared_buffers?",
+      "options": [
+        "Кэш страниц данных (обычно 8 КБ) в общей памяти кластера",
+        "Каталог pg_wal на диске",
+        "Клиентский кэш psql",
+        "Таблица TOAST для каждой базы"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Исполнитель читает heap через buffer manager: страница либо уже в shared_buffers, либо поднимается с диска. Типичный ориентир — порядка 25% RAM, не весь объём машины. WAL — отдельный журнал."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Зачем PostgreSQL пишет WAL до изменения data-файлов?",
+      "options": [
+        "Чтобы ускорить Seq Scan",
+        "Ради durability и crash recovery: после сбоя можно повторить redo",
+        "Чтобы заменить shared_buffers",
+        "Чтобы отключить checkpoint"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Правило write-ahead: сначала журнал, потом (позже) грязные страницы. COMMIT ждёт fsync WAL. Без журнала аварийное выключение потеряло бы зафиксированные транзакции."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Путь простого SELECT в PostgreSQL начинается так:",
+      "options": [
+        "Клиент → postmaster → backend → разбор/план/исполнение → buffer manager → страница",
+        "Клиент напрямую читает файлы heap, минуя backend",
+        "Только autovacuum читает пользовательские SELECT",
+        "Планировщик пишет результат сразу в pg_wal, минуя буферы"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Сессия живёт в backend. Парсер, планировщик и исполнитель работают там же и ходят в буферный менеджер. Клиент не открывает relfile сам. SELECT читает страницы, а не подменяет собой WAL."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Buffer cache hit ratio считают примерно как:",
+      "options": [
+        "n_dead_tup / n_live_tup",
+        "max_wal_size / checkpoint_timeout",
+        "blks_hit / (blks_hit + blks_read)",
+        "число расширений / число баз"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Доля попаданий в shared buffers — ключевой KPI кэша. Мёртвые кортежи и размер WAL — другие метрики. Низкий hit ratio на горячей нагрузке намекает на малый кэш или на слишком большие seq scan."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие фоновые процессы относятся к архитектуре PostgreSQL? (все верные)",
+      "options": [
+        "checkpointer — сброс грязных буферов в контрольной точке",
+        "Отдельный процесс на каждую строку таблицы student",
+        "walwriter — запись WAL",
+        "autovacuum — очистка dead tuples и ANALYZE"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Checkpointer, walwriter, autovacuum и bgwriter — штатные процессы кластера. Backend один на сессию, а не на кортеж. Postmaster остаётся родителем клиентских backend."
+    }
+  ]
+}

@@ -1,0 +1,2470 @@
+{
+  "title": "Базы данных: от проектирования до SQL",
+  "version": "1.0.0",
+  "parts": [
+    {
+      "id": "part0",
+      "title": "Введение в курс",
+      "modules": [
+        {
+          "id": "mod0-1",
+          "title": "Старт курса",
+          "lessons": [
+            {
+              "id": "p0-l01-course-intro",
+              "title": "Введение в курс: цели, структура и материалы",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "lecture1",
+                  "ref": "Слайды 1–8: обзор дисциплины"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 1, §1.1–1.2"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Понять цели и структуру курса",
+                "Ознакомиться с источниками и форматом занятий",
+                "Сформулировать ожидаемые результаты обучения"
+              ]
+            },
+            {
+              "id": "p0-l02-postgres-setup",
+              "title": "Установка и настройка PostgreSQL",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 1: установка СУБД"
+                },
+                {
+                  "sourceId": "practicum",
+                  "ref": "Задание 1: подготовка среды"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Установить PostgreSQL и клиент psql",
+                "Создать учётную запись и базу данных для практики",
+                "Проверить подключение и выполнить первый запрос"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "part1",
+      "title": "Основы СУБД и реляционная теория",
+      "modules": [
+        {
+          "id": "mod1-1",
+          "title": "Системы управления базами данных",
+          "lessons": [
+            {
+              "id": "p1-l01-dbms-intro",
+              "title": "Что такое СУБД и зачем она нужна",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 1, §1.3–1.5"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 1"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Определить понятие базы данных и СУБД",
+                "Перечислить основные функции СУБД",
+                "Сравнить файловый и базисный подходы"
+              ]
+            },
+            {
+              "id": "p1-l02-requirements",
+              "title": "Требования к системам управления данными",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 2"
+                },
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 1: требования к СУБД"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Классифицировать требования к СУБД",
+                "Объяснить требования целостности и безопасности",
+                "Сопоставить требования с возможностями PostgreSQL"
+              ]
+            },
+            {
+              "id": "p1-l03-data-models",
+              "title": "Модели данных: иерархическая, сетевая, реляционная",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 3, §3.1–3.3"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 2"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Описать иерархическую и сетевую модели",
+                "Объяснить принципы реляционной модели",
+                "Сравнить модели по гибкости и сложности реализации"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mod1-2",
+          "title": "Реляционная модель данных",
+          "lessons": [
+            {
+              "id": "p1-l04-relational-basics",
+              "title": "Реляционная модель: отношения, атрибуты, домены",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "lecture1",
+                  "ref": "Слайды 15–28: реляционная модель"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 3–4"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Определить отношение, кортеж и атрибут",
+                "Пояснить роль доменов",
+                "Представить данные в виде таблиц-отношений"
+              ]
+            },
+            {
+              "id": "p1-l05-keys",
+              "title": "Ключи: суперключ, кандидат, первичный, внешний",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 4, §4.2"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 5"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Различать виды ключей",
+                "Обосновать выбор первичного ключа",
+                "Объяснить назначение внешних ключей"
+              ]
+            },
+            {
+              "id": "p1-l06-algebra",
+              "title": "Реляционная алгебра: операции и выражения",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 5, §5.1"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 6"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Выполнить операции выборки и проекции",
+                "Применить соединение, объединение и разность",
+                "Построить алгебраическое выражение для запроса"
+              ]
+            },
+            {
+              "id": "p1-l07-calculus",
+              "title": "Реляционное исчисление: Tuple и Domain",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 7"
+                },
+                {
+                  "sourceId": "date-sql",
+                  "ref": "Глава 2"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Записать запрос в терминах исчисления кортежей",
+                "Сопоставить алгебру и исчисление",
+                "Перевести формулу в SQL-подобный синтаксис"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mod1-3",
+          "title": "Целостность и SQL",
+          "lessons": [
+            {
+              "id": "p1-l08-integrity",
+              "title": "Целостность данных: сущностная, ссылочная, доменная",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 4, §4.4–4.6"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 8"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Определить виды ограничений целостности",
+                "Привести примеры нарушений и их предотвращения",
+                "Связать ограничения с DDL PostgreSQL"
+              ]
+            },
+            {
+              "id": "p1-l09-codd-rules",
+              "title": "12 правил Кодда и их практическое значение",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 2, приложение"
+                },
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 2: правила Кодда"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Перечислить правила Кодда",
+                "Оценить соответствие PostgreSQL правилам",
+                "Объяснить, почему правила важны для SQL"
+              ]
+            },
+            {
+              "id": "p1-l10-sql-overview",
+              "title": "Обзор SQL: DDL, DML, DCL, TCL",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 2: обзор SQL"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Главы 1–2"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Классифицировать команды SQL по категориям",
+                "Описать жизненный цикл данных в SQL",
+                "Подготовиться к практической части курса"
+              ]
+            },
+            {
+              "id": "p1-l11-dialects",
+              "title": "Диалекты SQL: стандарт, PostgreSQL, T-SQL",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Введение: особенности PostgreSQL"
+                },
+                {
+                  "sourceId": "ben-gan",
+                  "ref": "Глава 1: обзор T-SQL"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Главы 1–3: SQLite vs PostgreSQL (не копировать синтаксис)"
+                }
+              ],
+              "objectives": [
+                "Сопоставить ANSI SQL и диалекты СУБД",
+                "Назвать ключевые отличия PostgreSQL и SQL Server",
+                "Выбрать источники для углублённого изучения"
+              ]
+            },
+            {
+              "id": "p1-l12-exam",
+              "title": "Контроль: основы СУБД и реляционная теория",
+              "dialect": "exam",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Главы 1–5 (повторение)"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Главы 1–8 (повторение)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Проверить понимание реляционной модели",
+                "Решить задачи на ключи и целостность",
+                "Подготовиться к проектированию БД"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "part2",
+      "title": "Проектирование баз данных",
+      "modules": [
+        {
+          "id": "mod2-1",
+          "title": "Методология проектирования",
+          "lessons": [
+            {
+              "id": "p2-l01-design-lifecycle",
+              "title": "Жизненный цикл проектирования базы данных",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "lecture1",
+                  "ref": "Слайды 30–42"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 6, §6.1"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Описать этапы жизненного цикла БД",
+                "Определить роли аналитика и разработчика",
+                "Сопоставить этапы с артефактами проекта"
+              ]
+            },
+            {
+              "id": "p2-l02-three-stages",
+              "title": "Три стадии проектирования: концептуальная, логическая, физическая",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 22"
+                },
+                {
+                  "sourceId": "info-support",
+                  "ref": "Раздел 2: стадии проектирования"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Различать концептуальный, логический и физический уровни",
+                "Определить входы и выходы каждой стадии",
+                "Применить подход к учебному примеру"
+              ]
+            },
+            {
+              "id": "p2-l03-entities",
+              "title": "Сущности, атрибуты и наборы сущностей",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "practicum",
+                  "ref": "Глава 1: сущности"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 6, §6.2"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Выделить сущности из предметной области",
+                "Классифицировать атрибуты",
+                "Построить перечень сущностей для модели"
+              ]
+            },
+            {
+              "id": "p2-l04-relationships",
+              "title": "Связи между сущностями: типы и кардинальность",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 6, §6.3"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 3"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Определить тип связи один-к-одному, один-ко-многим, многие-ко-многим",
+                "Задать кардинальность и обязательность",
+                "Отразить связи в ER-модели"
+              ]
+            },
+            {
+              "id": "p2-l05-er-diagrams",
+              "title": "ER-диаграммы: нотация Chen и Crow's Foot",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "lecture1",
+                  "ref": "Слайды 43–55"
+                },
+                {
+                  "sourceId": "practicum",
+                  "ref": "Глава 2: ER-диаграммы"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Читать и строить ER-диаграммы",
+                "Выбрать нотацию для проекта",
+                "Проверить модель на полноту"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mod2-2",
+          "title": "Нормализация",
+          "lessons": [
+            {
+              "id": "p2-l06-redundancy",
+              "title": "Избыточность данных и аномалии обновления",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 7, §7.1"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 12"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Объяснить аномалии вставки, удаления и обновления",
+                "Показать связь избыточности с плохим проектированием",
+                "Наметить стратегию нормализации"
+              ]
+            },
+            {
+              "id": "p2-l07-fd",
+              "title": "Функциональные зависимости",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 7, §7.2"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 11"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Определить функциональную зависимость",
+                "Вывести замыкание множества атрибутов",
+                "Найти ключи через FD"
+              ]
+            },
+            {
+              "id": "p2-l08-1nf-2nf",
+              "title": "Первая и вторая нормальные формы",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "practicum",
+                  "ref": "Глава 3: 1NF–2NF"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 13"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Проверить соответствие 1NF и 2NF",
+                "Декомпозировать отношение до 2NF",
+                "Обосновать сохранение зависимостей"
+              ]
+            },
+            {
+              "id": "p2-l09-3nf-bcnf",
+              "title": "Третья нормальная форма и НФ Бойса–Кодда",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 7, §7.4"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Главы 13–14"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Применить алгоритм нормализации до 3NF",
+                "Различать 3NF и BCNF",
+                "Выбрать целевую НФ для схемы"
+              ]
+            },
+            {
+              "id": "p2-l10-higher-nf",
+              "title": "НФ высших порядков: 4NF, 5NF, DKNF",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 15"
+                },
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 5: высшие нормальные формы"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Определить многозначные и join-зависимости",
+                "Понять практические ограничения высших НФ",
+                "Оценить необходимость дальнейшей декомпозиции"
+              ]
+            },
+            {
+              "id": "p2-l11-semantic",
+              "title": "Семантическое моделирование и бизнес-правила",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "lecture1",
+                  "ref": "Слайды 56–65"
+                },
+                {
+                  "sourceId": "info-support",
+                  "ref": "Раздел 3: семантика данных"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Формализовать бизнес-правила в модели",
+                "Согласовать ER-модель с заказчиком",
+                "Документировать допущения проектирования"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mod2-3",
+          "title": "Практика проектирования",
+          "lessons": [
+            {
+              "id": "p2-l12-lab-bookstore",
+              "title": "Лабораторная: проектирование БД книжного магазина",
+              "dialect": "lab",
+              "requiredSources": [
+                {
+                  "sourceId": "practicum",
+                  "ref": "Задание 2: книжный магазин"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 4"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Построить ER-диаграмму книжного магазина",
+                "Нормализовать схему до 3NF",
+                "Подготовить DDL-скрипт создания таблиц"
+              ]
+            },
+            {
+              "id": "p2-l13-lab-airline",
+              "title": "Лабораторная: проектирование БД авиакомпании",
+              "dialect": "lab",
+              "requiredSources": [
+                {
+                  "sourceId": "practicum",
+                  "ref": "Задание 3: авиакомпания"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 6 (примеры)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Моделировать рейсы, пассажиров и бронирования",
+                "Учесть связи многие-ко-многим",
+                "Проверить схему на аномалии"
+              ]
+            },
+            {
+              "id": "p2-l14-exam",
+              "title": "Контроль: проектирование и нормализация",
+              "dialect": "exam",
+              "requiredSources": [
+                {
+                  "sourceId": "practicum",
+                  "ref": "Главы 1–3 (повторение)"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Главы 11–15 (повторение)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Решить задачи на ER-моделирование",
+                "Нормализовать заданные отношения",
+                "Защитить проектную схему"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "part3",
+      "title": "SQL: язык манипулирования и определения данных",
+      "modules": [
+        {
+          "id": "mod3-1",
+          "title": "DDL: определение структуры",
+          "lessons": [
+            {
+              "id": "p3-l01-create-table",
+              "title": "CREATE TABLE: создание таблиц и схем",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 3, §3.1"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 5"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Создать таблицу с именованными столбцами",
+                "Использовать схемы для организации объектов",
+                "Применить IF NOT EXISTS и комментарии"
+              ]
+            },
+            {
+              "id": "p3-l02-data-types",
+              "title": "Типы данных PostgreSQL",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 3, §3.2"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 8, §8.1"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Выбрать подходящие типы для атрибутов",
+                "Использовать serial, numeric, timestamp",
+                "Понять различия text и varchar"
+              ]
+            },
+            {
+              "id": "p3-l03-constraints",
+              "title": "Ограничения: PRIMARY KEY, FOREIGN KEY, CHECK, UNIQUE",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 3, §3.3"
+                },
+                {
+                  "sourceId": "practicum",
+                  "ref": "Глава 4: ограничения"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Задать первичный и внешний ключи",
+                "Добавить CHECK и UNIQUE ограничения",
+                "Обработать ошибки нарушения целостности"
+              ]
+            },
+            {
+              "id": "p3-l04-alter-table",
+              "title": "ALTER TABLE: изменение структуры",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 3, §3.4"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 6"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Добавить и удалить столбцы",
+                "Изменить тип данных и ограничения",
+                "Переименовать таблицы и столбцы"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mod3-2",
+          "title": "DML: изменение данных",
+          "lessons": [
+            {
+              "id": "p3-l05-insert",
+              "title": "INSERT: добавление данных",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 4, §4.1"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 7"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 10: DML vs анализ"
+                }
+              ],
+              "objectives": [
+                "Вставить одну и несколько строк",
+                "Использовать INSERT … RETURNING",
+                "Загрузить данные из SELECT"
+              ]
+            },
+            {
+              "id": "p3-l06-update",
+              "title": "UPDATE: изменение данных",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 4, §4.2"
+                },
+                {
+                  "sourceId": "practicum",
+                  "ref": "Задание 4: DML"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 10: изменение данных"
+                }
+              ],
+              "objectives": [
+                "Обновить строки по условию",
+                "Использовать UPDATE … FROM",
+                "Предотвратить нежелательные массовые обновления"
+              ]
+            },
+            {
+              "id": "p3-l07-delete",
+              "title": "DELETE и TRUNCATE",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 4, §4.3"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 8"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 10: удаление; сначала SELECT"
+                }
+              ],
+              "objectives": [
+                "Удалить строки по условию",
+                "Сравнить DELETE и TRUNCATE",
+                "Учесть каскадное удаление"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mod3-3",
+          "title": "SELECT и соединения",
+          "lessons": [
+            {
+              "id": "p3-l08-select-basics",
+              "title": "SELECT: базовый синтаксис запросов",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 5, §5.1"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 9"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 4: структура запроса, комментарии, LIMIT"
+                }
+              ],
+              "objectives": [
+                "Выбрать столбцы и задать псевдонимы",
+                "Использовать DISTINCT",
+                "Ограничить результат LIMIT/OFFSET"
+              ]
+            },
+            {
+              "id": "p3-l09-where-order",
+              "title": "WHERE, ORDER BY и операторы сравнения",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 5, §5.2"
+                },
+                {
+                  "sourceId": "practicum",
+                  "ref": "Глава 5: фильтрация"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 5: WHERE, LIKE, AND/OR"
+                }
+              ],
+              "objectives": [
+                "Фильтровать строки сложными условиями",
+                "Сортировать по нескольким столбцам",
+                "Применять BETWEEN, IN, LIKE"
+              ]
+            },
+            {
+              "id": "p3-l10-joins-intro",
+              "title": "Соединения таблиц: обзор и синтаксис",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 6, §6.1"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 10"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 6: зачем нужны соединения"
+                }
+              ],
+              "objectives": [
+                "Объяснить необходимость JOIN",
+                "Записать условие соединения ON/USING",
+                "Отличить INNER от OUTER JOIN"
+              ]
+            },
+            {
+              "id": "p3-l11-inner-join",
+              "title": "INNER JOIN: пересечение данных",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 6, §6.2"
+                },
+                {
+                  "sourceId": "practicum",
+                  "ref": "Задание 5: соединения"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 6: внутренние соединения"
+                }
+              ],
+              "objectives": [
+                "Соединить две и более таблиц",
+                "Использовать составные ключи",
+                "Оптимизировать читаемость запроса"
+              ]
+            },
+            {
+              "id": "p3-l12-outer-join",
+              "title": "LEFT, RIGHT и FULL OUTER JOIN",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 6, §6.3"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 11"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 6: LEFT JOIN и несовпавшие строки"
+                }
+              ],
+              "objectives": [
+                "Сохранить строки без пары",
+                "Обработать NULL при внешнем соединении",
+                "Выбрать подходящий тип OUTER JOIN"
+              ]
+            },
+            {
+              "id": "p3-l13-cross-self-join",
+              "title": "CROSS JOIN и SELF JOIN",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 6, §6.4"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 5, §5.3"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Построить декартово произведение",
+                "Применить самосоединение для иерархий",
+                "Оценить риски CROSS JOIN"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mod3-4",
+          "title": "Агрегация и подзапросы",
+          "lessons": [
+            {
+              "id": "p3-l14-group-by",
+              "title": "GROUP BY и агрегирование",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 7, §7.1"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 12"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 7: агрегаты и GROUP BY"
+                }
+              ],
+              "objectives": [
+                "Группировать данные по столбцам",
+                "Использовать COUNT, SUM, AVG, MIN, MAX",
+                "Понять правило «все столбцы в GROUP BY»"
+              ]
+            },
+            {
+              "id": "p3-l15-having",
+              "title": "HAVING: фильтрация групп",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 7, §7.2"
+                },
+                {
+                  "sourceId": "practicum",
+                  "ref": "Задание 6: агрегаты"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 7: WHERE vs HAVING"
+                }
+              ],
+              "objectives": [
+                "Отличить WHERE от HAVING",
+                "Фильтровать агрегированные результаты",
+                "Комбинировать GROUP BY и HAVING"
+              ]
+            },
+            {
+              "id": "p3-l16-subqueries",
+              "title": "Подзапросы: скalar, IN, EXISTS",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 8, §8.1"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 13"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 8: подзапросы в SELECT и WHERE"
+                }
+              ],
+              "objectives": [
+                "Вложить SELECT во WHERE и FROM",
+                "Использовать EXISTS для проверки наличия",
+                "Сравнить подзапросы и JOIN"
+              ]
+            },
+            {
+              "id": "p3-l17-set-ops",
+              "title": "Операции над множествами: UNION, INTERSECT, EXCEPT",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 8, §8.2"
+                },
+                {
+                  "sourceId": "date-sql",
+                  "ref": "Глава 5"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Объединить результаты запросов",
+                "Убрать дубликаты UNION ALL",
+                "Применить INTERSECT и EXCEPT"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mod3-5",
+          "title": "Функции, транзакции и объекты БД",
+          "lessons": [
+            {
+              "id": "p3-l18-scalar-funcs",
+              "title": "Скalarные функции и выражения",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 9, §9.1"
+                },
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Глава 14"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 7: строковые и датовые функции (в курсе — PostgreSQL)"
+                }
+              ],
+              "objectives": [
+                "Использовать строковые и числовые функции",
+                "Работать с датами и интервалами",
+                "Применять COALESCE и NULLIF"
+              ]
+            },
+            {
+              "id": "p3-l19-case-when",
+              "title": "Условные выражения CASE и CAST",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 9, §9.2"
+                },
+                {
+                  "sourceId": "practicum",
+                  "ref": "Глава 6: выражения"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 5: CASE как классификатор"
+                }
+              ],
+              "objectives": [
+                "Построить ветвление CASE WHEN",
+                "Приводить типы CAST и ::",
+                "Создать вычисляемые столбцы"
+              ]
+            },
+            {
+              "id": "p3-l20-transactions",
+              "title": "Транзакции: BEGIN, COMMIT, ROLLBACK",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 10, §10.1"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 9, §9.2"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Оформить операции в транзакцию",
+                "Откатить изменения при ошибке",
+                "Понять свойства ACID"
+              ]
+            },
+            {
+              "id": "p3-l21-isolation",
+              "title": "Уровни изоляции и аномалии параллелизма",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 10, §10.2"
+                },
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 16"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Настроить READ COMMITTED и REPEATABLE READ",
+                "Распознать dirty read и phantom read",
+                "Выбрать уровень изоляции для задачи"
+              ]
+            },
+            {
+              "id": "p3-l22-views",
+              "title": "Представления (VIEW) и материализованные представления",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 11, §11.1"
+                },
+                {
+                  "sourceId": "practicum",
+                  "ref": "Глава 7: представления"
+                }
+              ],
+              "optionalSources": [
+                {
+                  "sourceId": "shields",
+                  "ref": "Глава 9: представление как сохранённый запрос"
+                }
+              ],
+              "objectives": [
+                "Создать обычное и материализованное VIEW",
+                "Обновлять данные через представления",
+                "Применить REFRESH MATERIALIZED VIEW"
+              ]
+            },
+            {
+              "id": "p3-l23-triggers",
+              "title": "Триггеры и хранимые функции PL/pgSQL",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 11, §11.2"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 10, §10.3"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Создать BEFORE/AFTER триггер",
+                "Написать простую функцию на PL/pgSQL",
+                "Обеспечить аудит изменений"
+              ]
+            },
+            {
+              "id": "p3-l24-exam",
+              "title": "Контроль: основы SQL и манипулирование данными",
+              "dialect": "exam",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Главы 3–11 (повторение)"
+                },
+                {
+                  "sourceId": "practicum",
+                  "ref": "Задания 4–7 (повторение)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Написать DDL и DML для заданной схемы",
+                "Построить запросы с JOIN и агрегатами",
+                "Продемонстрировать работу с транзакциями"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "part4",
+      "title": "Продвинутый SQL",
+      "modules": [
+        {
+          "id": "mod4-1",
+          "title": "Расширенные возможности SQL",
+          "lessons": [
+            {
+              "id": "p4-l01-cte",
+              "title": "CTE: WITH и рекурсивные запросы",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 12, §12.1"
+                },
+                {
+                  "sourceId": "date-sql",
+                  "ref": "Глава 7"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Оформить запрос с общим табличным выражением",
+                "Построить рекурсивный CTE для иерархий",
+                "Сравнить CTE и подзапросы"
+              ]
+            },
+            {
+              "id": "p4-l02-window",
+              "title": "Оконные функции: OVER, PARTITION BY, ROWS",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 12, §12.2"
+                },
+                {
+                  "sourceId": "ben-gan",
+                  "ref": "Глава 7: оконные функции"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Применить ROW_NUMBER, RANK, DENSE_RANK",
+                "Задать рамку ROWS/RANGE",
+                "Вычислить скользящие агрегаты"
+              ]
+            },
+            {
+              "id": "p4-l03-lateral",
+              "title": "LATERAL JOIN и unnest",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 12, §12.3"
+                },
+                {
+                  "sourceId": "pro-tsql",
+                  "ref": "Глава 4: APPLY (аналог)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Использовать LATERAL для коррелированных подзапросов",
+                "Развернуть массивы через unnest",
+                "Упростить сложные запросы"
+              ]
+            },
+            {
+              "id": "p4-l04-pivot",
+              "title": "PIVOT и crosstab: сводные таблицы",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 12, §12.4"
+                },
+                {
+                  "sourceId": "ben-gan",
+                  "ref": "Глава 8: pivot"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Построить сводную таблицу через FILTER",
+                "Использовать tablefunc.crosstab",
+                "Сравнить подходы pivot/unpivot"
+              ]
+            },
+            {
+              "id": "p4-l05-views-advanced",
+              "title": "Updatable views, правила и INSTEAD OF",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 13, §13.1"
+                },
+                {
+                  "sourceId": "date-sql",
+                  "ref": "Глава 9"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Создать обновляемое представление",
+                "Применить правила (rules) в PostgreSQL",
+                "Разделить логику через представления"
+              ]
+            },
+            {
+              "id": "p4-l06-duplicates-null",
+              "title": "Дубликаты, NULL и трёхзначная логика",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 13, §13.2"
+                },
+                {
+                  "sourceId": "date-sql",
+                  "ref": "Глава 3–4"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Обработать NULL в условиях и агрегатах",
+                "Найти и устранить дубликаты",
+                "Понять семантику NOT IN с NULL"
+              ]
+            },
+            {
+              "id": "p4-l07-formal-logic",
+              "title": "Формальная логика SQL и реляционная теория",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Глава 6 (дополнение)"
+                },
+                {
+                  "sourceId": "date-sql",
+                  "ref": "Главы 1–2, 10"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Сопоставить SQL и реляционную алгебру",
+                "Объяснить различие bag и set модели",
+                "Критически оценить «антипаттерны» SQL"
+              ]
+            },
+            {
+              "id": "p4-l08-exam",
+              "title": "Контроль: продвинутый SQL",
+              "dialect": "exam",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Главы 12–13 (повторение)"
+                },
+                {
+                  "sourceId": "date-sql",
+                  "ref": "Главы 3–10 (повторение)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Решить задачи на CTE и окна",
+                "Построить сводный отчёт",
+                "Обосновать выбор конструкции SQL"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "part5",
+      "title": "Производительность и оптимизация",
+      "modules": [
+        {
+          "id": "mod5-1",
+          "title": "Индексы и планы выполнения",
+          "lessons": [
+            {
+              "id": "p5-l01-indexes-intro",
+              "title": "Индексы: зачем нужны и как работают",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 14, §14.1"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 11, §11.1"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Объяснить роль индексов при поиске",
+                "Создать B-tree индекс",
+                "Измерить влияние на INSERT/SELECT"
+              ]
+            },
+            {
+              "id": "p5-l02-btree-hash",
+              "title": "B-tree, Hash и составные индексы",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 14, §14.2"
+                },
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 8: индексы"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Выбрать тип индекса для запроса",
+                "Построить составной индекс",
+                "Использовать INCLUDE и partial index"
+              ]
+            },
+            {
+              "id": "p5-l03-special-indexes",
+              "title": "GIN, GiST, BRIN и полнотекстовый поиск",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 14, §14.3"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 11, §11.3"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Применить GIN для JSON и массивов",
+                "Использовать BRIN для больших таблиц",
+                "Настроить полнотекстовый поиск tsvector"
+              ]
+            },
+            {
+              "id": "p5-l04-explain",
+              "title": "EXPLAIN и EXPLAIN ANALYZE",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 15, §15.1"
+                },
+                {
+                  "sourceId": "pro-tsql",
+                  "ref": "Глава 10: планы выполнения"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Читать план запроса PostgreSQL",
+                "Найти seq scan и nested loop",
+                "Интерпретировать cost и actual time"
+              ]
+            },
+            {
+              "id": "p5-l05-optimization",
+              "title": "Оптимизация запросов и статистика",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 15, §15.2"
+                },
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 9: оптимизация"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Обновить статистику ANALYZE",
+                "Переписать запрос для лучшего плана",
+                "Применить pg_stat_statements"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mod5-2",
+          "title": "Обслуживание и динамический SQL",
+          "lessons": [
+            {
+              "id": "p5-l06-partitioning",
+              "title": "Секционирование таблиц",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 16, §16.1"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 12, §12.2"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Создать RANGE и LIST секции",
+                "Настроить секционирование по HASH",
+                "Выполнить partition pruning"
+              ]
+            },
+            {
+              "id": "p5-l07-vacuum",
+              "title": "VACUUM, AUTOVACUUM и bloat",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 16, §16.2"
+                },
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 10: обслуживание"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Запустить VACUUM и VACUUM FULL",
+                "Объяснить MVCC и dead tuples",
+                "Настроить autovacuum"
+              ]
+            },
+            {
+              "id": "p5-l08-dynamic-intro",
+              "title": "Динамический SQL: concept и EXECUTE",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 17, §17.1"
+                },
+                {
+                  "sourceId": "dynamic-sql",
+                  "ref": "Главы 1–3"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Сформировать SQL строкой в PL/pgSQL",
+                "Выполнить EXECUTE с параметрами",
+                "Оценить риски SQL injection"
+              ]
+            },
+            {
+              "id": "p5-l09-dynamic-advanced",
+              "title": "Динамический SQL: шаблоны и безопасность",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "pro-tsql",
+                  "ref": "Глава 12: dynamic SQL"
+                },
+                {
+                  "sourceId": "dynamic-sql",
+                  "ref": "Главы 4–6"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Построить универсальный отчёт",
+                "Использовать quote_ident и format",
+                "Применить prepared statements"
+              ]
+            },
+            {
+              "id": "p5-l10-exam",
+              "title": "Контроль: индексы, оптимизация и динамический SQL",
+              "dialect": "exam",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Главы 14–17 (повторение)"
+                },
+                {
+                  "sourceId": "dynamic-sql",
+                  "ref": "Главы 1–6 (повторение)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Подобрать индексы для рабочей нагрузки",
+                "Проанализировать план запроса",
+                "Написать безопасный динамический SQL"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "part6",
+      "title": "Внутреннее устройство PostgreSQL",
+      "modules": [
+        {
+          "id": "mod6-1",
+          "title": "Хранение и расширения",
+          "lessons": [
+            {
+              "id": "p6-l01-storage-arch",
+              "title": "Архитектура хранения PostgreSQL",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 18, §18.1"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 13, §13.1"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Описать процессы postmaster и backend",
+                "Объяснить shared buffers и WAL",
+                "Наметить путь запроса к данным"
+              ]
+            },
+            {
+              "id": "p6-l02-pages-tuples",
+              "title": "Страницы, строки и HOT-обновления",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 18, §18.2"
+                },
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 11: физическое хранение"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Описать структуру heap page",
+                "Объяснить HOT и index-only scan",
+                "Связать физику с производительностью"
+              ]
+            },
+            {
+              "id": "p6-l03-wal",
+              "title": "Write-Ahead Log и контрольные точки",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 18, §18.3"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 13, §13.2"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Объяснить назначение WAL",
+                "Настроить checkpoint и wal_level",
+                "Понять crash recovery"
+              ]
+            },
+            {
+              "id": "p6-l04-tablespaces",
+              "title": "Tablespaces и размещение данных",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 19, §19.1"
+                },
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 12: tablespaces"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Создать tablespace на отдельном диске",
+                "Перенести индексы и таблицы",
+                "Спланировать I/O нагрузку"
+              ]
+            },
+            {
+              "id": "p6-l05-toast",
+              "title": "TOAST и хранение больших значений",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 19, §19.2"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 13, §13.3"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Объяснить механизм TOAST",
+                "Выбрать стратегию storage для JSON/BLOB",
+                "Диагностировать раздувание строк"
+              ]
+            },
+            {
+              "id": "p6-l06-extensions",
+              "title": "Расширения PostgreSQL: установка и обзор",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 20, §20.1"
+                },
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 13: extensions"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Установить расширение через CREATE EXTENSION",
+                "Использовать pg_trgm и uuid-ossp",
+                "Оценить совместимость версий"
+              ]
+            },
+            {
+              "id": "p6-l07-monitoring-ext",
+              "title": "Мониторинг: pg_stat и pg_stat_statements",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 20, §20.2"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 14, §14.1"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Читать pg_stat_activity и pg_locks",
+                "Найти долгие запросы",
+                "Настроить pg_stat_statements"
+              ]
+            },
+            {
+              "id": "p6-l08-exam",
+              "title": "Контроль: хранение и расширения PostgreSQL",
+              "dialect": "exam",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Главы 18–20 (повторение)"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Главы 13–14 (повторение)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Объяснить путь записи на диск",
+                "Спланировать tablespace",
+                "Подключить расширение для задачи"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "part7",
+      "title": "Администрирование и архитектуры нагрузок",
+      "modules": [
+        {
+          "id": "mod7-1",
+          "title": "Безопасность и эксплуатация",
+          "lessons": [
+            {
+              "id": "p7-l01-auth",
+              "title": "Аутентификация и pg_hba.conf",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 21, §21.1"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 15, §15.1"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Настроить методы аутентификации",
+                "Редактировать pg_hba.conf",
+                "Подключиться с SSL-сертификатом"
+              ]
+            },
+            {
+              "id": "p7-l02-roles",
+              "title": "Роли, привилегии GRANT и REVOKE",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 21, §21.2"
+                },
+                {
+                  "sourceId": "petkovic",
+                  "ref": "Глава 9: безопасность"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Создать роли и назначить права",
+                "Ограничить доступ к схемам и таблицам",
+                "Применить принцип наименьших привилегий"
+              ]
+            },
+            {
+              "id": "p7-l03-rls",
+              "title": "Row-Level Security (RLS)",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 21, §21.3"
+                },
+                {
+                  "sourceId": "pro-tsql",
+                  "ref": "Глава 15: RLS в SQL Server"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Включить RLS на таблице",
+                "Написать политику USING/WITH CHECK",
+                "Протестировать изоляцию строк"
+              ]
+            },
+            {
+              "id": "p7-l04-encryption",
+              "title": "Шифрование: at rest и in transit",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 15, §15.2"
+                },
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 14: шифрование"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Настроить SSL для подключений",
+                "Объяснить TDE и pgcrypto",
+                "Выбрать стратегию защиты данных"
+              ]
+            },
+            {
+              "id": "p7-l05-backup",
+              "title": "Резервное копирование: pg_dump и pg_basebackup",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 22, §22.1"
+                },
+                {
+                  "sourceId": "petkovic",
+                  "ref": "Глава 10: backup"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Сделать логический дамп pg_dump",
+                "Выполнить физический base backup",
+                "Восстановить БД из резервной копии"
+              ]
+            },
+            {
+              "id": "p7-l06-replication",
+              "title": "Репликация: streaming и logical",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Глава 22, §22.2"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 16, §16.1"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Настроить streaming replication",
+                "Объяснить logical replication",
+                "Спланировать failover"
+              ]
+            },
+            {
+              "id": "p7-l07-oltp-olap",
+              "title": "OLTP vs OLAP: сравнение нагрузок",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "lecture1",
+                  "ref": "Слайды 80–95"
+                },
+                {
+                  "sourceId": "smirnov",
+                  "ref": "Глава 1: OLTP и OLAP"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Различить транзакционную и аналитическую нагрузку",
+                "Сопоставить нормализацию и денormalization",
+                "Выбрать архитектуру под сценарий"
+              ]
+            },
+            {
+              "id": "p7-l08-exam",
+              "title": "Контроль: безопасность, резервирование и OLTP/OLAP",
+              "dialect": "exam",
+              "requiredSources": [
+                {
+                  "sourceId": "morgunov",
+                  "ref": "Главы 21–22 (повторение)"
+                },
+                {
+                  "sourceId": "novikov",
+                  "ref": "Главы 15–16 (повторение)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Спроектировать модель доступа",
+                "Выполнить backup/restore",
+                "Обосновать выбор OLTP или OLAP"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "part8",
+      "title": "Хранилища данных",
+      "modules": [
+        {
+          "id": "mod8-1",
+          "title": "DWH и dimensional modeling",
+          "lessons": [
+            {
+              "id": "p8-l01-dwh-concepts",
+              "title": "Хранилища данных: понятия и архитектура",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "lecture1",
+                  "ref": "Слайды 96–110"
+                },
+                {
+                  "sourceId": "smirnov",
+                  "ref": "Глава 1–2"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Определить DWH, Data Mart и Data Lake",
+                "Описать слои staging и core",
+                "Сопоставить Inmon и Kimball"
+              ]
+            },
+            {
+              "id": "p8-l02-dimensional",
+              "title": "Измерения и факты: основы dimensional modeling",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "smirnov",
+                  "ref": "Глава 3"
+                },
+                {
+                  "sourceId": "info-support",
+                  "ref": "Раздел 5: измерения"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Выделить fact и dimension таблицы",
+                "Определить grain фактовой таблицы",
+                "Спроектировать surrogate key"
+              ]
+            },
+            {
+              "id": "p8-l03-star-schema",
+              "title": "Звезда (Star Schema)",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "practicum",
+                  "ref": "Глава 8: star schema"
+                },
+                {
+                  "sourceId": "smirnov",
+                  "ref": "Глава 4, §4.1"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Построить star schema для продаж",
+                "Денormalize измерения",
+                "Оценить производительность запросов"
+              ]
+            },
+            {
+              "id": "p8-l04-snowflake",
+              "title": "Снежинка (Snowflake Schema)",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 15: snowflake"
+                },
+                {
+                  "sourceId": "smirnov",
+                  "ref": "Глава 4, §4.2"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Нормализовать измерения в snowflake",
+                "Сравнить star и snowflake",
+                "Выбрать схему для ETL"
+              ]
+            },
+            {
+              "id": "p8-l05-etl",
+              "title": "ETL и ELT: загрузка данных в DWH",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "lecture1",
+                  "ref": "Слайды 111–120"
+                },
+                {
+                  "sourceId": "smirnov",
+                  "ref": "Глава 5"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Описать этапы extract, transform, load",
+                "Сравнить ETL и ELT",
+                "Спроектировать staging area"
+              ]
+            },
+            {
+              "id": "p8-l06-olap-cubes",
+              "title": "OLAP-кубы и операции drill-down",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "novikov",
+                  "ref": "Глава 17, §17.2"
+                },
+                {
+                  "sourceId": "smirnov",
+                  "ref": "Глава 6"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Выполнить slice, dice, roll-up",
+                "Объяснить ROLAP vs MOLAP",
+                "Построить простой OLAP-отчёт"
+              ]
+            },
+            {
+              "id": "p8-l07-data-marts",
+              "title": "Витрины данных (Data Marts)",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "smirnov",
+                  "ref": "Глава 7"
+                },
+                {
+                  "sourceId": "info-support",
+                  "ref": "Раздел 6: витрины"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Спроектировать subject-area mart",
+                "Определить SLA обновления",
+                "Интегрировать mart с DWH"
+              ]
+            },
+            {
+              "id": "p8-l08-dwh-lab",
+              "title": "Кейс: проектирование хранилища продаж",
+              "dialect": "lab",
+              "requiredSources": [
+                {
+                  "sourceId": "practicum",
+                  "ref": "Задание 8: DWH"
+                },
+                {
+                  "sourceId": "smirnov",
+                  "ref": "Глава 8 (практика)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Построить star schema для retail",
+                "Написать ETL-скрипт загрузки",
+                "Сформировать аналитический отчёт"
+              ]
+            },
+            {
+              "id": "p8-l09-exam",
+              "title": "Контроль: проектирование хранилищ данных",
+              "dialect": "exam",
+              "requiredSources": [
+                {
+                  "sourceId": "lecture1",
+                  "ref": "Слайды 96–120 (повторение)"
+                },
+                {
+                  "sourceId": "smirnov",
+                  "ref": "Главы 1–8 (повторение)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Спроектировать dimensional model",
+                "Обосновать выбор star/snowflake",
+                "Описать pipeline загрузки данных"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "part9",
+      "title": "Альтернативные СУБД и итоговая аттестация",
+      "modules": [
+        {
+          "id": "mod9-1",
+          "title": "NoSQL и графовые БД",
+          "lessons": [
+            {
+              "id": "p9-l01-nosql-overview",
+              "title": "NoSQL: обзор моделей и сценариев",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "mongodb",
+                  "ref": "Глава 1"
+                },
+                {
+                  "sourceId": "graph-db",
+                  "ref": "Глава 1"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Классифицировать document, key-value, graph, column",
+                "Сопоставить NoSQL и реляционные БД",
+                "Выбрать технологию под use case"
+              ]
+            },
+            {
+              "id": "p9-l02-mongo-model",
+              "title": "MongoDB: документная модель и BSON",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 16: document DB"
+                },
+                {
+                  "sourceId": "mongodb",
+                  "ref": "Главы 2–3"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Описать коллекции и документы",
+                "Спроектировать вложенную схему",
+                "Сравнить embedding и referencing"
+              ]
+            },
+            {
+              "id": "p9-l03-mongo-queries",
+              "title": "MongoDB: CRUD и запросы",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "practicum",
+                  "ref": "Задание 9: MongoDB"
+                },
+                {
+                  "sourceId": "mongodb",
+                  "ref": "Главы 4–5"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Выполнить find, insert, update, delete",
+                "Использовать операторы $gt, $in, $regex",
+                "Создать индексы в MongoDB"
+              ]
+            },
+            {
+              "id": "p9-l04-mongo-aggregation",
+              "title": "MongoDB: aggregation pipeline",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "headfirst",
+                  "ref": "Приложение: NoSQL"
+                },
+                {
+                  "sourceId": "mongodb",
+                  "ref": "Глава 6"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Построить pipeline $match, $group, $lookup",
+                "Сформировать аналитический отчёт",
+                "Сравнить с SQL GROUP BY"
+              ]
+            },
+            {
+              "id": "p9-l05-graph-intro",
+              "title": "Графовые базы данных: модель и применение",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "komarov",
+                  "ref": "Раздел 17: graph DB"
+                },
+                {
+                  "sourceId": "graph-db",
+                  "ref": "Главы 2–3"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Определить вершины, рёбра и свойства",
+                "Привести примеры social и fraud graphs",
+                "Оценить преимущества перед RDBMS"
+              ]
+            },
+            {
+              "id": "p9-l06-graph-queries",
+              "title": "Graph DB: Cypher и обход графа",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "mongodb",
+                  "ref": "Глава 7 (сравнение)"
+                },
+                {
+                  "sourceId": "graph-db",
+                  "ref": "Главы 4–5"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Написать MATCH и RETURN в Cypher",
+                "Выполнить k-hop обход",
+                "Сравнить производительность с JOIN"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mod9-2",
+          "title": "T-SQL, теория Дейта и итог",
+          "lessons": [
+            {
+              "id": "p9-l07-tsql-overview",
+              "title": "T-SQL: обзор для PostgreSQL-разработчика",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "petkovic",
+                  "ref": "Главы 1–4"
+                },
+                {
+                  "sourceId": "ben-gan",
+                  "ref": "Главы 1–3"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Сопоставить синтаксис T-SQL и PostgreSQL",
+                "Использовать TOP и OFFSET/FETCH",
+                "Применить переменные и batch"
+              ]
+            },
+            {
+              "id": "p9-l08-tsql-advanced",
+              "title": "T-SQL: процедуры, функции и MERGE",
+              "dialect": "sql",
+              "requiredSources": [
+                {
+                  "sourceId": "ben-gan",
+                  "ref": "Главы 10–11"
+                },
+                {
+                  "sourceId": "pro-tsql",
+                  "ref": "Главы 5–7"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Написать stored procedure в T-SQL",
+                "Использовать MERGE для upsert",
+                "Применить error handling TRY/CATCH"
+              ]
+            },
+            {
+              "id": "p9-l09-date-advanced",
+              "title": "К. Дж. Дейт: продвинутая реляционная теория",
+              "dialect": "theory",
+              "requiredSources": [
+                {
+                  "sourceId": "date-intro",
+                  "ref": "Главы 19–21"
+                },
+                {
+                  "sourceId": "date-sql",
+                  "ref": "Главы 11–14"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Обсудить NULL и реляционную модель",
+                "Разобрать view updating problem",
+                "Оценить соответствие SQL теории"
+              ]
+            },
+            {
+              "id": "p9-l10-exam",
+              "title": "Итоговый контроль: альтернативные СУБД и теория",
+              "dialect": "exam",
+              "requiredSources": [
+                {
+                  "sourceId": "date-sql",
+                  "ref": "Главы 11–14 (повторение)"
+                },
+                {
+                  "sourceId": "mongodb",
+                  "ref": "Главы 1–7 (повторение)"
+                },
+                {
+                  "sourceId": "graph-db",
+                  "ref": "Главы 1–5 (повторение)"
+                }
+              ],
+              "optionalSources": [],
+              "objectives": [
+                "Выбрать СУБД под задачу",
+                "Написать запросы MongoDB и Cypher",
+                "Подвести итоги курса"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

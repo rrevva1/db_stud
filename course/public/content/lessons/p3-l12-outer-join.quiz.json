@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l12-outer-join",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Дан мини-набор:\nstudent: (1,'Иванов'), (2,'Петрова'), (3,'Сидоров')\ns_group: (1,'ИВТ-21'), (2,'ПИ-22')\nstudent_in_group: (1,1), (2,1)\n\nSELECT g.name, s.last_name\nFROM s_group g\nLEFT JOIN student_in_group sig ON sig.group_id = g.group_id\nLEFT JOIN student s ON s.student_id = sig.student_id\nORDER BY g.name, s.last_name NULLS LAST;\n\nЧто вернёт запрос?",
+      "options": [
+        "Только ИВТ-21—Иванов и ИВТ-21—Петрова (как INNER JOIN)",
+        "ИВТ-21—Иванов, ИВТ-21—Петрова и ПИ-22—NULL (пустая группа сохранена)",
+        "Только Сидоров—NULL, группы в результат не входят",
+        "Шесть строк: 3 студента × 2 группы"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "LEFT JOIN от s_group сохраняет ПИ-22: совпадений в student_in_group нет, last_name будет NULL. ИВТ-21 даёт две строки с Ивановым и Петровой. Сидоров слева не стоял — его этот запрос не показывает. CROSS дал бы 6 строк."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Как найти группы без студентов (сироты слева)?",
+      "options": [
+        "s_group LEFT JOIN student_in_group … WHERE sig.group_id IS NULL",
+        "INNER JOIN student_in_group и WHERE sig.group_id IS NULL",
+        "CROSS JOIN student и WHERE true",
+        "DELETE FROM s_group WHERE name = 'ПИ-22'"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Приём аудита: LEFT JOIN и фильтр IS NULL по ключу правой стороны. INNER уже выкинул пустые группы, IS NULL там ничего не найдёт. CROSS и DELETE — не поиск сирот."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "RIGHT JOIN s_group g ON ... в PostgreSQL по набору строк эквивалентен:",
+      "options": [
+        "INNER JOIN: пустые группы всё равно пропадут",
+        "FULL JOIN без NULL",
+        "LEFT JOIN, если поменять таблицы местами: FROM s_group g LEFT JOIN …",
+        "CROSS JOIN с последующим DISTINCT"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "RIGHT сохраняет правую таблицу; тот же набор даёт LEFT, если эту таблицу поставить слева. Так пишут чаще: читается слева направо. PostgreSQL RIGHT поддерживает; переписывание — привычка переносимости, не запрет СУБД."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Ловушка внешнего соединения: LEFT JOIN student s ON s.student_id = sig.student_id, а затем WHERE s.last_name = 'Иванов'. Что произойдёт с несовпавшими строками слева?",
+      "options": [
+        "Они останутся, last_name будет NULL, Иванов тоже будет",
+        "WHERE на OUTER JOIN в PostgreSQL запрещён",
+        "NULL-строки сирот пройдут, потому что NULL = 'Иванов' истинно",
+        "Предикат в WHERE отфильтрует NULL справа: несовпавшие пропадут, как при INNER"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "WHERE s.last_name = 'Иванов' ложен для NULL, сироты исчезают. Чтобы сохранить левые строки и ограничить правую таблицу, условие ставят в ON: LEFT JOIN student s ON … AND s.last_name = 'Иванов'."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие утверждения об OUTER JOIN верны? Выберите все верные.",
+      "options": [
+        "LEFT JOIN от s_group сохранит пустую ПИ-22, INNER — нет",
+        "Студенты без группы находятся student LEFT JOIN student_in_group WHERE sig.student_id IS NULL",
+        "FULL OUTER JOIN оставляет только пересечение ключей",
+        "Фильтр «сирот» — IS NULL по ключу стороны без пары"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "INNER отбрасывает пустые группы и студентов без связи. LEFT+IS NULL — стандартный поиск сирот с обеих сторон по отдельности. FULL как раз объединяет несовпавших с обеих сторон, это не пересечение."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "Отчёт «все группы и число студентов, включая нули» строят как:",
+      "options": [
+        "INNER JOIN student_in_group и COUNT(*)",
+        "s_group LEFT JOIN student_in_group и COUNT(sig.student_id) (пустые дадут 0)",
+        "CROSS JOIN student без GROUP BY",
+        "EXCEPT между s_group и student"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "LEFT JOIN удерживает группу без членов. COUNT по столбцу связи не считает NULL-строку дополнения, для ПИ-22 получится 0. INNER пустую группу потеряет. COUNT(*) по LEFT JOIN дал бы 1 у пустой группы — это уже ловушка агрегата."
+    }
+  ]
+}

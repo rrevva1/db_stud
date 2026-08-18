@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l06-update",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Перед UPDATE student SET email = 'x@uni.local' WHERE last_name = 'Иванов'; безопасная привычка курса:",
+      "options": [
+        "Сразу COMMIT в autocommit, чтобы не держать блокировки",
+        "Выполнить SELECT с тем же WHERE и проверить, сколько строк заденет UPDATE",
+        "Убрать WHERE, чтобы обновить всех и не пропустить Иванова",
+        "Заменить UPDATE на TRUNCATE student"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Сначала тот же фильтр через SELECT — видно множество жертв. Потом BEGIN, UPDATE, проверка, COMMIT. Без WHERE обновятся все. TRUNCATE уничтожит строки, а не поменяет email."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "UPDATE performance SET grade = 5; без WHERE в PostgreSQL:",
+      "options": [
+        "Обновит одну случайную строку",
+        "Вернёт ошибку «WHERE обязателен»",
+        "Обновит только строки с grade IS NULL",
+        "Поставит 5 во всех строках таблицы performance"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Без WHERE предикат не ограничивает множество: меняется вся таблица. Это частая авария DML. Синтаксис валиден — сервер не требует WHERE. Защита: SELECT, транзакция, права."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "UPDATE performance p SET grade = 5 FROM student s WHERE p.student_id = s.student_id AND s.last_name = 'Иванов'; зачем FROM?",
+      "options": [
+        "Чтобы взять условие из другой таблицы student (расширение PostgreSQL)",
+        "FROM в UPDATE запрещён, нужен только подзапрос",
+        "FROM включает режим READ ONLY",
+        "FROM удаляет строки student после обновления оценок"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "UPDATE … FROM соединяет целевую таблицу с источником, как JOIN. Так можно обновить оценки Иванова, не копируя id вручную. Это не READ ONLY и не каскадное удаление student."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "На performance есть CHECK (grade BETWEEN 2 AND 5). UPDATE ... SET grade = 6 WHERE student_id = 1; чем закончится?",
+      "options": [
+        "Оценка станет 6, CHECK только предупредит в логе",
+        "Оценка тихо заменится на 5",
+        "Операция отвергнется, строка останется прежней",
+        "Удалится строка performance с student_id = 1"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "UPDATE проверяет все ограничения. Нарушение CHECK откатывает эту команду (в транзакции — при ошибке нужен ROLLBACK). Значение не подрезается автоматически и строка не удаляется."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие приёмы снижают риск массового UPDATE? Выберите все верные.",
+      "options": [
+        "Всегда писать UPDATE без WHERE, чтобы условие не ошибочно отфильтровало строки",
+        "Сначала SELECT с тем же предикатом",
+        "Обернуть изменение в BEGIN … проверка … COMMIT",
+        "Ограничить права учётки учебной схемой, а не «боевой» копией"
+      ],
+      "correct": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "Связка SELECT → транзакция → ограниченные права — стандарт курса. UPDATE без WHERE как раз главный риск. Autocommit не даёт шанса посмотреть результат и откатиться."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "UPDATE student SET email = 'new@uni.local' WHERE student_id = 1 RETURNING student_id, email; вернёт:",
+      "options": [
+        "Только число ROW_COUNT, без значений",
+        "Новые значения указанных столбцов после обновления",
+        "Старые значения email до UPDATE",
+        "Всю таблицу student независимо от WHERE"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "RETURNING в UPDATE показывает состояние строки после присвоения. Это удобно для проверки в той же команде. Без RETURNING клиент видит только число изменённых строк. WHERE по-прежнему ограничивает множество."
+    }
+  ]
+}

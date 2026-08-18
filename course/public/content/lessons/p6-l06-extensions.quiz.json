@@ -1,0 +1,98 @@
+{
+  "lessonId": "p6-l06-extensions",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Как подключить расширение в текущей базе?",
+      "options": [
+        "CREATE EXTENSION IF NOT EXISTS pg_trgm",
+        "LOAD TABLESPACE pg_trgm",
+        "ALTER SYSTEM SET extension = pg_trgm без файлов",
+        "INSERT INTO pg_extension вручную произвольный текст"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "CREATE EXTENSION ставит объекты модуля в базу. Часть расширений (pg_stat_statements) ещё требует shared_preload_libraries. Ручной INSERT в каталог — не установка."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Для чего расширение pg_trgm?",
+      "options": [
+        "Генерация UUID v4",
+        "Секционирование RANGE",
+        "Триграммный нечёткий поиск: similarity, LIKE/ILIKE с GIN/GiST",
+        "Запись WAL"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Триграммы позволяют искать похожие строки и ускорять '%подстрока%'. UUID даёт uuid-ossp или встроенный gen_random_uuid(). Журнал и секции к pg_trgm не относятся."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "to_tsvector('russian', body) @@ to_tsquery('russian', 'база') — это:",
+      "options": [
+        "Обязательное расширение uuid-ossp",
+        "Оператор GIN для массивов integer",
+        "Встроенный полнотекстовый поиск по лексемам словаря russian",
+        "Команда CREATE TABLESPACE"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "tsvector/tsquery входят в ядро. Индекс обычно GIN по выражению to_tsvector. Словарь russian учитывает морфологию. uuid-ossp здесь ни при чём."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Почему pg_stat_statements часто «не работает» сразу после CREATE EXTENSION?",
+      "options": [
+        "Расширение запрещено в PostgreSQL",
+        "Оно ставится только в pg_toast",
+        "Требуется wal_level = minimal",
+        "Нужно добавить модуль в shared_preload_libraries и перезапустить кластер"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Сбор статистики хуков выполняется в shared preload. Без перезапуска объекты расширения есть, а счётчики не наполняются. wal_level к этому не привязан."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Где смотреть, какие расширения можно поставить и какой версии?",
+      "options": [
+        "pg_locks",
+        "pg_available_extensions",
+        "pg_replication_origin только",
+        "information_schema.columns"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "pg_available_extensions показывает имя, версию по умолчанию и комментарий. Совместимость control-файла с сервером проверяют до CREATE EXTENSION. pg_locks — про блокировки сессий."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие модули/возможности относят к экосистеме расширений и поиска? (все верные)",
+      "options": [
+        "pg_trgm — нечёткий поиск",
+        "Обязательный внешний парсер документов для каждого SELECT",
+        "uuid-ossp — генерация UUID",
+        "pg_stat_statements — топ SQL по времени"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Перечисленные расширения закрывают поиск, UUID и мониторинг SQL. Полнотекст на tsvector встроен. Отдельный документный парсер для SELECT не требуется."
+    }
+  ]
+}

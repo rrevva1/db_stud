@@ -1,0 +1,194 @@
+{
+  "lessonId": "p7-l08-exam",
+  "passingScore": 75,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Студент с GRANT SELECT на performance всё равно не видит чужие оценки. Какой механизм это обеспечивает?",
+      "options": [
+        "Только отсутствие индекса по student_id",
+        "Политика RLS с USING по идентификатору студента",
+        "pg_dump --data-only без строк других студентов",
+        "hostssl в pg_hba.conf вместо host"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "GRANT даёт доступ к таблице, RLS режет строки. Индекс влияет на план, не на видимость. Dump — снимок данных, не runtime-фильтр. hostssl шифрует канал, но не делит строки между студентами."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Нужно перенести схему и данные university_db на другой major PostgreSQL. Что уместнее как логический перенос?",
+      "options": [
+        "pg_dump / pg_restore (логический дамп)",
+        "Только copy всего PGDATA без учёта версии",
+        "CREATE PUBLICATION на pg_catalog",
+        "VACUUM FULL вместо выгрузки"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Логический dump портативен между версиями и позволяет выбрать объекты. Слепой copy PGDATA для другого major обычно не подходит. Публикация системного каталога и VACUUM задачу миграции не решают."
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "question": "Что входит в модель доступа учебной БД? (все верные)",
+      "options": [
+        "Замена всех паролей методом Hash Join",
+        "Правила pg_hba.conf (кто и каким методом входит)",
+        "GRANT/REVOKE на БД, схемы и таблицы",
+        "RLS на performance для роли студента"
+      ],
+      "correct": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "Слои: аутентификация (HBA), объектные права, строковые политики. Hash Join — алгоритм планировщика. Комплексный сценарий части 7 как раз собирает эти три слоя для ролей student/teacher/admin."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Приложение ходит в PostgreSQL под superuser. В чём главная проблема?",
+      "options": [
+        "Superuser не может читать таблицы с RLS без BYPASSRLS",
+        "Superuser запрещён спецификацией SQL и не существует",
+        "Нарушен least privilege: компрометация приложения даёт весь кластер",
+        "Superuser не проходит scram-sha-256 в принципе"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Суперпользователь обходит почти все ограничения, часто включая RLS (BYPASSRLS). Для приложения нужна узкая LOGIN-роль. Superuser существует и аутентифицируется как любая роль, если HBA это позволяет."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Нужно скрыть номер паспорта в столбце, но остальной диск не шифровать. Какой инструмент ближе?",
+      "options": [
+        "Только hostssl без ключей приложения",
+        "pgcrypto: ciphertext в столбце, ключ в vault",
+        "pg_basebackup вместо шифрования",
+        "GRANT USAGE ON SCHEMA как TDE"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Шифрование выбранных полей — pgcrypto (или аналог в приложении) плюс отдельное хранение ключа. TLS не защищает файлы и бэкапы. Backup и GRANT — не TDE и не column encryption."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Когда выбирать pg_basebackup, а не только pg_dump? (все верные)",
+      "options": [
+        "Нужна физическая копия кластера как база для PITR",
+        "Нужно быстро снять huge DB целиком вместе с WAL-контекстом",
+        "Нужно выгрузить одну таблицу student на другую СУБД",
+        "Планируется restore на момент времени через WAL archive"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Физический backup + WAL даёт PITR и полную копию инстанса. Одну таблицу на другую платформу логичнее выгрузить dump/COPY. Huge cluster чаще клонируют basebackup, а не логическим дампом."
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "question": "Отчёты деканата сканируют оценки за годы и мешают регистрации экзамена. Что сделать в архитектуре нагрузки?",
+      "options": [
+        "Повысить wal_level до logical и отключить hot_standby",
+        "Вынести OLAP на replica или в DWH, OLTP оставить на primary",
+        "Заменить все FK на RLS-политики",
+        "Отключить backup, чтобы освободить I/O для отчётов"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Классическое разделение OLTP/OLAP: короткие транзакции на мастере, тяжёлые сканы на standby или в хранилище. Отключение копий и подмена FK политиками проблему конкуренции не решают."
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "question": "Чем logical replication удобнее physical streaming при апгрейде версии?",
+      "options": [
+        "Она копирует PGDATA побайтно, включая другую major-версию",
+        "Она не требует wal_level и слотов",
+        "Публикация таблиц может идти на другой major, выборочно",
+        "Она гарантирует нулевой лаг сильнее sync physical"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Логическая репликация декодирует строки и умеет целевой кластер другой версии и подмножество таблиц. Physical — побайтовая копия той же major. Слоты и wal_level для logical тоже нужны. Лаг не исчезает автоматически."
+    },
+    {
+      "id": "q9",
+      "type": "multi",
+      "question": "Какие утверждения про TLS, pgcrypto и TDE/диск верны? (все верные)",
+      "options": [
+        "TLS закрывает канал, не файлы data directory",
+        "Любой из трёх механизмов заменяет протестированный restore",
+        "pgcrypto шифрует выбранные значения столбцов",
+        "Шифрование тома/TDE защищает носитель at rest"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Три разных угрозы: сеть, утечка отдельных полей, кража диска. Ни один слой не отменяет RPO/RTO и проверку backup. Ключи нельзя класть в тот же репозиторий, что и ciphertext."
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "question": "Синхронная репликация не подтверждает COMMIT, пока standby недоступен. Какой CAP-акцент это отражает?",
+      "options": [
+        "AP: запись всегда доступна ценой рассинхрона",
+        "CP: согласованность важнее доступности записи при partition",
+        "CA без partition: сеть никогда не рвётся",
+        "Только выбор между star и 3NF"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Sync wait — отказ в COMMIT при недоступности реплики: сохраняем согласованность копии, жертвуем доступностью записи (CP-bias). Async ближе к AP с лагом. CAP не про dimensional modeling."
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "question": "Роли analyst выданы SELECT на student, но SELECT падает с permission denied for schema public. Чего не хватает?",
+      "options": [
+        "pg_basebackup с правами analyst",
+        "wal_level=replica на analyst",
+        "CREATE POLICY на pg_hba.conf",
+        "GRANT USAGE ON SCHEMA public"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Без USAGE на схему объекты в ней недоступны, даже при GRANT на таблицу. wal_level — параметр сервера. Политики RLS пишутся на таблицы, не в HBA. Backup-роль не заменяет USAGE."
+    },
+    {
+      "id": "q12",
+      "type": "multi",
+      "question": "Какие пары «инструмент — задача» верны? (все верные)",
+      "options": [
+        "pg_reload_conf — применить новый pg_hba.conf",
+        "CREATE POLICY / ENABLE ROW LEVEL SECURITY — изоляция строк",
+        "hot_standby replica — чтение отчётов рядом с OLTP-primary",
+        "GRANT ALL TO PUBLIC — рекомендуемый least privilege"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Reload подхватывает HBA, RLS режет строки, replica разгружает отчёты. GRANT ALL TO PUBLIC противоречит наименьшим привилегиям. Итоговая картина части 7: вход, права, строки, копии, репликация, разделение нагрузок."
+    }
+  ]
+}

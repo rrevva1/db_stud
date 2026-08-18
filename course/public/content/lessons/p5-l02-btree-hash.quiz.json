@@ -1,0 +1,98 @@
+{
+  "lessonId": "p5-l02-btree-hash",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Составной B-tree индекс (student_id, exam_date) на performance обычно поддержит:",
+      "options": [
+        "WHERE exam_date = ... без условия по student_id (как основной сценарий в PostgreSQL)",
+        "WHERE student_id = ... и WHERE student_id = ... AND exam_date BETWEEN ...",
+        "Только полнотекстовый поиск по комментарию к оценке",
+        "Только оператор @> для jsonb"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "B-tree использует левый префикс: student_id, затем пару столбцов. Поиск только по exam_date этим индексом в PostgreSQL как правило не идёт (нет index skip scan как основной стратегии). Для jsonb и FTS нужны другие типы."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Для чего в PostgreSQL индекс HASH?",
+      "options": [
+        "Для диапазонов <, > и ORDER BY",
+        "Только для оператора равенства = (после PG 10 индекс WAL-safe)",
+        "Для BRIN-сжатия блоков",
+        "Для GiST-поиска ближайшего соседа"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Hash-индекс обслуживает равенство. Диапазоны и сортировка — задача B-tree. На практике B-tree чаще достаточен даже для =."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Что даёт INCLUDE в CREATE INDEX ON performance (student_id) INCLUDE (grade)?",
+      "options": [
+        "Добавляет grade в ключ сортировки индекса наравне с student_id",
+        "Создаёт partial index по grade IS NOT NULL",
+        "Позволяет Index-Only Scan: grade лежит в индексе, но не участвует в порядке ключа",
+        "Заменяет visibility map"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "INCLUDE хранит дополнительные столбцы для покрывающих сканов без расширения ключа. Условие поиска и порядок остаются по student_id. Видимость по-прежнему проверяет visibility map."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Partial index CREATE INDEX ON student (group_id) WHERE expelled_at IS NULL полезен, когда:",
+      "options": [
+        "Запросы почти всегда фильтруют тех же активных студентов, что и предикат индекса",
+        "Нужно индексировать только отчисленных, а предикат про активных",
+        "PostgreSQL не умеет обычные B-tree по group_id",
+        "Требуется HASH вместо B-tree"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Частичный индекс меньше и быстрее, если его WHERE совпадает с запросом. Для отчисленных он не подойдёт. Это всё тот же B-tree, только по подмножеству строк."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Почему порядок столбцов составного индекса важен?",
+      "options": [
+        "Потому что PostgreSQL читает столбцы индекса справа налево",
+        "Потому что сначала кладут столбец равенства/высокой селективности, затем диапазон",
+        "Потому что INCLUDE должен стоять левее ключа",
+        "Потому что HASH требует не меньше трёх столбцов"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Планировщик идёт по левому префиксу. Типичный шаблон: student_id = const, затем диапазон дат. INCLUDE не входит в ключ и не переставляется влево."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие утверждения о B-tree в PostgreSQL верны? (все верные)",
+      "options": [
+        "Поддерживает =, <, >, BETWEEN и сортировку ORDER BY",
+        "B-tree нельзя построить CONCURRENTLY",
+        "UNIQUE-индекс может обеспечивать уникальность пары (student_id, course_id)",
+        "Составной индекс (a,b) обычно не ищет только по b"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "B-tree — универсальный индекс равенства, диапазонов и UNIQUE. Левый префикс ограничивает использование. CONCURRENTLY как раз часто применяют именно к B-tree."
+    }
+  ]
+}

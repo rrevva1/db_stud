@@ -1,0 +1,98 @@
+{
+  "lessonId": "p5-l04-explain",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Чем EXPLAIN отличается от EXPLAIN ANALYZE?",
+      "options": [
+        "EXPLAIN выполняет запрос и пишет actual time; ANALYZE только оценивает cost",
+        "EXPLAIN показывает выбранный план без выполнения; ANALYZE выполняет запрос и добавляет фактические строки и время",
+        "Оба никогда не выполняют DML, даже ANALYZE DELETE",
+        "ANALYZE в EXPLAIN обновляет pg_statistic, как команда ANALYZE"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Обычный EXPLAIN дешёвый: виден только план. ANALYZE реально гоняет запрос — для SELECT это чтение, для DELETE/UPDATE — изменение данных, если не обернуть в транзакцию. К статистике каталога это не относится."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Что означает cost=0.29..8.30 в узле плана?",
+      "options": [
+        "Время в миллисекундах от старта до конца",
+        "Число страниц на диске",
+        "Условная стоимость планировщика: startup .. total, не миллисекунды",
+        "Процент заполнения shared_buffers"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "cost — внутренняя единица оптимизатора. actual time в EXPLAIN ANALYZE уже в миллисекундах. Путать их — частая ошибка при чтении плана."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Узел Nested Loop с большим loops чаще всего сигнализирует:",
+      "options": [
+        "Что индекс справа вызывается много раз на каждую строку левой стороны",
+        "Что PostgreSQL обязан использовать Hash Join",
+        "Что Seq Scan запрещён навсегда в postgresql.conf",
+        "Что MERGE JOIN в PostgreSQL не существует"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Nested Loop для каждой левой строки ищет справа (часто Index Scan). Если слева неожиданно много строк, loops взлетает. Это повод сверить оценку rows и порядок соединений, а не запрещать Seq Scan глобально."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Зачем в EXPLAIN (ANALYZE, BUFFERS) смотреть shared hit vs read?",
+      "options": [
+        "hit — страницы из кэша PostgreSQL; read — чтение с диска (или ОС-кэша как read)",
+        "hit всегда означает ошибку индекса",
+        "read считает только WAL-сегменты",
+        "BUFFERS показывает число пользовательских сессий"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "shared hit — блок уже был в shared_buffers. shared read — пришлось читать relfile. Много read на горячем запросе намекает на нехватку кэша или на слишком большой seq scan."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Если estimated rows сильно расходится с actual rows, первый шаг:",
+      "options": [
+        "SET enable_seqscan = off в postgresql.conf навсегда",
+        "Обновить статистику: ANALYZE по таблице (student, performance)",
+        "Удалить все индексы",
+        "Перейти на другой wal_level"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Плохие оценки rows рождают неверный join и метод скана. ANALYZE обновляет гистограммы. enable_seqscan = off — только отладочный костыль, не настройка production."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие узлы плана PostgreSQL нужно уметь узнавать? (все верные)",
+      "options": [
+        "Seq Scan — полное чтение таблицы",
+        "Materialize всегда означает ошибку планировщика и запрещён в SELECT",
+        "Index Scan / Index Only Scan — доступ через индекс",
+        "Hash Join и Merge Join — альтернативы Nested Loop"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Сканы и соединения — основа чтения EXPLAIN. Index Only Scan возможен при покрывающем индексе и актуальной visibility map. Узел Materialize — нормальный буфер промежуточного результата, а не ошибка."
+    }
+  ]
+}

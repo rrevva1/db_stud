@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l05-insert",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Почему в INSERT в student нужно явно перечислять столбцы: INSERT INTO student (last_name, first_name, birth_date) VALUES (...)?",
+      "options": [
+        "PostgreSQL запрещает INSERT без списка столбцов синтаксически",
+        "Список столбцов нужен только для SERIAL, иначе sequence сломается",
+        "Порядок и состав таблицы могут измениться — VALUES без списка хрупки",
+        "Явный список отключает проверку CHECK и UNIQUE"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "INSERT без списка привязан к текущему порядку столбцов. ALTER TABLE ADD COLUMN сдвинет позиции — «тихий» INSERT запишет не туда. SERIAL как раз удобно опускать в списке, подставится DEFAULT. Ограничения по-прежнему проверяются."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Чем риск INSERT отличается от риска SELECT по тем же данным student?",
+      "options": [
+        "Ошибка в SELECT ничего не портит в хранилище; ошибка в INSERT видна всем",
+        "SELECT всегда блокирует таблицу на запись, INSERT — нет",
+        "INSERT нельзя выполнить в транзакции, SELECT — можно",
+        "SELECT меняет sequence у SERIAL, INSERT — нет"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "SELECT только читает: опечатка в WHERE даст пустой или лишний набор, таблица цела. INSERT пишет общее хранилище: неверная строка сразу у всех. Оба оператора живут в транзакциях. Sequence двигает именно INSERT, не SELECT."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "INSERT INTO student (last_name, first_name, birth_date) VALUES ('Козлова', 'Мария', '2004-07-15') RETURNING student_id, last_name; зачем RETURNING?",
+      "options": [
+        "Это синоним LIMIT 1 для вставки",
+        "RETURNING отменяет INSERT, если student_id уже занят",
+        "RETURNING создаёт VIEW из вставленной строки",
+        "Клиент сразу получает сгенерированный SERIAL и вставленные поля"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "RETURNING возвращает строку после вставки — удобно забрать student_id из sequence без отдельного SELECT. Это не LIMIT, не ON CONFLICT и не CREATE VIEW. Конфликт по ключу по-прежнему даёт ошибку, если нет ON CONFLICT."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "INSERT INTO student_archive (...) SELECT student_id, last_name, first_name FROM student WHERE birth_date < '2000-01-01'; делает:",
+      "options": [
+        "Только показывает старых студентов, archive не меняется",
+        "Копирует выбранные строки в student_archive (DML + запрос-источник)",
+        "Перемещает строки: в student они исчезнут",
+        "Создаёт таблицу student_archive, если её не было"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "INSERT … SELECT читает источник и вставляет копии. Исходные строки в student остаются (это не DELETE). Таблица-приёмник должна уже существовать: создание структуры — CREATE TABLE, не INSERT."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Что допустимо в INSERT в PostgreSQL? Выберите все верные.",
+      "options": [
+        "Несколько строк в одном VALUES (...), (...)",
+        "DEFAULT в списке значений, чтобы взять значение по умолчанию",
+        "Явный NULL в столбце, который допускает NULL",
+        "Пропуск списка столбцов как обязательная лучшая практика курса"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ],
+      "explanation": "Многострочный VALUES, DEFAULT и явный NULL (если нет NOT NULL) — штатный DML. Курс как раз требует явный список столбцов: вставка «вслепую» по позициям хрупкая при эволюции схемы."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "INSERT ... ON CONFLICT (student_id) DO UPDATE SET last_name = EXCLUDED.last_name — это:",
+      "options": [
+        "Всегда ошибка: PostgreSQL не умеет UPSERT",
+        "Удаление конфликтующей строки без вставки новой",
+        "UPSERT: при конфликте ключа обновить существующую строку",
+        "Переименование столбца last_name в EXCLUDED"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "ON CONFLICT — UPSERT: вставить или, если ключ занят, обновить. EXCLUDED — псевдотаблица предлагаемых к вставке значений. Это не DROP строки и не DDL переименования."
+    }
+  ]
+}

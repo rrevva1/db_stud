@@ -1,0 +1,98 @@
+{
+  "lessonId": "p4-l06-duplicates-null",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Чему равно сравнение NULL = NULL в PostgreSQL?",
+      "options": [
+        "TRUE, потому что оба операнда «одинаково пустые»",
+        "FALSE, как в двузначной булевой логике",
+        "UNKNOWN (NULL): любое сравнение через = с NULL даёт неизвестность",
+        "Ошибке синтаксиса, нужен оператор <=>"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "SQL использует трёхзначную логику: TRUE, FALSE и UNKNOWN. Предикат = с NULL не даёт TRUE, поэтому пишут IS NULL. IS DISTINCT FROM NULL как раз считает два NULL равными для сравнения."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Дана таблица student:\n\nid | group_id\n---+---------\n1  | 10\n2  | 20\n3  | NULL\n\nЧто вернёт SELECT COUNT(*) FROM student WHERE group_id NOT IN (10, NULL);",
+      "options": [
+        "1 — только студент с group_id = 20",
+        "2 — все, кроме group_id = 10",
+        "3 — COUNT(*) игнорирует предикат WHERE",
+        "0 — для каждой строки предикат не равен TRUE из‑за NULL в списке"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "NOT IN (10, NULL) для любой строки даёт UNKNOWN или FALSE, потому что сравнение с NULL неизвестно. WHERE пропускает только TRUE, поэтому COUNT(*) = 0. Безопаснее NOT EXISTS или IS DISTINCT FROM."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Как WHERE обрабатывает UNKNOWN?",
+      "options": [
+        "Строка отбирается, если предикат не FALSE",
+        "Строка отбирается только если предикат строго TRUE; UNKNOWN отфильтровывается",
+        "UNKNOWN автоматически превращается в FALSE в SELECT-списке, но не в WHERE",
+        "UNKNOWN приводит к ошибке выполнения запроса"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Фильтр WHERE оставляет лишь строки с TRUE. Сравнение с NULL даёт UNKNOWN и строка пропадает — отсюда сюрпризы с NOT IN. Ошибки при этом нет."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Чем COUNT(*) отличается от COUNT(group_id) по таблице student?",
+      "options": [
+        "COUNT(*) считает все строки, COUNT(group_id) не считает строки, где group_id IS NULL",
+        "Оба всегда совпадают, потому что агрегаты игнорируют NULL одинаково",
+        "COUNT(group_id) считает NULL как отдельную группу",
+        "COUNT(*) запрещён, если в таблице есть NULL"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "COUNT(*) включает все кортежи. COUNT(столбец) пропускает NULL в этом столбце. SUM, AVG, MIN и MAX тоже игнорируют NULL, а на пустом наборе дают NULL, не 0."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Как в PostgreSQL взять одну «последнюю» строку performance на каждого студента?",
+      "options": [
+        "SELECT * FROM performance GROUP BY student_id без агрегатов по остальным столбцам",
+        "DISTINCT ON (student_id) ... ORDER BY student_id, exam_date DESC",
+        "UNION ALL всех дат экзамена",
+        "WHERE grade IS NOT DISTINCT FROM grade"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "DISTINCT ON оставляет первую строку каждой группы по ORDER BY — типичный приём PostgreSQL. GROUP BY без агрегатов по прочим столбцам в стандартном SQL некорректен. Альтернатива — ROW_NUMBER() и фильтр rn = 1."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие приёмы находят или устраняют дубликаты email студентов? (все верные)",
+      "options": [
+        "GROUP BY email HAVING COUNT(*) > 1",
+        "DELETE ... USING второй копии таблицы по email и большему id",
+        "WHERE email = NULL",
+        "ROW_NUMBER() OVER (PARTITION BY email ORDER BY id) и удаление строк с rn > 1"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Дубликаты ищут группировкой с HAVING COUNT(*) > 1. Удаляют через JOIN к копии или через нумерацию в окне. Сравнение email = NULL не работает: нужен IS NULL, и к дубликатам это не относится."
+    }
+  ]
+}

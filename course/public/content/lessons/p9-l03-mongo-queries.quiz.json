@@ -1,0 +1,100 @@
+{
+  "lessonId": "p9-l03-mongo-queries",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Какой вызов вставляет один документ в коллекцию students?",
+      "options": [
+        "db.students.find({ name: \"Петров\" })",
+        "db.students.deleteMany({ status: \"inactive\" })",
+        "db.students.insertOne({ name: \"Петров\", group: \"ИВТ-21\" })",
+        "db.students.createIndex({ group: 1 })"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "insertOne — создание документа. find читает, deleteMany удаляет множество, createIndex строит индекс. По смыслу это аналог INSERT … RETURNING одной строки, не SELECT."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Что означает фильтр { \"grades.score\": { $gt: 4 } }?",
+      "options": [
+        "Документы, где во вложенных оценках есть score строго больше 4",
+        "Сортировку коллекции по имени без фильтра",
+        "Удаление всех студентов с баллом 4",
+        "Создание уникального индекса по score"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "$gt — оператор сравнения, точка — путь во вложение/массив. Это ближе к SQL WHERE по JSON, не к DELETE и не к DDL индекса. Для сложного условия на элемент массива дополнительно бывает $elemMatch."
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "question": "Какие соответствия Mongo ↔ SQL верны? (все верные)",
+      "options": [
+        "createIndex ≈ GRANT SELECT ON TABLE",
+        "find({ a: 1 }) ≈ SELECT … WHERE a = 1",
+        "$in ≈ предикат IN (…)",
+        "updateOne + $set ≈ UPDATE … SET"
+      ],
+      "correct": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "CRUD и предикаты хорошо проецируются на SQL. Индекс — про доступ, не про привилегии. GRANT остаётся механизмом РСУБД; в Mongo контроль доступа устроен иначе."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Чем updateOne с $set отличается от замены всего документа?",
+      "options": [
+        "$set меняет указанные поля, не затирая остальные",
+        "$set всегда удаляет _id",
+        "updateOne нельзя вызывать без drop коллекции",
+        "$set эквивалентен deleteMany + insertOne того же фильтра"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Оператор $set точечно обновляет поля (status: active в примере). Полная замена документа другим объектом может снести незаданные поля. _id обычно неизменен. Это не удаление коллекции."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Зачем db.students.createIndex({ group: 1, name: 1 })?",
+      "options": [
+        "Чтобы запретить запросы find по группе",
+        "Чтобы заменить $regex полнотекстовым VACUUM",
+        "Чтобы включить RLS PostgreSQL на коллекции",
+        "Чтобы ускорить поиск/сортировку по префиксу ключей group и name"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Составной индекс поддерживает фильтры, начинающиеся с group (и далее name). Это не RLS и не vacuum. Без индекса find по большим коллекциям легко уходит в collection scan — та же идея, что Seq Scan в PostgreSQL."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие операторы фильтрации названы в уроке? (все верные)",
+      "options": [
+        "$gt / $gte для сравнения чисел",
+        "$mergeJoin как обязательный предикат find",
+        "$in для множества значений",
+        "$regex для шаблона строки"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "В теории урока: $gt, $gte, $in, $regex, $elemMatch. Hash/merge join — алгоритмы SQL-планировщика, не операторы Mongo find. Для массивов объектов $elemMatch уточняет, что условия относятся к одному элементу."
+    }
+  ]
+}

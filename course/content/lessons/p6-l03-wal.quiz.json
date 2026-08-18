@@ -1,0 +1,98 @@
+{
+  "lessonId": "p6-l03-wal",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Когда COMMIT считается надёжным при синхронной записи?",
+      "options": [
+        "После попадания изменений только в shared_buffers, без fsync",
+        "После fsync записей WAL на стабильное устройство",
+        "После следующего autovacuum",
+        "После EXPLAIN ANALYZE"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Клиент получает успешный COMMIT, когда журнал сброшен (при стандартном synchronous_commit). Грязные heap-страницы могут ещё лежать в буферах до checkpoint. Это и есть write-ahead logging."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Где лежат сегменты WAL и какого они типичного размера?",
+      "options": [
+        "pg_wal/, обычно 16 МБ на сегмент",
+        "pg_toast/, по 8 КБ",
+        "только в tablespace pg_global как heap",
+        "в shared_buffers как неизменяемый архив"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Каталог pg_wal хранит сегменты журнала (класс 16 МБ, если не меняли). После checkpoint отработавшие сегменты можно архивировать и переиспользовать. Это не TOAST и не кэш."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Что делает checkpoint?",
+      "options": [
+        "Удаляет все индексы",
+        "Отключает crash recovery",
+        "Сбрасывает грязные буферы на диск и позволяет recycle WAL; задают timeout и max_wal_size",
+        "Превращает Seq Scan в Index Scan"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Контрольная точка — согласованный срез: страницы записаны, в WAL есть метка. Recovery начинается с последнего checkpoint. Слишком частые checkpoint бьют по I/O, редкие — удлиняют восстановление."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Какой wal_level нужен для потоковой репликации и базового бэкапа?",
+      "options": [
+        "minimal",
+        "replica (или выше, logical)",
+        "off",
+        "archive_only"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "minimal пишет лишь то, что нужно для crash recovery одного узла. replica добавляет информацию для standby и pg_basebackup. logical — надстройка для логической репликации."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Crash recovery PostgreSQL — это прежде всего:",
+      "options": [
+        "redo WAL с последнего checkpoint; незавершённые транзакции не попадают в данные",
+        "повторный CREATE EXTENSION",
+        "обязательный REINDEX всех таблиц до открытия порта",
+        "пересчёт статистики ANALYZE до открытия порта"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "После сбоя процесс стартует redo по LSN. Зафиксированное в WAL восстанавливается; незафиксированное не применяется как committed. REINDEX и ANALYZE к аварийному циклу не относятся."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "На чём основаны репликация и PITR? (все верные)",
+      "options": [
+        "На непрерывном потоке WAL",
+        "На отключении журнала командой SET wal_level = off",
+        "На контрольных точках как старте redo",
+        "На LSN (Log Sequence Number) как позиции в журнале"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Standby и point-in-time recovery читают WAL от базового бэкапа/checkpoint. LSN адресует байт в журнале. Значения wal_level — minimal/replica/logical, не произвольные строки."
+    }
+  ]
+}

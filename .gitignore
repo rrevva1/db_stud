@@ -1,0 +1,27 @@
+# Dependencies — restore via npm / venv, not from git
+.venv/
+**/node_modules/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Frontend build output
+course/dist/
+*.tsbuildinfo
+
+# OS / editor
+.DS_Store
+Thumbs.db
+._*
+.AppleDouble
+.LSOverride
+.idea/
+.vscode/
+
+# Secrets
+.env
+.env.*
+!.env.example

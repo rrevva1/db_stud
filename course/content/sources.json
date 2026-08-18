@@ -1,0 +1,140 @@
+{
+  "sources": [
+    {
+      "id": "lecture1",
+      "title": "Проектирование и разработка баз и хранилищ данных. Лекция 1",
+      "authors": "Дзгоев А. Э.",
+      "path": "../sources/core/Дзгоев А. Э. — Проектирование и разработка баз и хранилищ данных. Лекция 1.pptx",
+      "language": "ru",
+      "role": "core"
+    },
+    {
+      "id": "morgunov",
+      "title": "PostgreSQL. Основы языка SQL",
+      "authors": "Моргунов Е. П.",
+      "path": "../sources/core/Моргунов Е. П. — PostgreSQL. Основы языка SQL.pdf",
+      "language": "ru",
+      "role": "core"
+    },
+    {
+      "id": "practicum",
+      "title": "Базы данных. Практикум",
+      "authors": "Братусь Н. В. и др.",
+      "path": "../sources/core/Братусь Н. В. и др. — Базы данных. Практикум.pdf",
+      "language": "ru",
+      "role": "core"
+    },
+    {
+      "id": "novikov",
+      "title": "Основы технологий баз данных",
+      "authors": "Новиков Б. А. и др.",
+      "path": "../sources/core/Новиков Б. А. и др. — Основы технологий баз данных.pdf",
+      "language": "ru",
+      "role": "core"
+    },
+    {
+      "id": "komarov",
+      "title": "Путеводитель по базам данных",
+      "authors": "Комаров В. И.",
+      "path": "../sources/reference/Комаров В. И. — Путеводитель по базам данных.pdf",
+      "language": "ru",
+      "role": "reference"
+    },
+    {
+      "id": "smirnov",
+      "title": "Проектирование хранилищ данных",
+      "authors": "Смирнов М. В.",
+      "path": "../sources/reference/Смирнов М. В. — Проектирование хранилищ данных.pdf",
+      "language": "ru",
+      "role": "reference"
+    },
+    {
+      "id": "headfirst",
+      "title": "Изучаем SQL",
+      "authors": "Линн Бейли",
+      "path": "../sources/pedagogy/Бейли Л. — Изучаем SQL.pdf",
+      "language": "ru",
+      "role": "pedagogy"
+    },
+    {
+      "id": "shields",
+      "title": "SQL: быстрое погружение",
+      "authors": "Уолтер Шилдс",
+      "path": "../sources/pedagogy/Шилдс У. — SQL. Быстрое погружение.pdf",
+      "language": "ru",
+      "role": "pedagogy"
+    },
+    {
+      "id": "date-intro",
+      "title": "Введение в системы баз данных (8-е изд.)",
+      "authors": "К. Дж. Дейт",
+      "path": "../sources/theory/Дейт К. Дж. — Введение в системы баз данных (8-е изд.).pdf",
+      "language": "ru",
+      "role": "theory"
+    },
+    {
+      "id": "date-sql",
+      "title": "SQL и реляционная теория",
+      "authors": "К. Дж. Дейт",
+      "path": "../sources/theory/Дейт К. Дж. — SQL и реляционная теория.pdf",
+      "language": "ru",
+      "role": "theory"
+    },
+    {
+      "id": "info-support",
+      "title": "Информационное обеспечение",
+      "authors": "Конспект",
+      "path": "../sources/reference/Конспект — Информационное обеспечение.pdf",
+      "language": "ru",
+      "role": "reference"
+    },
+    {
+      "id": "petkovic",
+      "title": "Microsoft SQL Server 2012. Руководство для начинающих",
+      "authors": "Душан Петкович",
+      "path": "../sources/tsql/Петкович Д. — Microsoft SQL Server 2012. Руководство для начинающих.pdf",
+      "language": "ru",
+      "role": "tsql"
+    },
+    {
+      "id": "ben-gan",
+      "title": "Microsoft SQL Server 2012. Создание запросов",
+      "authors": "Ицик Бен-Ган и др.",
+      "path": "../sources/tsql/Бен-Ган И. и др. — Microsoft SQL Server 2012. Создание запросов.pdf",
+      "language": "ru",
+      "role": "tsql"
+    },
+    {
+      "id": "pro-tsql",
+      "title": "Pro T-SQL 2019",
+      "authors": "Elizabeth Noble",
+      "path": "../sources/tsql/Noble E. — Pro T-SQL 2019.pdf",
+      "language": "en",
+      "role": "tsql"
+    },
+    {
+      "id": "dynamic-sql",
+      "title": "Dynamic SQL (2nd ed.)",
+      "authors": "Edward Pollack",
+      "path": "../sources/tsql/Pollack E. — Dynamic SQL (2nd ed.).pdf",
+      "language": "en",
+      "role": "tsql"
+    },
+    {
+      "id": "mongodb",
+      "title": "MongoDB: полное руководство",
+      "authors": "Брэдшоу, Брэзил, Ходоров",
+      "path": "../sources/nosql/Брэдшоу Ш., Брэзил Й., Ходоров К. — MongoDB. Полное руководство.pdf",
+      "language": "ru",
+      "role": "nosql"
+    },
+    {
+      "id": "graph-db",
+      "title": "Graph Databases (2nd ed.)",
+      "authors": "Robinson, Webber, Eifrem",
+      "path": "../sources/nosql/Robinson I., Webber J., Eifrem E. — Graph Databases (2nd ed.).pdf",
+      "language": "en",
+      "role": "nosql"
+    }
+  ]
+}

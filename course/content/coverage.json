@@ -1,0 +1,3621 @@
+{
+  "version": "1.0.0",
+  "mappings": [
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p1-l11-dialects",
+        "p9-l07-tsql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 1: обзор T-SQL",
+      "lessonIds": [
+        "p1-l11-dialects"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 10",
+      "lessonIds": [
+        "p9-l08-tsql-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 11",
+      "lessonIds": [
+        "p9-l08-tsql-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p9-l07-tsql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p9-l07-tsql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p3-l08-select-basics"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p3-l09-where-order"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p3-l10-joins-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p4-l02-window"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 7: оконные функции",
+      "lessonIds": [
+        "p4-l02-window"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 8",
+      "lessonIds": [
+        "p4-l04-pivot"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 8: pivot",
+      "lessonIds": [
+        "p4-l04-pivot"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Глава 9",
+      "lessonIds": [
+        "p3-l16-subqueries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Главы 1–3",
+      "lessonIds": [
+        "p9-l07-tsql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "ben-gan",
+      "ref": "Главы 10–11",
+      "lessonIds": [
+        "p9-l08-tsql-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p1-l01-dbms-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 10",
+      "lessonIds": [
+        "p2-l07-fd"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 11",
+      "lessonIds": [
+        "p2-l07-fd"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 12",
+      "lessonIds": [
+        "p2-l06-redundancy"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 13",
+      "lessonIds": [
+        "p2-l08-1nf-2nf",
+        "p2-l09-3nf-bcnf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 14",
+      "lessonIds": [
+        "p2-l09-3nf-bcnf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 15",
+      "lessonIds": [
+        "p2-l10-higher-nf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 16",
+      "lessonIds": [
+        "p3-l21-isolation"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 17",
+      "lessonIds": [
+        "p3-l20-transactions"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 18",
+      "lessonIds": [
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 19",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p1-l03-data-models",
+        "p1-l09-codd-rules"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 2, приложение",
+      "lessonIds": [
+        "p1-l09-codd-rules"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 20",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 21",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 22",
+      "lessonIds": [
+        "p2-l02-three-stages"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 23",
+      "lessonIds": [
+        "p2-l02-three-stages"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 24",
+      "lessonIds": [
+        "p4-l05-views-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 25",
+      "lessonIds": [
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 26",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 27",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p1-l04-relational-basics"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 3–4",
+      "lessonIds": [
+        "p1-l04-relational-basics"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p1-l04-relational-basics"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p1-l05-keys"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p1-l06-algebra",
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 6 (дополнение)",
+      "lessonIds": [
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p1-l07-calculus"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 8",
+      "lessonIds": [
+        "p1-l08-integrity"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Глава 9",
+      "lessonIds": [
+        "p2-l06-redundancy"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Главы 1–8 (повторение)",
+      "lessonIds": [
+        "p1-l12-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Главы 11–15 (повторение)",
+      "lessonIds": [
+        "p2-l14-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Главы 13–14",
+      "lessonIds": [
+        "p2-l09-3nf-bcnf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Главы 19–21",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Приложение A",
+      "lessonIds": [
+        "p1-l09-codd-rules"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Приложение B",
+      "lessonIds": [
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Приложение C",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Часть I",
+      "lessonIds": [
+        "p1-l01-dbms-intro",
+        "p1-l03-data-models"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Часть II",
+      "lessonIds": [
+        "p1-l04-relational-basics",
+        "p1-l05-keys",
+        "p1-l06-algebra"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Часть III",
+      "lessonIds": [
+        "p1-l07-calculus",
+        "p1-l08-integrity"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Часть IV",
+      "lessonIds": [
+        "p2-l06-redundancy",
+        "p2-l07-fd",
+        "p2-l08-1nf-2nf",
+        "p2-l09-3nf-bcnf",
+        "p2-l10-higher-nf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Часть V",
+      "lessonIds": [
+        "p3-l20-transactions",
+        "p3-l21-isolation"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Часть VI",
+      "lessonIds": [
+        "p2-l02-three-stages",
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-intro",
+      "ref": "Часть VII",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 10",
+      "lessonIds": [
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 11",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 11",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 12",
+      "lessonIds": [
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 12",
+      "lessonIds": [
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 13",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 14",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p1-l07-calculus",
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p4-l06-duplicates-null"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 3–4",
+      "lessonIds": [
+        "p4-l06-duplicates-null"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p4-l06-duplicates-null"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p3-l17-set-ops"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p4-l01-cte"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 8",
+      "lessonIds": [
+        "p4-l02-window"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Глава 9",
+      "lessonIds": [
+        "p4-l05-views-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Главы 1–2, 10",
+      "lessonIds": [
+        "p4-l07-formal-logic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Главы 11–14",
+      "lessonIds": [
+        "p9-l09-date-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Главы 11–14 (повторение)",
+      "lessonIds": [
+        "p9-l10-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "date-sql",
+      "ref": "Главы 3–10 (повторение)",
+      "lessonIds": [
+        "p4-l08-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "dynamic-sql",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p5-l08-dynamic-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "dynamic-sql",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p5-l08-dynamic-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "dynamic-sql",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p5-l08-dynamic-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "dynamic-sql",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p5-l09-dynamic-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "dynamic-sql",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p5-l09-dynamic-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "dynamic-sql",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p5-l09-dynamic-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "dynamic-sql",
+      "ref": "Главы 1–3",
+      "lessonIds": [
+        "p5-l08-dynamic-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "dynamic-sql",
+      "ref": "Главы 1–6 (повторение)",
+      "lessonIds": [
+        "p5-l10-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "dynamic-sql",
+      "ref": "Главы 4–6",
+      "lessonIds": [
+        "p5-l09-dynamic-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "graph-db",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p9-l01-nosql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "graph-db",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p9-l05-graph-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "graph-db",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p9-l05-graph-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "graph-db",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p9-l06-graph-queries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "graph-db",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p9-l06-graph-queries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "graph-db",
+      "ref": "Главы 1–5 (повторение)",
+      "lessonIds": [
+        "p9-l10-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "graph-db",
+      "ref": "Главы 2–3",
+      "lessonIds": [
+        "p9-l05-graph-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "graph-db",
+      "ref": "Главы 4–5",
+      "lessonIds": [
+        "p9-l06-graph-queries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p1-l10-sql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 10",
+      "lessonIds": [
+        "p3-l10-joins-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 11",
+      "lessonIds": [
+        "p3-l12-outer-join"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 12",
+      "lessonIds": [
+        "p3-l14-group-by"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 13",
+      "lessonIds": [
+        "p3-l16-subqueries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 14",
+      "lessonIds": [
+        "p3-l18-scalar-funcs"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p1-l10-sql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p2-l04-relationships"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p2-l12-lab-bookstore"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p3-l01-create-table"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p3-l04-alter-table"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p3-l05-insert"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 8",
+      "lessonIds": [
+        "p3-l07-delete"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Глава 9",
+      "lessonIds": [
+        "p3-l08-select-basics"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Главы 1–2",
+      "lessonIds": [
+        "p1-l10-sql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "headfirst",
+      "ref": "Приложение: NoSQL",
+      "lessonIds": [
+        "p9-l04-mongo-aggregation"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "info-support",
+      "ref": "Раздел 1",
+      "lessonIds": [
+        "p0-l01-course-intro",
+        "p2-l01-design-lifecycle"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "info-support",
+      "ref": "Раздел 2",
+      "lessonIds": [
+        "p2-l02-three-stages"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "info-support",
+      "ref": "Раздел 2: стадии проектирования",
+      "lessonIds": [
+        "p2-l02-three-stages"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "info-support",
+      "ref": "Раздел 3",
+      "lessonIds": [
+        "p2-l11-semantic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "info-support",
+      "ref": "Раздел 3: семантика данных",
+      "lessonIds": [
+        "p2-l11-semantic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "info-support",
+      "ref": "Раздел 4",
+      "lessonIds": [
+        "p2-l03-entities"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "info-support",
+      "ref": "Раздел 5",
+      "lessonIds": [
+        "p8-l02-dimensional"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "info-support",
+      "ref": "Раздел 5: измерения",
+      "lessonIds": [
+        "p8-l02-dimensional"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "info-support",
+      "ref": "Раздел 6",
+      "lessonIds": [
+        "p8-l07-data-marts"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "info-support",
+      "ref": "Раздел 6: витрины",
+      "lessonIds": [
+        "p8-l07-data-marts"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p1-l01-dbms-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 10",
+      "lessonIds": [
+        "p5-l07-vacuum"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 11",
+      "lessonIds": [
+        "p6-l02-pages-tuples"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 12",
+      "lessonIds": [
+        "p6-l04-tablespaces"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 13",
+      "lessonIds": [
+        "p6-l06-extensions"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 14",
+      "lessonIds": [
+        "p7-l04-encryption"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 15",
+      "lessonIds": [
+        "p8-l04-snowflake"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p1-l02-requirements"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p1-l03-data-models"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p1-l04-relational-basics"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p1-l05-keys"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p1-l06-algebra"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p2-l07-fd"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 8",
+      "lessonIds": [
+        "p5-l02-btree-hash"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Глава 9",
+      "lessonIds": [
+        "p5-l05-optimization"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 1",
+      "lessonIds": [
+        "p1-l02-requirements"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 1: требования к СУБД",
+      "lessonIds": [
+        "p1-l02-requirements"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 10",
+      "lessonIds": [
+        "p5-l07-vacuum"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 10: обслуживание",
+      "lessonIds": [
+        "p5-l07-vacuum"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 11",
+      "lessonIds": [
+        "p6-l02-pages-tuples"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 11: физическое хранение",
+      "lessonIds": [
+        "p6-l02-pages-tuples"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 12",
+      "lessonIds": [
+        "p6-l04-tablespaces"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 12: tablespaces",
+      "lessonIds": [
+        "p6-l04-tablespaces"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 13",
+      "lessonIds": [
+        "p6-l06-extensions"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 13: extensions",
+      "lessonIds": [
+        "p6-l06-extensions"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 14",
+      "lessonIds": [
+        "p7-l04-encryption"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 14: шифрование",
+      "lessonIds": [
+        "p7-l04-encryption"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 15",
+      "lessonIds": [
+        "p8-l04-snowflake"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 15: snowflake",
+      "lessonIds": [
+        "p8-l04-snowflake"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 16",
+      "lessonIds": [
+        "p9-l02-mongo-model"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 16: document DB",
+      "lessonIds": [
+        "p9-l02-mongo-model"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 17",
+      "lessonIds": [
+        "p9-l05-graph-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 17: graph DB",
+      "lessonIds": [
+        "p9-l05-graph-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 2",
+      "lessonIds": [
+        "p1-l09-codd-rules"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 2: правила Кодда",
+      "lessonIds": [
+        "p1-l09-codd-rules"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 5",
+      "lessonIds": [
+        "p2-l10-higher-nf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 5: высшие нормальные формы",
+      "lessonIds": [
+        "p2-l10-higher-nf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 8",
+      "lessonIds": [
+        "p5-l02-btree-hash"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 8: индексы",
+      "lessonIds": [
+        "p5-l02-btree-hash"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 9",
+      "lessonIds": [
+        "p5-l05-optimization"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Раздел 9: оптимизация",
+      "lessonIds": [
+        "p5-l05-optimization"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Часть I",
+      "lessonIds": [
+        "p1-l01-dbms-intro",
+        "p1-l02-requirements"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Часть II",
+      "lessonIds": [
+        "p1-l03-data-models",
+        "p1-l04-relational-basics"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Часть III",
+      "lessonIds": [
+        "p2-l06-redundancy",
+        "p2-l07-fd",
+        "p2-l10-higher-nf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Часть IV",
+      "lessonIds": [
+        "p3-l08-select-basics",
+        "p3-l10-joins-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Часть V",
+      "lessonIds": [
+        "p5-l01-indexes-intro",
+        "p5-l05-optimization"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Часть VI",
+      "lessonIds": [
+        "p6-l01-storage-arch",
+        "p7-l01-auth"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "komarov",
+      "ref": "Часть VII",
+      "lessonIds": [
+        "p8-l01-dwh-concepts",
+        "p9-l01-nosql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 1–8: обзор дисциплины",
+      "lessonIds": [
+        "p0-l01-course-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 111–120",
+      "lessonIds": [
+        "p8-l05-etl",
+        "p8-l06-olap-cubes"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 121–129: итоги и перспективы",
+      "lessonIds": [
+        "p0-l01-course-intro",
+        "p8-l09-exam",
+        "p9-l10-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 15–28: реляционная модель",
+      "lessonIds": [
+        "p1-l04-relational-basics",
+        "p1-l05-keys"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 29: переход к проектированию",
+      "lessonIds": [
+        "p2-l01-design-lifecycle"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 30–42",
+      "lessonIds": [
+        "p2-l01-design-lifecycle",
+        "p2-l02-three-stages"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 43–55",
+      "lessonIds": [
+        "p2-l04-relationships",
+        "p2-l05-er-diagrams"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 56–65",
+      "lessonIds": [
+        "p2-l03-entities",
+        "p2-l11-semantic"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 66–79: нормализация и SQL",
+      "lessonIds": [
+        "p1-l10-sql-overview",
+        "p2-l06-redundancy",
+        "p2-l07-fd"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 80–95",
+      "lessonIds": [
+        "p7-l07-oltp-olap",
+        "p8-l01-dwh-concepts"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 9–14: история и эволюция БД",
+      "lessonIds": [
+        "p1-l01-dbms-intro",
+        "p1-l03-data-models"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 96–110",
+      "lessonIds": [
+        "p8-l01-dwh-concepts",
+        "p8-l02-dimensional"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "lecture1",
+      "ref": "Слайды 96–120 (повторение)",
+      "lessonIds": [
+        "p8-l09-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p9-l01-nosql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p9-l02-mongo-model"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p9-l02-mongo-model"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p9-l03-mongo-queries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p9-l03-mongo-queries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p9-l04-mongo-aggregation"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p9-l06-graph-queries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Глава 7 (сравнение)",
+      "lessonIds": [
+        "p9-l06-graph-queries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Главы 1–7 (повторение)",
+      "lessonIds": [
+        "p9-l10-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Главы 2–3",
+      "lessonIds": [
+        "p9-l02-mongo-model"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Главы 4–5",
+      "lessonIds": [
+        "p9-l03-mongo-queries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Часть I",
+      "lessonIds": [
+        "p9-l01-nosql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Часть II",
+      "lessonIds": [
+        "p9-l02-mongo-model"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Часть III",
+      "lessonIds": [
+        "p9-l03-mongo-queries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Часть IV",
+      "lessonIds": [
+        "p9-l04-mongo-aggregation"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "mongodb",
+      "ref": "Часть V",
+      "lessonIds": [
+        "p9-l03-mongo-queries",
+        "p9-l10-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Введение: особенности PostgreSQL",
+      "lessonIds": [
+        "p1-l11-dialects"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p0-l02-postgres-setup"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 1: установка СУБД",
+      "lessonIds": [
+        "p0-l02-postgres-setup"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 10",
+      "lessonIds": [
+        "p3-l20-transactions",
+        "p3-l21-isolation"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 10, §10.1",
+      "lessonIds": [
+        "p3-l20-transactions"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 10, §10.2",
+      "lessonIds": [
+        "p3-l21-isolation"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 11",
+      "lessonIds": [
+        "p3-l22-views",
+        "p3-l23-triggers"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 11, §11.1",
+      "lessonIds": [
+        "p3-l22-views"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 11, §11.2",
+      "lessonIds": [
+        "p3-l23-triggers"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 12",
+      "lessonIds": [
+        "p4-l01-cte",
+        "p4-l02-window",
+        "p4-l03-lateral",
+        "p4-l04-pivot"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 12, §12.1",
+      "lessonIds": [
+        "p4-l01-cte"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 12, §12.2",
+      "lessonIds": [
+        "p4-l02-window"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 12, §12.3",
+      "lessonIds": [
+        "p4-l03-lateral"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 12, §12.4",
+      "lessonIds": [
+        "p4-l04-pivot"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 13",
+      "lessonIds": [
+        "p4-l05-views-advanced",
+        "p4-l06-duplicates-null"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 13, §13.1",
+      "lessonIds": [
+        "p4-l05-views-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 13, §13.2",
+      "lessonIds": [
+        "p4-l06-duplicates-null"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 14",
+      "lessonIds": [
+        "p5-l01-indexes-intro",
+        "p5-l02-btree-hash",
+        "p5-l03-special-indexes"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 14, §14.1",
+      "lessonIds": [
+        "p5-l01-indexes-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 14, §14.2",
+      "lessonIds": [
+        "p5-l02-btree-hash"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 14, §14.3",
+      "lessonIds": [
+        "p5-l03-special-indexes"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 15",
+      "lessonIds": [
+        "p5-l04-explain",
+        "p5-l05-optimization"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 15, §15.1",
+      "lessonIds": [
+        "p5-l04-explain"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 15, §15.2",
+      "lessonIds": [
+        "p5-l05-optimization"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 16",
+      "lessonIds": [
+        "p5-l06-partitioning",
+        "p5-l07-vacuum"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 16, §16.1",
+      "lessonIds": [
+        "p5-l06-partitioning"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 16, §16.2",
+      "lessonIds": [
+        "p5-l07-vacuum"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 17",
+      "lessonIds": [
+        "p5-l08-dynamic-intro",
+        "p5-l09-dynamic-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 17, §17.1",
+      "lessonIds": [
+        "p5-l08-dynamic-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 18",
+      "lessonIds": [
+        "p6-l01-storage-arch",
+        "p6-l02-pages-tuples",
+        "p6-l03-wal"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 18, §18.1",
+      "lessonIds": [
+        "p6-l01-storage-arch"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 18, §18.2",
+      "lessonIds": [
+        "p6-l02-pages-tuples"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 18, §18.3",
+      "lessonIds": [
+        "p6-l03-wal"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 19",
+      "lessonIds": [
+        "p6-l04-tablespaces",
+        "p6-l05-toast"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 19, §19.1",
+      "lessonIds": [
+        "p6-l04-tablespaces"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 19, §19.2",
+      "lessonIds": [
+        "p6-l05-toast"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p1-l10-sql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 2: обзор SQL",
+      "lessonIds": [
+        "p1-l10-sql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 20",
+      "lessonIds": [
+        "p6-l06-extensions",
+        "p6-l07-monitoring-ext"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 20, §20.1",
+      "lessonIds": [
+        "p6-l06-extensions"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 20, §20.2",
+      "lessonIds": [
+        "p6-l07-monitoring-ext"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 21",
+      "lessonIds": [
+        "p7-l01-auth",
+        "p7-l02-roles",
+        "p7-l03-rls"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 21, §21.1",
+      "lessonIds": [
+        "p7-l01-auth"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 21, §21.2",
+      "lessonIds": [
+        "p7-l02-roles"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 21, §21.3",
+      "lessonIds": [
+        "p7-l03-rls"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 22",
+      "lessonIds": [
+        "p7-l05-backup",
+        "p7-l06-replication"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 22, §22.1",
+      "lessonIds": [
+        "p7-l05-backup"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 22, §22.2",
+      "lessonIds": [
+        "p7-l06-replication"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p3-l01-create-table",
+        "p3-l02-data-types",
+        "p3-l03-constraints",
+        "p3-l04-alter-table"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 3, §3.1",
+      "lessonIds": [
+        "p3-l01-create-table"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 3, §3.2",
+      "lessonIds": [
+        "p3-l02-data-types"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 3, §3.3",
+      "lessonIds": [
+        "p3-l03-constraints"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 3, §3.4",
+      "lessonIds": [
+        "p3-l04-alter-table"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p3-l05-insert",
+        "p3-l06-update",
+        "p3-l07-delete"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 4, §4.1",
+      "lessonIds": [
+        "p3-l05-insert"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 4, §4.2",
+      "lessonIds": [
+        "p3-l06-update"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 4, §4.3",
+      "lessonIds": [
+        "p3-l07-delete"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p3-l08-select-basics",
+        "p3-l09-where-order"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 5, §5.1",
+      "lessonIds": [
+        "p3-l08-select-basics"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 5, §5.2",
+      "lessonIds": [
+        "p3-l09-where-order"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p3-l10-joins-intro",
+        "p3-l11-inner-join",
+        "p3-l12-outer-join",
+        "p3-l13-cross-self-join"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 6, §6.1",
+      "lessonIds": [
+        "p3-l10-joins-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 6, §6.2",
+      "lessonIds": [
+        "p3-l11-inner-join"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 6, §6.3",
+      "lessonIds": [
+        "p3-l12-outer-join"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 6, §6.4",
+      "lessonIds": [
+        "p3-l13-cross-self-join"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p3-l14-group-by",
+        "p3-l15-having"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 7, §7.1",
+      "lessonIds": [
+        "p3-l14-group-by"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 7, §7.2",
+      "lessonIds": [
+        "p3-l15-having"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 8",
+      "lessonIds": [
+        "p3-l16-subqueries",
+        "p3-l17-set-ops"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 8, §8.1",
+      "lessonIds": [
+        "p3-l16-subqueries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 8, §8.2",
+      "lessonIds": [
+        "p3-l17-set-ops"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 9",
+      "lessonIds": [
+        "p3-l18-scalar-funcs",
+        "p3-l19-case-when"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 9, §9.1",
+      "lessonIds": [
+        "p3-l18-scalar-funcs"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Глава 9, §9.2",
+      "lessonIds": [
+        "p3-l19-case-when"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Главы 12–13 (повторение)",
+      "lessonIds": [
+        "p4-l08-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Главы 14–17 (повторение)",
+      "lessonIds": [
+        "p5-l10-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Главы 18–20 (повторение)",
+      "lessonIds": [
+        "p6-l08-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Главы 21–22 (повторение)",
+      "lessonIds": [
+        "p7-l08-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "morgunov",
+      "ref": "Главы 3–11 (повторение)",
+      "lessonIds": [
+        "p3-l24-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p0-l01-course-intro",
+        "p1-l01-dbms-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 1, §1.1–1.2",
+      "lessonIds": [
+        "p0-l01-course-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 1, §1.3–1.5",
+      "lessonIds": [
+        "p1-l01-dbms-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 10",
+      "lessonIds": [
+        "p3-l23-triggers"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 10, §10.3",
+      "lessonIds": [
+        "p3-l23-triggers"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 11",
+      "lessonIds": [
+        "p5-l01-indexes-intro",
+        "p5-l03-special-indexes"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 11, §11.1",
+      "lessonIds": [
+        "p5-l01-indexes-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 11, §11.3",
+      "lessonIds": [
+        "p5-l03-special-indexes"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 12",
+      "lessonIds": [
+        "p5-l06-partitioning"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 12, §12.2",
+      "lessonIds": [
+        "p5-l06-partitioning"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 13",
+      "lessonIds": [
+        "p6-l01-storage-arch",
+        "p6-l03-wal",
+        "p6-l05-toast"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 13, §13.1",
+      "lessonIds": [
+        "p6-l01-storage-arch"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 13, §13.2",
+      "lessonIds": [
+        "p6-l03-wal"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 13, §13.3",
+      "lessonIds": [
+        "p6-l05-toast"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 14",
+      "lessonIds": [
+        "p6-l07-monitoring-ext"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 14, §14.1",
+      "lessonIds": [
+        "p6-l07-monitoring-ext"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 15",
+      "lessonIds": [
+        "p7-l01-auth",
+        "p7-l04-encryption"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 15, §15.1",
+      "lessonIds": [
+        "p7-l01-auth"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 15, §15.2",
+      "lessonIds": [
+        "p7-l04-encryption"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 16",
+      "lessonIds": [
+        "p7-l06-replication"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 16, §16.1",
+      "lessonIds": [
+        "p7-l06-replication"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 17",
+      "lessonIds": [
+        "p8-l06-olap-cubes"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 17, §17.2",
+      "lessonIds": [
+        "p8-l06-olap-cubes"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 18",
+      "lessonIds": [
+        "p5-l05-optimization",
+        "p6-l02-pages-tuples"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 19",
+      "lessonIds": [
+        "p7-l03-rls",
+        "p7-l04-encryption"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p1-l02-requirements"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 20",
+      "lessonIds": [
+        "p9-l01-nosql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 21",
+      "lessonIds": [
+        "p9-l05-graph-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 22",
+      "lessonIds": [
+        "p8-l09-exam",
+        "p9-l10-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p1-l03-data-models"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 3, §3.1–3.3",
+      "lessonIds": [
+        "p1-l03-data-models"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p1-l05-keys",
+        "p1-l08-integrity"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 4, §4.2",
+      "lessonIds": [
+        "p1-l05-keys"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 4, §4.4–4.6",
+      "lessonIds": [
+        "p1-l08-integrity"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p1-l06-algebra",
+        "p3-l13-cross-self-join"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 5, §5.1",
+      "lessonIds": [
+        "p1-l06-algebra"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 5, §5.3",
+      "lessonIds": [
+        "p3-l13-cross-self-join"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p2-l01-design-lifecycle",
+        "p2-l03-entities",
+        "p2-l04-relationships",
+        "p2-l13-lab-airline"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 6 (примеры)",
+      "lessonIds": [
+        "p2-l13-lab-airline"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 6, §6.1",
+      "lessonIds": [
+        "p2-l01-design-lifecycle"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 6, §6.2",
+      "lessonIds": [
+        "p2-l03-entities"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 6, §6.3",
+      "lessonIds": [
+        "p2-l04-relationships"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p2-l06-redundancy",
+        "p2-l07-fd",
+        "p2-l09-3nf-bcnf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 7, §7.1",
+      "lessonIds": [
+        "p2-l06-redundancy"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 7, §7.2",
+      "lessonIds": [
+        "p2-l07-fd"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 7, §7.4",
+      "lessonIds": [
+        "p2-l09-3nf-bcnf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 8",
+      "lessonIds": [
+        "p3-l02-data-types"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 8, §8.1",
+      "lessonIds": [
+        "p3-l02-data-types"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 9",
+      "lessonIds": [
+        "p3-l20-transactions"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Глава 9, §9.2",
+      "lessonIds": [
+        "p3-l20-transactions"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Главы 1–5 (повторение)",
+      "lessonIds": [
+        "p1-l12-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Главы 13–14 (повторение)",
+      "lessonIds": [
+        "p6-l08-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Главы 15–16 (повторение)",
+      "lessonIds": [
+        "p7-l08-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "novikov",
+      "ref": "Гlaва 11, §11.3",
+      "lessonIds": [
+        "p5-l03-special-indexes"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p9-l07-tsql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 10",
+      "lessonIds": [
+        "p7-l05-backup"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 10: backup",
+      "lessonIds": [
+        "p7-l05-backup"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p9-l07-tsql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p9-l07-tsql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p9-l07-tsql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p3-l08-select-basics"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p3-l10-joins-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p3-l14-group-by"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 8",
+      "lessonIds": [
+        "p9-l08-tsql-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 9",
+      "lessonIds": [
+        "p7-l02-roles"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Глава 9: безопасность",
+      "lessonIds": [
+        "p7-l02-roles"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Главы 1–4",
+      "lessonIds": [
+        "p9-l07-tsql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Часть I: основы T-SQL",
+      "lessonIds": [
+        "p9-l07-tsql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Часть II: запросы",
+      "lessonIds": [
+        "p3-l08-select-basics",
+        "p3-l10-joins-intro"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "petkovic",
+      "ref": "Часть III: программирование",
+      "lessonIds": [
+        "p9-l08-tsql-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p2-l03-entities"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 1: сущности",
+      "lessonIds": [
+        "p2-l03-entities"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p2-l05-er-diagrams"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 2: ER-диаграммы",
+      "lessonIds": [
+        "p2-l05-er-diagrams"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p2-l08-1nf-2nf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 3: 1NF–2NF",
+      "lessonIds": [
+        "p2-l08-1nf-2nf"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p3-l03-constraints"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 4: ограничения",
+      "lessonIds": [
+        "p3-l03-constraints"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p3-l09-where-order"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 5: фильтрация",
+      "lessonIds": [
+        "p3-l09-where-order"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p3-l19-case-when"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 6: выражения",
+      "lessonIds": [
+        "p3-l19-case-when"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p3-l22-views"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 7: представления",
+      "lessonIds": [
+        "p3-l22-views"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 8",
+      "lessonIds": [
+        "p8-l03-star-schema"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Глава 8: star schema",
+      "lessonIds": [
+        "p8-l03-star-schema"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Главы 1–3 (повторение)",
+      "lessonIds": [
+        "p2-l14-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 1",
+      "lessonIds": [
+        "p0-l02-postgres-setup"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 1: подготовка среды",
+      "lessonIds": [
+        "p0-l02-postgres-setup"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 10",
+      "lessonIds": [
+        "p5-l01-indexes-intro",
+        "p5-l04-explain"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 11",
+      "lessonIds": [
+        "p3-l20-transactions",
+        "p3-l21-isolation"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 12",
+      "lessonIds": [
+        "p7-l01-auth",
+        "p7-l02-roles"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 13",
+      "lessonIds": [
+        "p7-l05-backup",
+        "p7-l06-replication"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 14",
+      "lessonIds": [
+        "p4-l01-cte",
+        "p4-l02-window"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 15",
+      "lessonIds": [
+        "p9-l10-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 2",
+      "lessonIds": [
+        "p2-l12-lab-bookstore"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 2: книжный магазин",
+      "lessonIds": [
+        "p2-l12-lab-bookstore"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 3",
+      "lessonIds": [
+        "p2-l13-lab-airline"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 3: авиакомпания",
+      "lessonIds": [
+        "p2-l13-lab-airline"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 4",
+      "lessonIds": [
+        "p3-l06-update"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 4: DML",
+      "lessonIds": [
+        "p3-l06-update"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 5",
+      "lessonIds": [
+        "p3-l11-inner-join"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 5: соединения",
+      "lessonIds": [
+        "p3-l11-inner-join"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 6",
+      "lessonIds": [
+        "p3-l15-having"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 6: агрегаты",
+      "lessonIds": [
+        "p3-l15-having"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 8",
+      "lessonIds": [
+        "p8-l08-dwh-lab"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 8: DWH",
+      "lessonIds": [
+        "p8-l08-dwh-lab"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 9",
+      "lessonIds": [
+        "p9-l03-mongo-queries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задание 9: MongoDB",
+      "lessonIds": [
+        "p9-l03-mongo-queries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "practicum",
+      "ref": "Задания 4–7 (повторение)",
+      "lessonIds": [
+        "p3-l24-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Глава 10",
+      "lessonIds": [
+        "p5-l04-explain"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Глава 10: планы выполнения",
+      "lessonIds": [
+        "p5-l04-explain"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Глава 12",
+      "lessonIds": [
+        "p5-l09-dynamic-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Глава 12: dynamic SQL",
+      "lessonIds": [
+        "p5-l09-dynamic-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Глава 15",
+      "lessonIds": [
+        "p7-l03-rls"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Глава 15: RLS в SQL Server",
+      "lessonIds": [
+        "p7-l03-rls"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p4-l03-lateral"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Глава 4: APPLY (аналог)",
+      "lessonIds": [
+        "p4-l03-lateral"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p9-l08-tsql-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p9-l08-tsql-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p9-l08-tsql-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Главы 5–7",
+      "lessonIds": [
+        "p9-l08-tsql-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Часть I",
+      "lessonIds": [
+        "p9-l07-tsql-overview"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Часть II",
+      "lessonIds": [
+        "p3-l08-select-basics",
+        "p3-l10-joins-intro",
+        "p3-l14-group-by"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Часть III",
+      "lessonIds": [
+        "p5-l08-dynamic-intro",
+        "p9-l08-tsql-advanced"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "pro-tsql",
+      "ref": "Часть IV",
+      "lessonIds": [
+        "p5-l09-dynamic-advanced",
+        "p7-l03-rls"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 1",
+      "lessonIds": [
+        "p7-l07-oltp-olap",
+        "p8-l01-dwh-concepts"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 1–2",
+      "lessonIds": [
+        "p8-l01-dwh-concepts"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 1: OLTP и OLAP",
+      "lessonIds": [
+        "p7-l07-oltp-olap"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 2",
+      "lessonIds": [
+        "p8-l01-dwh-concepts"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 3",
+      "lessonIds": [
+        "p8-l02-dimensional"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 4",
+      "lessonIds": [
+        "p8-l03-star-schema",
+        "p8-l04-snowflake"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 4, §4.1",
+      "lessonIds": [
+        "p8-l03-star-schema"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 4, §4.2",
+      "lessonIds": [
+        "p8-l04-snowflake"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 5",
+      "lessonIds": [
+        "p8-l05-etl"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 6",
+      "lessonIds": [
+        "p8-l06-olap-cubes"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 7",
+      "lessonIds": [
+        "p8-l07-data-marts"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 8",
+      "lessonIds": [
+        "p8-l08-dwh-lab"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Глава 8 (практика)",
+      "lessonIds": [
+        "p8-l08-dwh-lab"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Главы 1–8 (повторение)",
+      "lessonIds": [
+        "p8-l09-exam"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Тема 1",
+      "lessonIds": [
+        "p7-l07-oltp-olap",
+        "p8-l01-dwh-concepts"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Тема 2",
+      "lessonIds": [
+        "p8-l01-dwh-concepts"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Тема 3",
+      "lessonIds": [
+        "p8-l02-dimensional"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Тема 4",
+      "lessonIds": [
+        "p8-l03-star-schema",
+        "p8-l04-snowflake"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Тема 5",
+      "lessonIds": [
+        "p8-l05-etl"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Тема 6",
+      "lessonIds": [
+        "p8-l06-olap-cubes"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "smirnov",
+      "ref": "Тема 7",
+      "lessonIds": [
+        "p8-l07-data-marts"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "shields",
+      "ref": "Глава 1: структура БД и термины",
+      "lessonIds": [
+        "p1-l04-relational-basics",
+        "p1-l11-dialects"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "shields",
+      "ref": "Главы 2–3: инструменты SQLite (не ядро курса)",
+      "lessonIds": [
+        "p0-l02-postgres-setup",
+        "p1-l11-dialects"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "shields",
+      "ref": "Глава 4: структура запроса, алиасы, ORDER BY, LIMIT",
+      "lessonIds": [
+        "p3-l08-select-basics",
+        "p3-l09-where-order"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "shields",
+      "ref": "Глава 5: WHERE, LIKE, AND/OR, CASE",
+      "lessonIds": [
+        "p3-l09-where-order",
+        "p3-l19-case-when"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "shields",
+      "ref": "Глава 6: соединения",
+      "lessonIds": [
+        "p3-l10-joins-intro",
+        "p3-l11-inner-join",
+        "p3-l12-outer-join"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "shields",
+      "ref": "Глава 7: функции, GROUP BY, HAVING",
+      "lessonIds": [
+        "p3-l14-group-by",
+        "p3-l15-having",
+        "p3-l18-scalar-funcs"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "shields",
+      "ref": "Глава 8: подзапросы",
+      "lessonIds": [
+        "p3-l16-subqueries"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "shields",
+      "ref": "Глава 9: представления",
+      "lessonIds": [
+        "p3-l22-views"
+      ],
+      "status": "covered"
+    },
+    {
+      "sourceId": "shields",
+      "ref": "Глава 10: DML",
+      "lessonIds": [
+        "p3-l05-insert",
+        "p3-l06-update",
+        "p3-l07-delete"
+      ],
+      "status": "covered"
+    }
+  ],
+  "summary": {
+    "totalMappings": 436,
+    "sourcesFullyCovered": [
+      "lecture1",
+      "morgunov",
+      "practicum",
+      "novikov",
+      "komarov",
+      "smirnov",
+      "headfirst",
+      "shields",
+      "date-intro",
+      "date-sql",
+      "info-support",
+      "petkovic",
+      "ben-gan",
+      "pro-tsql",
+      "dynamic-sql",
+      "mongodb",
+      "graph-db"
+    ]
+  }
+}

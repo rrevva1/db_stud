@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l07-delete",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Нужно убрать из performance оценки старше 2020 года, таблицу оставить. Какая команда уместна?",
+      "options": [
+        "TRUNCATE TABLE performance",
+        "DROP TABLE performance",
+        "DELETE FROM performance WHERE grade_date < '2020-01-01'",
+        "ALTER TABLE performance DROP COLUMN grade"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Часть строк снимает DELETE с WHERE. TRUNCATE очищает всю таблицу без предиката. DROP TABLE уничтожает и данные, и структуру. DROP COLUMN убирает атрибут у всех строк, а не старые оценки."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Чем TRUNCATE TABLE performance принципиально отличается от DELETE FROM performance?",
+      "options": [
+        "TRUNCATE быстро очищает всю таблицу и не вызывает построчные триггеры DELETE",
+        "TRUNCATE всегда удаляет только одну строку",
+        "TRUNCATE нельзя откатить в транзакции PostgreSQL, DELETE — можно",
+        "TRUNCATE требует обязательный WHERE, иначе ошибка"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "TRUNCATE — массовая очистка без WHERE; построчные DELETE-триггеры не срабатывают. В PostgreSQL TRUNCATE транзакционен и откатывается ROLLBACK. DELETE с WHERE выбирает подмножество и вызывает триггеры на каждую строку."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "DROP TABLE student в отличие от DELETE/TRUNCATE:",
+      "options": [
+        "Удаляет только строки с NULL в last_name",
+        "Оставляет таблицу, но сбрасывает sequence SERIAL",
+        "Работает только если таблица пустая, иначе тихий пропуск",
+        "Удаляет и строки, и определение таблицы (структуру)"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "DROP TABLE убирает объект схемы. DELETE/TRUNCATE чистят кортежи, отношение остаётся. Чтобы снова вставлять, после DROP нужен CREATE TABLE. Зависимые FK могут потребовать CASCADE."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "На student_in_group стоит ON DELETE CASCADE к student. DELETE FROM student WHERE student_id = 1; что будет со связями?",
+      "options": [
+        "DELETE студента запретится, пока есть строки в student_in_group",
+        "Строки student_in_group с student_id = 1 удалятся вместе со студентом",
+        "group_id в связях станет NULL, студент останется",
+        "Удалится вся таблица s_group"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "CASCADE снимает дочерние строки при удалении родителя. Запрет дал бы RESTRICT. SET NULL обнулил бы ключ. Таблица групп не дропается — меняются (удаляются) строки связи."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие утверждения о DELETE верны? Выберите все верные.",
+      "options": [
+        "Перед DELETE полезен SELECT с тем же WHERE",
+        "TRUNCATE поддерживает WHERE grade = 2, как DELETE",
+        "DELETE … RETURNING может вернуть удалённые student_id, last_name",
+        "DELETE без WHERE удалит все строки, таблица останется"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Привычка «сначала спросить» и RETURNING помогают контролировать DML. DELETE без WHERE опустошает таблицу. TRUNCATE не имеет WHERE — только вся таблица (или список таблиц)."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "TRUNCATE TABLE student_in_group, student RESTART IDENTITY CASCADE в учебном скрипте:",
+      "options": [
+        "Удаляет только индексы, данные student сохраняются",
+        "Переименовывает таблицы в *_old",
+        "Очищает указанные таблицы, сбрасывает SERIAL и проходит по FK (CASCADE)",
+        "Эквивалентен DROP SCHEMA university CASCADE"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "RESTART IDENTITY возвращает последовательности к старту. CASCADE у TRUNCATE затрагивает таблицы, связанные FK. Это не DROP SCHEMA: объекты остаются, меняется содержимое (и счётчики)."
+    }
+  ]
+}

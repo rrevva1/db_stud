@@ -1,0 +1,190 @@
+{
+  "lessonId": "p6-l08-exam",
+  "passingScore": 75,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Кто порождает backend-процесс клиентской сессии?",
+      "options": [
+        "walwriter",
+        "postmaster (главный процесс кластера)",
+        "checkpointer",
+        "bgwriter"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Postmaster слушает порт и делает fork/exec backend. walwriter и checkpointer — фоновые писатели журнала и буферов, они сессии не принимают. Каждая сессия — отдельный процесс."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Порядок надёжной записи изменения строки performance:",
+      "options": [
+        "Сначала data-файл, потом WAL, потом COMMIT клиенту",
+        "Сначала WAL (fsync), затем позже dirty page в heap; COMMIT опирается на журнал",
+        "Только shared_buffers, диск не нужен",
+        "Сначала TOAST, WAL не пишется"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Write-ahead: журнал раньше кучи. Клиент получает COMMIT после сброса WAL. Страницы данных догоняют на checkpoint/bgwriter. TOAST тоже журналируется."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "HOT на UPDATE grade в performance сработает с большей вероятностью, если:",
+      "options": [
+        "grade входит во все индексы таблицы",
+        "grade не индексирован, на странице есть место (FILLFACTOR), новая версия влезает",
+        "Всегда, даже при смене student_id в уникальном индексе",
+        "Только если одновременно выполняется CREATE INDEX CONCURRENTLY"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Менять можно столбцы вне индексных ключей, и новая tuple должна остаться на той же странице. Смена ключа индекса ломает HOT. Построение индекса в той же транзакции условием HOT не является."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Зачем checkpoint_timeout и max_wal_size?",
+      "options": [
+        "Чтобы управлять частотой контрольных точек и объёмом неотработанного WAL",
+        "Чтобы задать размер heap-страницы 8 КБ на лету",
+        "Чтобы включить GIN",
+        "Чтобы заменить pg_stat_activity"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Оба параметра влияют, как часто сбрасывают грязные буферы и сколько WAL накопить. BLCKSZ при этом фиксирован со сборки. Мониторинг сессий — отдельные представления."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Индекс student на SSD, архив оценок на HDD. Какой DDL уместен?",
+      "options": [
+        "SET shared_buffers TO '/mnt/ssd'",
+        "CREATE EXTENSION tablespace",
+        "CREATE INDEX ... TABLESPACE fast_ssd и ALTER TABLE archive SET TABLESPACE slow_hdd",
+        "ALTER SYSTEM SET wal_level = tablespace"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Tablespace как раз разделяет файлы по дискам. shared_buffers — объём RAM, не путь. wal_level принимает minimal/replica/logical."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "Большой комментарий text в строке оценки, скорее всего:",
+      "options": [
+        "Всегда лежит целиком в 8 КБ heap без исключений",
+        "Будет сжат и/или вынесен в TOAST (EXTENDED)",
+        "Попадёт в pg_wal как единственное хранилище",
+        "Требует отдельного tablespace на столбец автоматически"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Значения выше порога уходят в TOAST-таблицу, в heap остаётся указатель. Журнал пишет изменения, но не заменяет хранение. Tablespace на атрибут сам не создаётся."
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "question": "Нечёткий поиск фамилии студента LIKE '%иван%' ускоряют:",
+      "options": [
+        "Обычный B-tree по last_name для ведущего %",
+        "Расширение pg_trgm и GIN/GiST по триграммам",
+        "BRIN по uuid",
+        "Hash-индекс только по равенству id"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "B-tree не помогает шаблону с ведущим %. Триграммы pg_trgm как раз для подстроки и similarity. BRIN и hash здесь не про текстовый паттерн."
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "question": "pg_stat_statements требует:",
+      "options": [
+        "Только CREATE EXTENSION, без перезапуска, всегда достаточно",
+        "shared_preload_libraries = 'pg_stat_statements' и перезапуск, плюс CREATE EXTENSION в базе",
+        "wal_level = minimal обязательно",
+        "Отключения autovacuum"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Хуки сбора ставят в preload. Расширение создаёт представления в базе. Журнал и vacuum к установке счётчиков не относятся."
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "question": "Visibility map нужна Index-Only Scan, чтобы:",
+      "options": [
+        "Не читать heap, если страница all-visible",
+        "Хранить тексты запросов pg_stat_statements",
+        "Заменить xmin в tuple",
+        "Создавать tablespace"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Индекс не содержит полной MVCC-картины. Карта видимости, которую поддерживает VACUUM, говорит, можно ли доверять индексной записи без heap fetch."
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "question": "wal_level = logical по сравнению с replica:",
+      "options": [
+        "Пишет меньше, чем minimal",
+        "Добавляет информацию для логической репликации поверх уровня replica",
+        "Отключает crash recovery",
+        "Равен отключённому журналу"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Шкала такая: minimal < replica < logical по объёму WAL. Logical нужен подпискам и декодированию изменений. Recovery при этом остаётся."
+    },
+    {
+      "id": "q11",
+      "type": "multi",
+      "question": "Какие компоненты участвуют в пути SELECT? (все верные)",
+      "options": [
+        "backend сессии",
+        "Обязательное сетевое разрешение имени для каждой строки результата",
+        "планировщик по pg_statistic",
+        "shared_buffers / чтение страницы 8 КБ"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Сессия, оптимизатор и буферный менеджер — ядро пути запроса. Строки student с диска или из кэша читает PostgreSQL сам. Сетевой резолв имён к исполнению SQL не нужен."
+    },
+    {
+      "id": "q12",
+      "type": "multi",
+      "question": "Что смотреть, если «база тормозит»? (все верные)",
+      "options": [
+        "pg_stat_activity: долгие запросы и wait_event",
+        "Отключение autovacuum и ANALYZE «чтобы план не менялся»",
+        "pg_stat_statements: топ среднего/суммарного времени",
+        "pg_stat_user_tables: bloat (n_dead_tup) и seq_scan"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Три среза: сейчас, накопленный SQL, здоровье таблиц/индексов. Дальше EXPLAIN ANALYZE и, при необходимости, WAL/checkpoint I/O. Отключать autovacuum из‑за «стабильного плана» нельзя."
+    }
+  ]
+}

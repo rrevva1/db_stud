@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l09-where-order",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Дана таблица student (student_id, last_name):\n1 | Иванов\n2 | Петрова\n3 | Сидоров\n\nЗапрос:\nSELECT last_name\nFROM student\nWHERE last_name LIKE 'и%'\nORDER BY last_name;\n\nЧто вернёт запрос в типичном PostgreSQL курса?",
+      "options": [
+        "Иванов (LIKE игнорирует регистр, как ILIKE)",
+        "Иванов, Петрова, Сидоров (шаблон 'и%' совпадает с любой фамилией)",
+        "Пустой набор: LIKE чувствителен к регистру, 'и%' не совпадает с «Иванов»",
+        "Петрова, Сидоров (все, кто не Иванов)"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "В PostgreSQL LIKE различает регистр: префикс «и» не находит «Иванов». Безрегистровый поиск — ILIKE 'и%' или LOWER(last_name) LIKE 'и%'. Шаблон не означает «любая строка» — для этого был бы '%'."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Чтобы найти фамилии независимо от регистра (иванов и Иванов), в PostgreSQL пишут:",
+      "options": [
+        "WHERE last_name LIKE 'и%' — этого достаточно",
+        "WHERE last_name ILIKE 'и%' (или LOWER(last_name) LIKE 'и%')",
+        "WHERE last_name BETWEEN 'и' AND 'И'",
+        "WHERE last_name IN ('и')"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "ILIKE — безрегистровый аналог LIKE. LIKE сам по себе регистр учитывает. BETWEEN и IN сравнивают значения целиком, а не префикс с шаблоном %."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Нужны студенты без email. Какой предикат верен?",
+      "options": [
+        "WHERE email = NULL",
+        "WHERE email == NULL",
+        "WHERE email = 'NULL'",
+        "WHERE email IS NULL"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Сравнение = NULL даёт UNKNOWN, строка отфильтровывается. Правильная проверка отсутствия — IS NULL / IS NOT NULL. 'NULL' — обычная строка из четырёх букв. Оператора == в SQL нет."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "WHERE last_name LIKE 'И%' OR last_name LIKE 'П%' AND birth_date >= '2004-01-01' опасно тем, что:",
+      "options": [
+        "OR в PostgreSQL запрещён вместе с LIKE",
+        "AND связывается сильнее OR: без скобок условие читается не как «(И или П) и дата»",
+        "LIKE нельзя комбинировать с датами",
+        "AND всегда вычисляется после OR, скобки ничего не меняют"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Приоритет: NOT → AND → OR. Без скобок получится «И% или (П% и дата)». Нужно WHERE (last_name LIKE 'И%' OR last_name LIKE 'П%') AND birth_date >= .... LIKE с датой в одном WHERE допустим — это разные столбцы."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие шаблоны LIKE верны? Выберите все верные.",
+      "options": [
+        "'И%' — фамилия начинается с «И» (Иванов)",
+        "'%ов' — фамилия оканчивается на «ов»",
+        "'И%' в PostgreSQL всегда находит и «иванов», и «Иванов»",
+        "'_' — ровно один любой символ, '%ан%' — содержит «ан»"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "% — любая последовательность, _ — один символ. Регистр LIKE не складывает: «иванов» шаблоном 'И%' не возьмётся. Для регистра — ILIKE. Символы % и _ как литералы экранируют ESCAPE."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "ORDER BY last_name ASC, first_name DESC в PostgreSQL:",
+      "options": [
+        "Сортирует только по first_name, last_name игнорируется",
+        "Запрещён: в ORDER BY можно указать один столбец",
+        "Сначала фамилия по возрастанию, внутри одинаковых фамилий — имя по убыванию; NULL при ASC обычно в конце",
+        "Всегда ставит NULL первыми независимо от ASC/DESC"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Несколько ключей сортировки применяются слева направо. По умолчанию в PostgreSQL NULLS LAST при ASC. Явно можно написать NULLS FIRST/LAST. Несколько столбцов в ORDER BY разрешены."
+    }
+  ]
+}

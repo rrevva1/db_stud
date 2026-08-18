@@ -1,0 +1,84 @@
+{
+  "lessonId": "p7-l02-roles",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Что такое ROLE в PostgreSQL?",
+      "options": [
+        "Только суперпользователь с правом BYPASSRLS",
+        "Учётная запись или группа, которой выдают привилегии",
+        "Синоним схемы public и владельца таблиц",
+        "Метод аутентификации в pg_hba.conf"
+      ],
+      "correct": [1],
+      "explanation": "ROLE объединяет пользователей и группы: LOGIN-роли входят в систему, NOLOGIN — как группы. Привилегии выдаются GRANT и отзываются REVOKE. Это не метод HBA и не замена схемы."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Какой минимальный набор нужен роли analyst, чтобы читать public.student?",
+      "options": [
+        "Только GRANT SELECT ON TABLE — USAGE на схему не нужен",
+        "Только CONNECT к базе, без прав на схему и таблицу",
+        "CONNECT к БД, USAGE на схему и SELECT на таблицу",
+        "TRUNCATE и TRIGGER вместо SELECT"
+      ],
+      "correct": [2],
+      "explanation": "Цепочка доступа: подключение к базе, USAGE на схему (иначе объекты не видны), затем SELECT на таблицу. Одного SELECT без USAGE недостаточно. TRUNCATE и TRIGGER — другие привилегии, для чтения не требуются."
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "question": "Какие действия соответствуют принципу наименьших привилегий? (все верные)",
+      "options": [
+        "Приложению — только нужные DML, не superuser",
+        "GRANT ALL ON DATABASE … TO PUBLIC для удобства",
+        "Отдельная DBA-роль, не смешанная с app-ролью",
+        "REVOKE лишних INSERT/DELETE после аудита прав"
+      ],
+      "correct": [0, 2, 3],
+      "explanation": "Least privilege: минимум прав для задачи, разделение app и DBA, отзыв лишнего. GRANT ALL TO PUBLIC расширяет поверхность атаки. Superuser в строке подключения приложения — типичная ошибка эксплуатации."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Что делает GRANT analyst TO user_ivan?",
+      "options": [
+        "Копирует пароль analyst в user_ivan",
+        "Даёт user_ivan право DROP DATABASE",
+        "Создаёт схему analyst, принадлежащую user_ivan",
+        "Включает user_ivan в роль-группу analyst (membership)"
+      ],
+      "correct": [3],
+      "explanation": "GRANT роль TO роль — членство в группе: user_ivan наследует привилегии analyst (с учётом INHERIT). Пароль, DROP DATABASE и владение схемой из этой команды не следуют."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Зачем нужен ALTER DEFAULT PRIVILEGES?",
+      "options": [
+        "Чтобы отозвать CONNECT у всех существующих ролей",
+        "Чтобы будущие таблицы сразу получали заданные GRANT",
+        "Чтобы заменить pg_hba.conf правилами GRANT",
+        "Чтобы включить RLS на всех таблицах кластера"
+      ],
+      "correct": [1],
+      "explanation": "DEFAULT PRIVILEGES задают права на объекты, которые ещё будут созданы (например SELECT для analyst на новые таблицы). Уже существующие объекты это не меняет задним числом. HBA и RLS настраиваются отдельно."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие привилегии относятся к объектам таблиц? (все верные)",
+      "options": [
+        "SELECT и INSERT",
+        "UPDATE и DELETE",
+        "wal_level=replica как право роли",
+        "REFERENCES и TRUNCATE"
+      ],
+      "correct": [0, 1, 3],
+      "explanation": "На таблицу выдаются SELECT, INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER. wal_level — параметр сервера для WAL/репликации, а не объектная привилегия GRANT. USAGE чаще связывают со схемами и последовательностями."
+    }
+  ]
+}

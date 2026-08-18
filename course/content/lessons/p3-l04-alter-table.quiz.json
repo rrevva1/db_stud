@@ -1,0 +1,97 @@
+{
+  "lessonId": "p3-l04-alter-table",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "ALTER TABLE student ADD COLUMN email VARCHAR(100); без DEFAULT. Что окажется в email у уже существующих строк?",
+      "options": [
+        "Пустая строка '' во всех старых строках",
+        "NULL во всех уже существующих строках",
+        "Команда не выполнится, пока не задан DEFAULT",
+        "Значение скопируется из last_name"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Новый столбец без DEFAULT заполняется NULL в старых строках. Пустая строка сама не подставляется. DEFAULT нужен, если хотите конкретное значение или сразу NOT NULL на непустой таблице."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Зачем в ALTER COLUMN ... TYPE VARCHAR(10) указывают USING code::VARCHAR?",
+      "options": [
+        "USING обязателен всегда, даже при INTEGER → BIGINT",
+        "USING создаёт индекс по столбцу после смены типа",
+        "USING переименовывает столбец одновременно со сменой типа",
+        "USING задаёт выражение преобразования, если типы несовместимы напрямую"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "PostgreSQL не всегда умеет неявно привести старые значения к новому типу. USING задаёт правило вроде code::VARCHAR. Совместимые расширения (INTEGER→BIGINT) часто проходят без USING. Это не индекс и не RENAME."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "ALTER TABLE student ALTER COLUMN email SET NOT NULL завершится ошибкой, если:",
+      "options": [
+        "Хотя бы в одной строке email уже NULL",
+        "На email нет индекса",
+        "Таблица student пустая",
+        "Столбец объявлен как TEXT, а не VARCHAR"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "NOT NULL нельзя повесить, пока в таблице есть NULL. Сначала UPDATE заполняет пропуски, затем SET NOT NULL. Пустая таблица как раз не мешает. Тип TEXT/VARCHAR и наличие индекса на это ограничение не влияют."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "ALTER TABLE student DROP COLUMN phone; что происходит с данными столбца?",
+      "options": [
+        "Столбец скрывается, данные остаются и возвращаются ADD COLUMN phone",
+        "Данные копируются в служебную таблицу pg_dropped",
+        "Столбец и его значения удаляются; без резервной копии это необратимо",
+        "Удаляются только NULL, заполненные номера сохраняются"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "DROP COLUMN убирает атрибут из таблицы. Повторный ADD COLUMN создаст новый пустой (NULL) столбец, старые номера не «воскреснут». Нужна резервная копия или транзакция, если ещё можно ROLLBACK."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие изменения структуры делает ALTER TABLE? Выберите все верные.",
+      "options": [
+        "ADD CONSTRAINT UNIQUE (email)",
+        "CREATE DATABASE university",
+        "RENAME COLUMN fname TO first_name",
+        "INSERT INTO student VALUES (...)"
+      ],
+      "correct": [
+        0,
+        2
+      ],
+      "explanation": "ALTER TABLE меняет схему: столбцы, типы, ограничения, имена. CREATE DATABASE создаёт базу, INSERT — DML, данные, а не структуру. Переименование таблицы тоже делается через ALTER TABLE ... RENAME TO."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "ALTER TABLE old_students RENAME TO student_archive переименует:",
+      "options": [
+        "Только столбец old_students, таблица останется",
+        "Саму таблицу; строки данных сохранятся под новым именем",
+        "Схему university в student_archive",
+        "Все внешние ключи в NULL"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "RENAME TO меняет имя отношения, кортежи остаются. Это не переименование столбца (для столбца — RENAME COLUMN) и не смена схемы. Внешние ключи, ссылающиеся на таблицу, продолжают указывать на тот же объект."
+    }
+  ]
+}

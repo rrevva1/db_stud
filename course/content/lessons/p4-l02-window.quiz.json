@@ -1,0 +1,98 @@
+{
+  "lessonId": "p4-l02-window",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Чем оконная функция отличается от агрегата с GROUP BY?",
+      "options": [
+        "Оконная функция всегда требует HAVING",
+        "GROUP BY сохраняет все строки, а окно схлопывает их в одну",
+        "Окно считает по связанным строкам, но каждая исходная строка остаётся в результате",
+        "Оконные функции в PostgreSQL работают только без PARTITION BY"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "OVER задаёт набор связанных строк, но не группирует результат: детализация сохраняется. GROUP BY, наоборот, сворачивает строки группы в одну. HAVING к оконным функциям не относится."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Дана таблица performance (оценки одного студента):\n\ngrade\n-----\n5\n5\n4\n\nЧто вернёт RANK() OVER (ORDER BY grade DESC)?",
+      "options": [
+        "5 → 1, 5 → 2, 4 → 3, как у ROW_NUMBER",
+        "5 → 1, 5 → 1, 4 → 3: при равенстве ранг общий, следующий номер пропускается",
+        "5 → 1, 5 → 1, 4 → 2: это поведение DENSE_RANK, а не RANK",
+        "5 → 1, 5 → 1, 4 → 1: без PARTITION BY все строки получают ранг 1"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "RANK при ничьей ставит одинаковый номер и пропускает следующие значения: две пятёрки получают 1, четвёрка — 3. ROW_NUMBER дал бы 1 и 2, DENSE_RANK — 1 и 2 для следующей отличной оценки. PARTITION BY здесь не обязателен."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Какая рамка окна по умолчанию, если в OVER указан ORDER BY?",
+      "options": [
+        "ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING",
+        "ROWS BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING",
+        "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+        "RANGE BETWEEN CURRENT ROW AND CURRENT ROW"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "При наличии ORDER BY PostgreSQL по умолчанию берёт RANGE от начала раздела до текущей строки. Поэтому накопительная SUM растёт по порядку. Без ORDER BY рамка — все строки раздела."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Для чего нужны LAG и LEAD в запросе к performance?",
+      "options": [
+        "Взять значение оценки предыдущей или следующей строки в заданном порядке",
+        "Заменить GROUP BY при подсчёте среднего балла группы",
+        "Создать рекурсивный CTE по student_id",
+        "Превратить строки семестров в столбцы (pivot)"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "LAG смотрит назад, LEAD — вперёд по ORDER BY окна. Это смещение по строкам, а не группировка, рекурсия или сводная таблица. Типичный пример — сравнить текущую оценку с предыдущей."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Чем ROWS отличается от RANGE в frame clause?",
+      "options": [
+        "ROWS считает логический диапазон значений ORDER BY, RANGE — физические строки",
+        "RANGE в PostgreSQL запрещён вместе с PARTITION BY",
+        "ROWS всегда требует UNBOUNDED FOLLOWING",
+        "ROWS считает физические строки, RANGE — логический диапазон по значению ORDER BY"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "ROWS BETWEEN 1 PRECEDING AND CURRENT ROW берёт соседние строки кадра. RANGE объединяет строки с одинаковым значением ключа сортировки. Выбор влияет на скользящие агрегаты при ничьих."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие функции относятся к оконным ранжирующим? (все верные)",
+      "options": [
+        "ROW_NUMBER()",
+        "COUNT(*) без OVER — тоже оконная функция",
+        "DENSE_RANK()",
+        "RANK()"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "ROW_NUMBER, RANK и DENSE_RANK — стандартные оконные ранжирующие функции. Обычный COUNT(*) без OVER — агрегат GROUP BY, он не нумерует строки внутри окна."
+    }
+  ]
+}

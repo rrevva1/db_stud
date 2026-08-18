@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l19-case-when",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Дан мини-набор:\nstudent: (1,'Иванов'), (2,'Петрова'), (3,'Сидоров')\nperformance: (1,5), (2,3) — у Сидорова нет оценки.\n\nSELECT s.last_name,\n  CASE\n    WHEN p.grade = 5 THEN 'отлично'\n    WHEN p.grade >= 3 THEN 'зачёт'\n    ELSE 'нет оценки'\n  END AS mark\nFROM student s\nLEFT JOIN performance p ON p.student_id = s.student_id\nORDER BY s.last_name;\n\nЧто вернёт запрос?",
+      "options": [
+        "Иванов—отлично, Петрова—зачёт (Сидоров отброшен INNER JOIN)",
+        "Иванов—отлично, Петрова—зачёт, Сидоров—NULL в mark",
+        "Иванов—отлично, Петрова—зачёт, Сидоров—нет оценки (NULL не равен 5 и не >= 3, срабатывает ELSE)",
+        "Всем трём «нет оценки», потому что CASE запрещён с JOIN"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "LEFT JOIN сохраняет Сидорова с grade NULL. Сравнения с NULL неизвестны, обе WHEN ложны, срабатывает ELSE. Иванов проходит первую ветку, Петрова — вторую. Без ELSE у Сидорова был бы NULL в mark, а не «нет оценки»."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Если в CASE WHEN grade = 5 THEN 'отлично' WHEN grade = 4 THEN 'хорошо' нет ELSE, то grade = 2 даст:",
+      "options": [
+        "NULL в вычисляемом столбце — «тихий хвост» без метки",
+        "Автоматически 'хорошо' как ближайшая ветка",
+        "Ошибку выполнения",
+        "Пустую строку ''"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Без ELSE несовпавшее значение становится NULL. Курс требует продумывать ELSE, иначе хвост классификации теряется. Это не ошибка синтаксиса и не автоподбор соседней ветки."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "SELECT CASE WHEN birth_date >= '2004-01-01' THEN 'младше' ELSE 'старше' END AS age_band FROM student WHERE age_band = 'младше'; почему не сработает?",
+      "options": [
+        "CASE нельзя использовать в SELECT, только в WHERE",
+        "Сравнение дат в CASE запрещено",
+        "Алиас age_band появляется на шаге SELECT, позже WHERE; в WHERE того же запроса его нет",
+        "Нужно писать WHERE age_band == 'младше' с двойным равенством"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "WHERE выполняется до SELECT. Повторите выражение CASE в WHERE, оберните запрос в подзапрос/CTE и фильтруйте снаружи. Оператора == в SQL нет."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "AVG(grade)::numeric(4,2) и CAST(birth_date AS TIMESTAMP) — это:",
+      "options": [
+        "Два способа GROUP BY",
+        "Комментарии для планировщика",
+        "Синонимы CHECK-ограничений",
+        "Приведение типов: оператор :: и функция CAST"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": ":: — принятая в PostgreSQL краткая запись CAST. На группировку и CHECK это не влияет. Нужно, когда среднее должно быть точным NUMERIC или дата становится меткой времени."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие приёмы CASE верны? Выберите все верные.",
+      "options": [
+        "COUNT(CASE WHEN grade = 5 THEN 1 END) считает пятёрки",
+        "Алиас столбца CASE можно писать в WHERE того же SELECT без подзапроса",
+        "Простая форма: CASE grade WHEN 5 THEN 'A' WHEN 4 THEN 'B' ELSE 'C' END",
+        "CASE — классификатор (метка курса/риска), не только перевод оценки в слово"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Условный агрегат считает подмножество без отдельного FILTER, хотя FILTER тоже есть в PostgreSQL. Простая и поисковая формы CASE равноправны. Алиас в WHERE того же уровня недоступен — нужен подзапрос."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "Чем COALESCE(email, 'нет') отличается от CASE?",
+      "options": [
+        "COALESCE работает только в триггерах",
+        "COALESCE — частный случай подмены NULL; CASE выражает произвольные ветки",
+        "CASE не умеет проверять IS NULL",
+        "Разницы нет: это полные синонимы"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "COALESCE(a,b) ≡ CASE WHEN a IS NOT NULL THEN a ELSE b END для двух аргументов. Для шкалы оценок, диапазонов дат и нескольких меток нужен полный CASE. Оба допустимы в обычном SELECT."
+    }
+  ]
+}

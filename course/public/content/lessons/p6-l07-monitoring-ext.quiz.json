@@ -1,0 +1,98 @@
+{
+  "lessonId": "p6-l07-monitoring-ext",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Какое представление показывает активные сессии, query и wait_event?",
+      "options": [
+        "pg_ts_dict",
+        "pg_tablespace",
+        "pg_stat_activity",
+        "information_schema.views"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "pg_stat_activity — главный взгляд на «кто что делает сейчас»: pid, usename, state, длительность, ожидание. Отсюда начинают поиск зависших запросов к student/performance."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Как найти долгие не-idle запросы?",
+      "options": [
+        "SELECT * FROM pg_available_extensions WHERE name = 'idle'",
+        "SELECT pid, now()-query_start, query FROM pg_stat_activity WHERE state <> 'idle' ORDER BY 2 DESC",
+        "SELECT * FROM pg_stat_activity WHERE state = 'idle' AND query IS NULL",
+        "DROP INDEX CONCURRENTLY на все таблицы"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Фильтр state <> 'idle' отсекает простаивающие сессии. Сортировка по длительности показывает кандидатов на EXPLAIN и pg_cancel_backend. Список расширений и idle-сессии эту задачу не решают."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "pg_locks совместно с pg_stat_activity помогают:",
+      "options": [
+        "Создать GIN по jsonb",
+        "Сменить wal_level",
+        "Включить TOAST PLAIN",
+        "Диагностировать ожидания блокировок и тупики"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Join по pid показывает, кто держит замок и кто ждёт. Это путь к deadlock и к долгим транзакциям, не отпускающим строки performance. К индексам и WAL представление не привязано."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Если в pg_stat_user_tables seq_scan огромный, а idx_scan почти ноль, это намёк:",
+      "options": [
+        "Запросы читают таблицу целиком: возможно, нет подходящего индекса или он не выбирается",
+        "Что WAL отключён",
+        "Что TOAST сломан",
+        "Что postmaster не запущен, но запросы идут"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Счётчики seq_scan/idx_scan отражают, каким сканом ходили. Дальше смотрят EXPLAIN и селективность. Работающий postmaster при этом уже есть — иначе не было бы статистики пользовательских таблиц."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Запрос к pg_stat_statements ORDER BY mean_exec_time DESC показывает:",
+      "options": [
+        "Только текущий backend, как activity",
+        "Самые «дорогие в среднем» нормализованные SQL, а не разовую сессию",
+        "Список tablespace",
+        "Содержимое каждой heap-страницы"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Это агрегат по тексту запроса за время жизни счётчиков. Для «кто прямо сейчас» — activity. Дальше берут конкретный SQL в EXPLAIN ANALYZE."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие источники мониторинга PostgreSQL стоит сочетать? (все верные)",
+      "options": [
+        "pg_stat_activity — живые сессии и wait_event",
+        "Только \\timing в psql без представлений статистики",
+        "pg_stat_statements — топ накопленного времени SQL",
+        "pg_stat_user_tables — seq/idx scan, n_dead_tup, autovacuum"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Сессии, агрегированные запросы и здоровье таблиц закрывают разные срезы. Дополнительно смотрят pg_stat_bgwriter и при необходимости pg_buffercache. Одного \\timing недостаточно для кластера."
+    }
+  ]
+}

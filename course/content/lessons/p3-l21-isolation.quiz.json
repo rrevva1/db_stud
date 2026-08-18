@@ -1,0 +1,97 @@
+{
+  "lessonId": "p3-l21-isolation",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Уровень изоляции по умолчанию в PostgreSQL:",
+      "options": [
+        "SERIALIZABLE — иначе OLTP не запускается",
+        "READ COMMITTED",
+        "READ UNCOMMITTED как отдельный реально более слабый режим",
+        "REPEATABLE READ для всех сессий кластера навсегда"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "По умолчанию READ COMMITTED: каждая команда видит последний зафиксированный снимок. READ UNCOMMITTED в PostgreSQL ведёт себя как READ COMMITTED (грязного чтения нет). Более строгие уровни задают явно."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Dirty read — это:",
+      "options": [
+        "Повторный SELECT в той же транзакции видит другую зафиксированную строку",
+        "Появление новой строки, подходящей под WHERE, при повторе запроса",
+        "Чтение страницы с диска, не из кэша",
+        "Чтение ещё не зафиксированных изменений чужой транзакции"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Грязное чтение — данные, которые автор ещё может откатить. В PostgreSQL его нет даже на «READ UNCOMMITTED». Non-repeatable — другое значение уже после чужого COMMIT. Phantom — новые строки множества."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Phantom read проявляется как:",
+      "options": [
+        "При повторном запросе появляются (или исчезают) строки, удовлетворяющие тому же предикату",
+        "Чтение значения, которое другая транзакция ещё не закоммитила",
+        "Обязательный сбой SERIALIZABLE",
+        "Потерянный UPDATE без конкурентов"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Фантом — изменение состава множества, не одной уже прочитанной ячейки. На READ COMMITTED это возможно. REPEATABLE READ в PostgreSQL держит снимок и для большинства случаев закрывает фантомы. SERIALIZABLE ещё строже к аномалиям записи."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Сессия в REPEATABLE READ дважды делает SELECT AVG(grade) FROM performance, между ними другая сессия вставила оценку и COMMIT. Второй AVG в первой сессии:",
+      "options": [
+        "Обязательно упадёт с deadlock",
+        "Увидит новую оценку, как READ COMMITTED",
+        "Останется прежним: снимок транзакции не включает чужой COMMIT после первого чтения",
+        "Превратится в DELETE оценок"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "REPEATABLE READ берёт снимок. Повторный агрегат стабилен до COMMIT/ROLLBACK своей транзакции. READ COMMITTED подхватил бы новую строку на втором операторе. Это свойство удобно для согласованных отчётов."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Как выбрать уровень изоляции? Выберите все верные.",
+      "options": [
+        "READ COMMITTED всегда запрещён для OLTP",
+        "OLTP по умолчанию — READ COMMITTED",
+        "SERIALIZABLE исключает любые ROLLBACK",
+        "Критичные согласованные расчёты — SERIALIZABLE (возможны serialization failure и повтор)"
+      ],
+      "correct": [
+        1,
+        3
+      ],
+      "explanation": "Типичный OLTP живёт на READ COMMITTED. Отчёт со стабильным снимком — REPEATABLE READ. SERIALIZABLE сильнее, но транзакцию могут оборвать: приложение повторяет блок. Это не запрет RC и не отсутствие откатов."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "SET TRANSACTION ISOLATION LEVEL действует:",
+      "options": [
+        "На весь кластер до перезагрузки postmaster",
+        "Только на следующий SELECT, DML игнорируется",
+        "На текущую транзакцию (команду задают до первого оператора блока)",
+        "Только если таблица student пустая"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Уровень задают в начале транзакции: BEGIN ISOLATION LEVEL ... или SET TRANSACTION сразу после BEGIN. Это не кластерный GUC навсегда (для сессии есть default_transaction_isolation). Наполнение таблицы ни при чём."
+    }
+  ]
+}

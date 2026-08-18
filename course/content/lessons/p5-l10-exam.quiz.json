@@ -1,0 +1,190 @@
+{
+  "lessonId": "p5-l10-exam",
+  "passingScore": 75,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Индекс по умолчанию для WHERE student.email = $1 — это:",
+      "options": [
+        "GIN",
+        "B-tree",
+        "BRIN",
+        "GiST"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Равенство скаляра закрывает B-tree, его CREATE INDEX строит по умолчанию. GIN нужен составным типам, BRIN — большим коррелированным таблицам, GiST — диапазонам и гео."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Составной индекс (group_id, last_name) на student скорее всего НЕ поможет запросу:",
+      "options": [
+        "WHERE group_id = 10",
+        "WHERE group_id = 10 AND last_name = 'Иванов'",
+        "WHERE last_name = 'Иванов' без условия по group_id",
+        "ORDER BY group_id, last_name"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Работает левый префикс. Поиск только по второму столбцу в PostgreSQL этим B-tree обычно не идёт. Равенство по group_id и сортировка по обоим столбцам — как раз его зона."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Для payload jsonb @> '{\"course\":\"БД\"}' уместен:",
+      "options": [
+        "HASH по всей строке таблицы",
+        "GIN по payload (часто jsonb_path_ops)",
+        "BRIN по случайному UUID",
+        "B-tree по jsonb без операторного класса"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Содержимое JSON ищет GIN. Hash по строке и BRIN по неупорядоченному UUID условие @> не ускорят. Обычный B-tree по jsonb для containment не предназначен."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "EXPLAIN без ANALYZE показывает:",
+      "options": [
+        "Фактическое время и actual rows",
+        "Только выбранный план и оценочные cost/rows, запрос не выполняется",
+        "Содержимое shared_buffers поблочно",
+        "Текст WAL redo"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Без ANALYZE это дешёвая оценка. actual time появляется только после реального выполнения. Буферы смотрят опцией BUFFERS, журнал — другими инструментами."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "После COPY миллионов строк в performance планировщик выбирает плохой Nested Loop. Что сделать первым?",
+      "options": [
+        "ANALYZE performance",
+        "DROP DATABASE",
+        "SET wal_level = minimal в сессии пользователя",
+        "Удалить PRIMARY KEY"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Массовая загрузка устаревает pg_statistic. ANALYZE возвращает адекватные rows. Ломать ключи и WAL из‑за одного плана не нужно."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "RANGE-секция FOR VALUES FROM ('2024-01-01') TO ('2024-02-01') содержит дату:",
+      "options": [
+        "2024-01-01 включительно и 2024-02-01 исключительно (полуинтервал)",
+        "Обе границы включительно всегда",
+        "Только 2024-02-01",
+        "Любую дату 2024 года"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "В RANGE верхняя граница не входит: 1 февраля уйдёт в следующую секцию. Это важно при создании помесячных секций оценок или логов."
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "question": "Обычный VACUUM по часто обновляемой performance нужен, чтобы:",
+      "options": [
+        "Переписать таблицу с эксклюзивной блокировкой, как FULL",
+        "Пометить dead tuples и обновить visibility map, не останавливая обычную работу",
+        "Отключить MVCC",
+        "Создать GIN по grade"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "MVCC оставляет мёртвые версии; VACUUM возвращает место для новых строк и помогает Index-Only Scan. FULL — тяжёлая перепись. Тип индекса VACUUM не выбирает."
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "question": "Безопасная подстановка id студента в динамический SQL:",
+      "options": [
+        "EXECUTE 'SELECT * FROM student WHERE id = ' || p_id",
+        "EXECUTE 'SELECT * FROM student WHERE id = $1' USING p_id",
+        "format('... id = %s', p_id) без кавычек и проверки",
+        "Конкатенация с кавычками вокруг p_id::text"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "USING передаёт значение отдельно от текста. Склейка и сырой %s открывают инъекцию или ошибки приведения. Для идентификаторов таблиц нужны %I и whitelist."
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "question": "INCLUDE (grade) у индекса по student_id нужен для:",
+      "options": [
+        "Покрывающего Index-Only Scan запросов, которые читают grade, не добавляя его в ключ",
+        "Обязательной сортировки по grade",
+        "Превращения B-tree в GIN",
+        "Замены ANALYZE"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Неключевые столбцы INCLUDE попадают в индексную запись и позволяют не ходить в heap, если страница видна. Порядок ключа не меняется. Статистику INCLUDE не собирает."
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "question": "Hash Join в плане обычно выбирают, когда:",
+      "options": [
+        "Есть равенство и внутреннюю сторону можно захешировать в work_mem",
+        "Нужен поиск ближайшего соседа по GiST",
+        "Запрос содержит только ORDER BY без соединения",
+        "Таблица обязательно секционирована HASH"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Hash Join строит хеш меньшей стороны по ключу равенства. Это не kNN и не сортировка без join. Секционирование HASH — про хранение, не про узел плана."
+    },
+    {
+      "id": "q11",
+      "type": "multi",
+      "question": "Какие настройки/объекты связаны с динамическим SQL безопасно? (все верные)",
+      "options": [
+        "Whitelist столбцов ORDER BY",
+        "EXECUTE ... USING",
+        "Прямая склейка '|| user_input' в WHERE",
+        "SET search_path в SECURITY DEFINER"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Имена проверяют списком, значения передают параметрами, definer-функции фиксируют search_path. Конкатенация ввода — уязвимость, а не защита."
+    },
+    {
+      "id": "q12",
+      "type": "multi",
+      "question": "Что помогает найти причину медленного SELECT по performance? (все верные)",
+      "options": [
+        "EXPLAIN (ANALYZE, BUFFERS)",
+        "SET default_statistics_target = 0 навсегда, чтобы «заморозить» план",
+        "pg_stat_statements по total/mean time",
+        "Сравнение n_dead_tup и last_autovacuum"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "План, топ запросов и bloat/autovacuum — рабочий чеклист. Обнулять default_statistics_target нельзя: оценки rows станут хуже. Дальше правят SQL и индексы."
+    }
+  ]
+}

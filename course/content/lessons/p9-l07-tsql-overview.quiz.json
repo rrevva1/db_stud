@@ -1,0 +1,100 @@
+{
+  "lessonId": "p9-l07-tsql-overview",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Как в T-SQL обычно ограничивают выборку первыми N строками по сравнению с PostgreSQL?",
+      "options": [
+        "В обоих диалектах только LIMIT, TOP не существует",
+        "PostgreSQL: SELECT TOP 10; T-SQL: только LIMIT",
+        "T-SQL: SELECT TOP 10 …; PostgreSQL: LIMIT 10 (или FETCH)",
+        "Оба требуют Cypher MATCH вместо SELECT"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Классический маркер диалекта: TOP у SQL Server, LIMIT у PostgreSQL. Современный T-SQL также умеет OFFSET/FETCH. Это не графовый язык и не отсутствие TOP в стандарте Microsoft."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Чем конкатенация строк в T-SQL отличается от PostgreSQL?",
+      "options": [
+        "В T-SQL 'a' + 'b'; в PostgreSQL чаще 'a' || 'b' или concat()",
+        "В обоих только оператор + как в C#",
+        "В PostgreSQL запрещена любая склейка строк",
+        "В T-SQL строки склеивает только MERGE"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Плюс в T-SQL — конкатенация (и арифметика для чисел). В PostgreSQL + для varchar не тот же оператор: берут ||. Путаница даёт ошибку или неожиданный тип — типичный перенос кода между диалектами."
+    },
+    {
+      "id": "q3",
+      "type": "multi",
+      "question": "Какие пары диалектов верны? (все верные)",
+      "options": [
+        "GO ↔ обязательный оператор VACUUM FULL",
+        "IDENTITY(1,1) ↔ SERIAL / GENERATED AS IDENTITY",
+        "BIT ↔ BOOLEAN (семантика «флага» разная по строгости)",
+        "GETDATE() ↔ now() / CURRENT_TIMESTAMP"
+      ],
+      "correct": [
+        1,
+        2,
+        3
+      ],
+      "explanation": "Таблица урока: автоинкремент, булев/бит, текущая дата. GO — разделитель пакета SSMS, не SQL-оператор PostgreSQL и не vacuum. Схемы по умолчанию: dbo vs public."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "Что такое GO в скриптах SQL Server?",
+      "options": [
+        "Синоним COMMIT в PostgreSQL",
+        "Разделитель пакетов клиентских инструментов (SSMS), не часть языка запросов PG",
+        "Обязательная замена точки с запятой внутри одного батча",
+        "Команда logical replication"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "GO режет скрипт на batches на стороне клиента. PostgreSQL такого разделителя не понимает: там транзакции и ; / блоки DO. Путать GO с COMMIT опасно при переносе скриптов."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "Как объявляют переменную в T-SQL по сравнению с PL/pgSQL?",
+      "options": [
+        "Переменные есть только в Cypher",
+        "В обоих диалектах только @x на верхнем уровне сессии без DECLARE",
+        "В PostgreSQL переменные пишут как @x, в T-SQL — без префикса",
+        "T-SQL: DECLARE @x INT = 5; PostgreSQL: в блоке DO/функции DECLARE x int := 5"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Префикс @ и пакетный DECLARE — стиль T-SQL. В PostgreSQL анонимный код оборачивают в DO $$ … $$ или в процедуру. Это не синтаксис графовых запросов."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие утверждения о пагинации верны? (все верные)",
+      "options": [
+        "T-SQL: OFFSET n ROWS FETCH NEXT m ROWS ONLY",
+        "TOP 10 OFFSET полностью заменяет ключи и ORDER BY",
+        "PostgreSQL: LIMIT m OFFSET n",
+        "Обе формы задают «пропустить n, взять m»"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "Без ORDER BY «первые N» недетерминированы в обоих диалектах. OFFSET/FETCH в T-SQL близок к LIMIT/OFFSET. TOP сам по себе не определяет стабильную страницу без сортировки."
+    }
+  ]
+}

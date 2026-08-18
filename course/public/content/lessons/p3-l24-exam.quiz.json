@@ -1,0 +1,190 @@
+{
+  "lessonId": "p3-l24-exam",
+  "passingScore": 75,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "Дан мини-набор:\nstudent: (1,'Иванов'), (2,'Петрова'), (3,'Сидоров')\ns_group: (1,'ИВТ-21'), (2,'ПИ-22')\nstudent_in_group: (1,1), (2,1)\n\nSELECT s.last_name, g.name\nFROM student s\nINNER JOIN student_in_group sig ON sig.student_id = s.student_id\nINNER JOIN s_group g ON g.group_id = sig.group_id\nORDER BY s.last_name;\n\nЧто вернёт запрос?",
+      "options": [
+        "Иванов—ИВТ-21, Петрова—ИВТ-21, Сидоров—NULL, ПИ-22—NULL",
+        "Иванов—ИВТ-21, Петрова—ИВТ-21 (Сидоров и пустая ПИ-22 отброшены)",
+        "Три фамилии без названий групп",
+        "Шесть строк декартова произведения"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "INNER JOIN требует совпадения ключей. Связаны только Иванов и Петрова с ИВТ-21. Сидоров без student_in_group и группа ПИ-22 без студентов в результат не входят. NULL-сироты дал бы LEFT/FULL, шесть строк — CROSS JOIN."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Тот же мини-набор. performance: (1,5), (2,3).\n\nSELECT s.last_name,\n  CASE\n    WHEN p.grade = 5 THEN 'отлично'\n    WHEN p.grade >= 3 THEN 'зачёт'\n    ELSE 'нет оценки'\n  END AS mark\nFROM student s\nLEFT JOIN performance p ON p.student_id = s.student_id\nORDER BY s.last_name;\n\nЧто вернёт запрос?",
+      "options": [
+        "Только Иванов—отлично, Петрова—зачёт",
+        "Всем «нет оценки», потому что ELSE перекрывает WHEN",
+        "Иванов—отлично, Петрова—зачёт, Сидоров—нет оценки",
+        "Сидоров—отлично (LEFT JOIN подставляет чужую пятёрку)"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "LEFT JOIN оставляет Сидорова с grade NULL. WHEN с NULL не истинны, срабатывает ELSE. Порядок WHEN важен: пятёрка Иванова не доходит до «>= 3». ELSE не перекрывает успешные ветки — он только хвост."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "Студенты без email. Верный предикат в PostgreSQL:",
+      "options": [
+        "WHERE email IS NULL",
+        "WHERE email = NULL",
+        "WHERE email == NULL",
+        "WHERE email = 'NULL'"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Трёхзначная логика: = NULL даёт UNKNOWN, строки пропадают. IS NULL проверяет отсутствие значения. == — не SQL. Строка 'NULL' — четыре символа, не маркер пустоты."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "DELETE FROM performance; без WHERE:",
+      "options": [
+        "Удалит одну случайную оценку",
+        "Вернёт синтаксическую ошибку «нужен WHERE»",
+        "Эквивалентен DROP TABLE performance",
+        "Удалит все строки performance, таблица и ограничения останутся"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "DELETE без предиката опустошает отношение. Структура (столбцы, PK, FK) жива — это не DROP. TRUNCATE тоже чистит всё, но без построчных DELETE-триггеров и без WHERE. Перед массовым DML — SELECT с тем же фильтром и транзакция."
+    },
+    {
+      "id": "q5",
+      "type": "single",
+      "question": "SELECT last_name, AVG(grade) FROM student JOIN performance ... GROUP BY subject_id; типичная ошибка в том, что:",
+      "options": [
+        "JOIN нельзя сочетать с GROUP BY",
+        "last_name не в GROUP BY и не агрегат (в стандартном SQL это ошибка)",
+        "AVG запрещён для целых grade",
+        "subject_id нельзя группировать, только last_name"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "После группировки по предмету фамилия неоднозначна. В SELECT — ключи GROUP BY и агрегаты. AVG(grade) законен. Исключение PostgreSQL по функциональной зависимости от PK здесь не спасает last_name при GROUP BY subject_id."
+    },
+    {
+      "id": "q6",
+      "type": "multi",
+      "question": "Какие команды относятся к DDL? Выберите все верные.",
+      "options": [
+        "CREATE TABLE student (...)",
+        "INSERT INTO student (...)",
+        "ALTER TABLE student ADD COLUMN email VARCHAR(100)",
+        "DROP TABLE student_archive"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "DDL меняет схему: CREATE/ALTER/DROP TABLE (и VIEW, INDEX). INSERT — DML, добавляет кортежи. SELECT — запрос, не определение структуры. Путаница DDL/DML — частая ошибка на контроле."
+    },
+    {
+      "id": "q7",
+      "type": "single",
+      "question": "Отчёт «все группы, включая пустую ПИ-22, и число студентов»:",
+      "options": [
+        "INNER JOIN student_in_group: пустая группа пропадёт",
+        "CROSS JOIN student: у ПИ-22 будет 3, как у всех",
+        "s_group LEFT JOIN student_in_group и COUNT(sig.student_id) — у пустой группы 0",
+        "EXCEPT student и s_group без агрегата"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "LEFT JOIN сохраняет группу без членов. COUNT по столбцу связи не считает NULL-дополнение, получится 0. COUNT(*) дал бы 1 у пустой группы — ловушка. INNER пустую ПИ-22 выкинет."
+    },
+    {
+      "id": "q8",
+      "type": "single",
+      "question": "BEGIN; два UPDATE; второй нарушил CHECK. Чтобы сессия снова принимала команды:",
+      "options": [
+        "Повторить второй UPDATE — PostgreSQL сам выйдет из aborted",
+        "ROLLBACK (транзакция aborted после ошибки; нужен откат, затем новый BEGIN)",
+        "COMMIT сохранит первый UPDATE и отбросит второй",
+        "TRUNCATE TABLE student автоматически закроет транзакцию успешно"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "Атомарность: ошибка переводит блок в aborted. COMMIT не «частично сохранит» первый UPDATE. Явный ROLLBACK, исправление, новая транзакция. Так защищают согласованность вместе с CHECK/FK."
+    },
+    {
+      "id": "q9",
+      "type": "single",
+      "question": "WHERE last_name LIKE 'и%' не находит «Иванов» в PostgreSQL курса, потому что:",
+      "options": [
+        "Символ % означает ровно один символ, нужен _",
+        "LIKE нельзя применять к VARCHAR",
+        "Нужен BETWEEN 'и' AND 'И'",
+        "LIKE чувствителен к регистру; безрегистровый поиск — ILIKE 'и%'"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "% — любая последовательность, включая пустую; _ — один символ. Регистр LIKE учитывает. ILIKE или LOWER(last_name) LIKE 'и%' находят Иванов. Это диалект PostgreSQL, не «баг данных»."
+    },
+    {
+      "id": "q10",
+      "type": "single",
+      "question": "WHERE student_id NOT IN (SELECT student_id FROM t) при NULL внутри подзапроса:",
+      "options": [
+        "Может вернуть пустой набор: сравнение с NULL делает NOT IN неизвестным",
+        "Автоматически отфильтрует NULL и сработает как NOT EXISTS",
+        "Заменит NULL на 0 и сравнит с student_id",
+        "В PostgreSQL NOT IN с NULL запрещён парсером"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "Классическая ловушка: NOT IN и NULL. Надёжнее NOT EXISTS или подзапрос с IS NOT NULL. Парсер запрос примет — «тихо пусто» хуже синтаксической ошибки. EXISTS останавливается на первом совпадении и NULL-списка не боится так же."
+    },
+    {
+      "id": "q11",
+      "type": "single",
+      "question": "Для стипендии (деньги с копейками) в PostgreSQL выбирают:",
+      "options": [
+        "REAL — «вещественный» значит точный для денег",
+        "DOUBLE PRECISION — достаточно для бухгалтерии всегда",
+        "NUMERIC(12, 2) (DECIMAL) — точная десятичная шкала",
+        "BOOLEAN — выплачено / не выплачено вместо суммы"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "NUMERIC хранит десятичные дроби точно. REAL/DOUBLE — двоичная плавающая точка, 0.1 и суммы «плывут». BOOLEAN не заменяет сумму. Целый INTEGER отбросит копейки."
+    },
+    {
+      "id": "q12",
+      "type": "multi",
+      "question": "Какие утверждения о SQL части 3 верны? Выберите все верные.",
+      "options": [
+        "WHERE s.last_name = 'Иванов' после LEFT JOIN student s убирает сирот, как INNER; фильтр к правой стороне для сохранения левых строк ставят в ON",
+        "DROP VIEW удаляет строки базовой таблицы student",
+        "Фильтр по AVG(grade) пишут в HAVING (или подзапросе), не в WHERE",
+        "Перед UPDATE/DELETE выполняют SELECT с тем же WHERE"
+      ],
+      "correct": [
+        0,
+        2,
+        3
+      ],
+      "explanation": "ON vs WHERE на внешнем соединении, WHERE vs HAVING и «сначала SELECT» — три контрольных ловушки. VIEW — сохранённый запрос: DROP VIEW данные student не трогает. Это и есть итог части 3 на учебной схеме университета."
+    }
+  ]
+}

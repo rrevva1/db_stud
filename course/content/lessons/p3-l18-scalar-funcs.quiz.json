@@ -1,0 +1,98 @@
+{
+  "lessonId": "p3-l18-scalar-funcs",
+  "passingScore": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "type": "single",
+      "question": "CONCAT_WS(' ', last_name, first_name) в PostgreSQL:",
+      "options": [
+        "Всегда вставляет пробел даже если имя NULL, как last_name || ' ' || first_name",
+        "Склеивает части через разделитель и пропускает NULL-аргументы",
+        "Это функция SQLite, в PostgreSQL её нет",
+        "Меняет фамилию в таблице student на диске"
+      ],
+      "correct": [
+        1
+      ],
+      "explanation": "CONCAT_WS (with separator) не пишет лишний разделитель вокруг NULL. Оператор || с NULL даёт NULL на всё выражение. CONCAT в PostgreSQL трактует NULL как пустую строку. SELECT функции данные не обновляет."
+    },
+    {
+      "id": "q2",
+      "type": "single",
+      "question": "Как в PostgreSQL курса отбросить время у значения даты, не копируя SQLite DATE()?",
+      "options": [
+        "DATE(birth_date) — это стандарт PostgreSQL",
+        "birth_date::sqlite_date",
+        "CAST(birth_date AS INTERVAL)",
+        "Приведение birth_date::date (или CAST(... AS DATE))"
+      ],
+      "correct": [
+        3
+      ],
+      "explanation": "Диалект курса — PostgreSQL: ::date / CAST AS DATE. SQLite DATE() в psql нет как переносимая привычка. INTERVAL — длительность, не «календарная дата». Для года используют EXTRACT(YEAR FROM birth_date)."
+    },
+    {
+      "id": "q3",
+      "type": "single",
+      "question": "SELECT COALESCE(email, 'нет почты') FROM student вернёт «нет почты», когда:",
+      "options": [
+        "email IS NULL; если почта есть — вернётся она",
+        "email — пустая строка ''; NULL при этом останется NULL",
+        "Только если last_name тоже NULL",
+        "COALESCE запрещён в SELECT, только в WHERE"
+      ],
+      "correct": [
+        0
+      ],
+      "explanation": "COALESCE берёт первый не-NULL аргумент. Пустая строка — не NULL, подмена не сработает (нужен NULLIF(email, '') при желании). Функция законна в SELECT, WHERE, выражениях."
+    },
+    {
+      "id": "q4",
+      "type": "single",
+      "question": "EXTRACT(YEAR FROM birth_date) = 2004 в WHERE отбирает:",
+      "options": [
+        "Студентов старше 2004 лет",
+        "Строки, где birth_date имеет тип INTEGER",
+        "Студентов, родившихся в 2004 календарном году",
+        "Только 4 января 2004, остальные дни года отбрасываются"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "EXTRACT вынимает поле даты. Год 2004 — любой день этого года. AGE() даёт интервал возраста, не фильтр «родились в 2004». Тип столбца остаётся DATE."
+    },
+    {
+      "id": "q5",
+      "type": "multi",
+      "question": "Какие функции уместны в SELECT по student/performance? Выберите все верные.",
+      "options": [
+        "UPPER(last_name), LENGTH(last_name), SUBSTRING(last_name FROM 1 FOR 3)",
+        "ROUND(AVG(grade)::numeric, 2) вместе с агрегатом",
+        "DATE() без аргументов как в SQLite для текущей даты",
+        "NULLIF(grade, 0) — NULL, если оценка равна 0, иначе grade"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ],
+      "explanation": "Строковые и числовые функции курса — PostgreSQL. Текущую дату даёт CURRENT_DATE / NOW(), не SQLite DATE(). NULLIF — частный случай «обнулить совпадение». ROUND к numeric стабилизирует среднее."
+    },
+    {
+      "id": "q6",
+      "type": "single",
+      "question": "last_name || ' ' || first_name, если first_name NULL, в PostgreSQL даст:",
+      "options": [
+        "Фамилию с хвостовым пробелом",
+        "Пустую строку ''",
+        "NULL на всё выражение конкатенации ||",
+        "Ошибку деления на ноль"
+      ],
+      "correct": [
+        2
+      ],
+      "explanation": "Оператор || распространяет NULL. Чтобы собрать ФИО с пропусками, берут CONCAT_WS или COALESCE(first_name, ''). Это не арифметика и не ошибка времени выполнения."
+    }
+  ]
+}
